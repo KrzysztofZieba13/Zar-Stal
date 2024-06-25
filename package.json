@@ -1,0 +1,11 @@
+{
+  "name": "zar-stal",
+  "version": "1.0.0",
+  "description": "Web App for zar-stal",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Krzysztof Zieba",
+  "license": "ISC"
+}
