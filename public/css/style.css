@@ -211,3 +211,162 @@ nav {
 /********************/
 /******OFFERT*******/
 /*******************/
+.section-offert {
+  margin-top: 15.6rem;
+}
+
+.offert-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.2rem;
+  margin-top: 5.2rem;
+}
+
+.offert-item {
+  height: 30rem;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3.2rem;
+  text-align: center;
+  box-shadow: 0 0 9px 5px rgba(3, 3, 3, 0.1);
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.offert-item1 {
+  background-image: linear-gradient(
+      rgba(39, 55, 77, 0.75),
+      rgba(39, 55, 77, 0.75)
+    ),
+    url('../img/offert/oferta1.png');
+}
+
+.offert-item2 {
+  background-image: linear-gradient(
+      rgba(39, 55, 77, 0.75),
+      rgba(39, 55, 77, 0.75)
+    ),
+    url('../img/offert/oferta2.jpg');
+}
+
+.offert-item3 {
+  background-image: linear-gradient(
+      rgba(39, 55, 77, 0.75),
+      rgba(39, 55, 77, 0.75)
+    ),
+    url('../img/offert/oferta3.jpg');
+}
+
+.offert-item3 {
+  background-image: linear-gradient(
+      rgba(39, 55, 77, 0.75),
+      rgba(39, 55, 77, 0.75)
+    ),
+    url('../img/offert/oferta3.jpg');
+}
+
+.offert-item4 {
+  background-image: linear-gradient(
+      rgba(39, 55, 77, 0.75),
+      rgba(39, 55, 77, 0.75)
+    ),
+    url('../img/offert/oferta4.jpg');
+}
+
+.offert-item5 {
+  background-image: linear-gradient(
+      rgba(39, 55, 77, 0.75),
+      rgba(39, 55, 77, 0.75)
+    ),
+    url('../img/offert/oferta5.jpg');
+}
+
+.offert-item6 {
+  background-image: linear-gradient(
+      rgba(39, 55, 77, 0.75),
+      rgba(39, 55, 77, 0.75)
+    ),
+    url('../img/offert/oferta6.jpg');
+}
+
+/********************/
+/******CONTACT*******/
+/********************/
+.section-contact {
+  margin-top: 15.8rem;
+  position: relative;
+  padding-bottom: 9.6rem;
+}
+
+.contact-panel {
+  background-color: #dde6ed;
+  width: 45%;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 5px rgba(3, 3, 3, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3.2rem;
+  margin: 4.4rem auto 0 auto;
+}
+
+.contact-logo {
+  filter: brightness(0);
+  opacity: 70%;
+  height: 17.8rem;
+  margin-bottom: 2rem;
+}
+
+.contact-element {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #9db2bf;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  position: relative;
+  padding-bottom: 0.4rem;
+  margin-top: 1.6rem;
+}
+
+.icon-contact {
+  color: #9db2bf;
+  font-size: 3.2rem;
+  position: absolute;
+  left: 0;
+  bottom: 0.4rem;
+}
+
+.contact--sub-info {
+  color: #9db2bf;
+  font-size: 1.6rem;
+}
+
+.contact--main-info {
+  font-size: 2.4rem;
+  color: #27374d;
+}
+.last-contact {
+  display: flex;
+  flex-direction: column;
+}
+
+.openhours {
+  display: flex;
+  justify-content: space-between;
+  gap: 2.4rem;
+  flex: 0;
+  color: #27374d;
+  width: 100%;
+}
+
+.construction-bg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: -10;
+  opacity: 20%;
+}
