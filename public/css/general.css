@@ -1,0 +1,63 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #27374d;
+  color: #fff;
+  font-family: Lato, 'sans serif';
+}
+
+.link:link,
+.link:visited {
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn {
+  font-size: 2rem;
+}
+
+.primary-header {
+  font-size: 5.2rem;
+  font-weight: 400;
+  letter-spacing: -0.7px;
+  line-height: 1.2;
+}
+
+.secondary-header {
+  font-size: 4.4rem;
+  font-weight: 400;
+}
+
+.third-header {
+  font-size: 3.2rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.subtitle {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.text {
+  font-size: 1.6rem;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+}
+
+.container {
+  padding: 0 3.2rem;
+  margin: 0 auto;
+  max-width: 140rem;
+}

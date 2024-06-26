@@ -1,6 +1,6 @@
 exports.getOverview = async (req, res) => {
   try {
-    res.render('index');
+    res.status(200).render('index');
   } catch (err) {
     console.log(err);
   }
