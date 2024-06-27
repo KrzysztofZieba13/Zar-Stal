@@ -27,14 +27,36 @@ header {
   padding: 1.2rem 4.4rem;
   position: absolute;
   width: 100%;
+  box-shadow: 0 4px 13px 5px rgba(3, 3, 3, 0.2);
+  position: fixed;
+  top: 0;
+  z-index: 11;
 }
 
 nav {
   display: flex;
-  height: 8rem;
+  height: 6.4rem;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
+}
+
+.nav-btn::after {
+  content: '';
+  width: 1px;
+  height: 2px;
+  background-color: transparent;
+  display: block;
+  transition: all 0.5s;
+  animation: infinite;
+  margin-top: 0.4rem;
+}
+
+.nav-btn:hover::after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: #141c27;
 }
 
 .logo-container img {
@@ -81,6 +103,14 @@ nav {
   margin-top: 5.2rem;
   justify-content: flex-end;
   padding-right: 5.2rem;
+}
+
+.btn {
+  transition: all 0.3s;
+}
+
+.hero-btns .btn:hover {
+  background-color: #141c27;
 }
 
 .btn-realization {
@@ -160,6 +190,7 @@ nav {
 /*************************/
 .section-realizations {
   margin-top: 12.8rem;
+  position: relative;
 }
 .realizations-box {
   display: grid;
@@ -197,6 +228,7 @@ nav {
   width: 50%;
   text-align: center;
   margin: 3.2rem auto;
+  transition: all 0.3s;
 }
 
 .btn--see-morerealizations {
@@ -206,6 +238,11 @@ nav {
   display: block;
   text-align: center;
   width: 35rem;
+  transition: all 0.3s;
+}
+
+.section-realizations .btn:hover {
+  background-color: #141c27;
 }
 
 /********************/
@@ -295,9 +332,9 @@ nav {
 /******CONTACT*******/
 /********************/
 .section-contact {
-  margin-top: 15.8rem;
+  margin-top: 18rem;
   position: relative;
-  padding-bottom: 9.6rem;
+  padding-bottom: 15.8rem;
 }
 
 .contact-panel {
@@ -369,4 +406,63 @@ nav {
   width: 100%;
   z-index: -10;
   opacity: 20%;
+}
+
+/*******************/
+/******FOOTER*******/
+/*******************/
+.footer {
+  background-color: #141c27;
+  color: #fff;
+  padding: 4.4rem 3.2rem 8rem 3.2rem;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 2.4rem;
+  margin: 0 auto;
+  max-width: 180rem;
+}
+
+.footer-logo {
+  height: 6.4rem;
+}
+
+.footer-title {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+}
+
+.footer-text {
+  font-size: 1.4rem;
+  line-height: 1.8;
+}
+
+.footer-openhours {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-top: 1.2rem;
+}
+
+.footer-openhours .openhours {
+  color: #fff;
+}
+
+.footer-contact .footer-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-offert .footer-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.footer-title .link {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  justify-content: flex-end;
 }
