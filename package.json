@@ -4,7 +4,7 @@
   "description": "Web App for zar-stal",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "dev": "nodemon app.js",
     "start:prod": "NODE_ENV=production nodemon app.js"
   },
   "author": "Krzysztof Zieba",
