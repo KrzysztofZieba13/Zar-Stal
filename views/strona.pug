@@ -130,40 +130,50 @@ html
         span.subtitle kontakt
         h2.secondary-header Skontaktuj Się
         .contact-panel 
-          img.contact-logo(src='../img/logo.png' alt='logo Zar-Stal')
-          .contact-element 
-            i.ph.ph-map-pin.icon-contact
-            span.contact--sub-info Miejscowość
-            p.contact--main-info Wylewa, 244a
-          .contact-element 
-            i.ph.ph-phone.icon-contact
-            span.contact--sub-info Właściciel
-            p.contact--main-info 504 200 637
-          .contact-element 
-            i.ph.ph-phone.icon-contact
-            span.contact--sub-info Kierownik Produkcji
-            p.contact--main-info 502 307 540
-          .contact-element 
-            i.ph.ph-phone.icon-contact
-            span.contact--sub-info Sekretariat
-            p.contact--main-info 786 801 755
-          .contact-element 
-            i.ph.ph-envelope-simple.icon-contact
-            span.contact--sub-info Email
-            p.contact--main-info biuro@zar-stal.pl
-          .contact-element 
-            i.ph.ph-clock.icon-contact
-            span.contact--sub-info Godziny Otwarcia
-            .contact--main-info.last-contact 
-              .openhours 
-                span pn-pt
-                span 06:00-16:00 
-              .openhours 
-                span sb 
-                span 06:00-16:00 
-              .openhours
-                span nd 
-                span nieczynne
+          .contact--left-col
+            img.contact-logo(src='../img/logoContact.png' alt='logo Zar-Stal')
+            .contact-box
+              .contact-element 
+                i.ph.ph-map-pin.icon-contact
+                span.contact--sub-info Miejscowość
+                p.contact--main-info Wylewa, 244a
+              .contact-element 
+                i.ph.ph-phone.icon-contact
+                span.contact--sub-info Właściciel
+                p.contact--main-info 504 200 637
+              .contact-element 
+                i.ph.ph-phone.icon-contact
+                span.contact--sub-info Kierownik Produkcji
+                p.contact--main-info 502 307 540
+              .contact-element 
+                i.ph.ph-phone.icon-contact
+                span.contact--sub-info Sekretariat
+                p.contact--main-info 786 801 755
+              .contact-element 
+                i.ph.ph-envelope-simple.icon-contact
+                span.contact--sub-info Email
+                p.contact--main-info biuro@zar-stal.pl
+              .contact-element 
+                i.ph.ph-clock.icon-contact
+                span.contact--sub-info Godziny Otwarcia
+                .contact--main-info.last-contact 
+                  .openhours 
+                    span pn-pt
+                    span 06:00-16:00 
+                  .openhours 
+                    span sb 
+                    span 06:00-13:00 
+                  .openhours
+                    span nd 
+                    span nieczynne
+          .contact--right-col
+            h3.contact-header Napisz do nas
+            form.form-contact
+              input#contact-name.input-contact(type='text' placeholder='Imię i nazwisko / Firma')
+              input#contact-email.input-contact(type='email' placeholder='Email')
+              input#contact-phone.input-contact(type='tel' placeholder='Telefon')
+              textarea#contact-message.textarea-contact(name="message" placeholder='Treść wiadomości')
+              input#contact-submit.input-submit(type="submit" value='Wyślij wiadomość')
       img(src='../img/construction-bg.png').construction-bg
 
     ////////////////////////////////

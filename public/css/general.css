@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+*:focus {
+  outline: none;
+  /* outline: 4px dotted #e67e22; */
+  outline-offset: 8px;
+  box-shadow: 0 0 0 0.4rem #9db2bf;
+}
+
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;

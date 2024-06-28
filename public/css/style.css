@@ -346,34 +346,112 @@ nav {
 }
 
 .contact-panel {
-  background-color: #dde6ed;
-  width: 45%;
-  border-radius: 5px;
+  width: 85%;
   box-shadow: 0 0 7px 5px rgba(3, 3, 3, 0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 3.2rem;
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
   margin: 4.4rem auto 0 auto;
 }
 
+.contact--left-col {
+  padding: 3.2rem;
+  background-color: rgba(157, 178, 191, 0.25);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20rem auto;
+  justify-items: center;
+}
+
+.contact--right-col {
+  padding: 3.2rem;
+  background-color: rgba(157, 178, 191, 0.1);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20rem auto;
+}
+
+.form-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.input-contact {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9db2bf;
+  color: #9db2bf;
+  font-size: 2.4rem;
+  padding: 1.2rem 0.6rem;
+}
+
+.input-contact::placeholder {
+  color: #526d82;
+  opacity: 1; /* Firefox */
+}
+
+.textarea-contact {
+  display: block;
+  width: 100%;
+  height: 20rem;
+  color: #526d82;
+  font-size: 2.4rem;
+  background-color: #dde6ed;
+  border: none;
+  padding: 1.2rem 0.6rem;
+  margin-top: 1.6rem;
+}
+
+.textarea-contact::placeholder {
+  color: #526d82;
+  opacity: 1; /* Firefox */
+}
+
+.input-submit {
+  background-color: #526d82;
+  color: #dde6ed;
+  border: none;
+  width: 100%;
+  font-size: 2.4rem;
+  padding: 1.6rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.input-submit:hover {
+  background-color: #27374d;
+}
+
+.contact-header {
+  font-size: 4.4rem;
+  font-weight: 400;
+  letter-spacing: 2.5px;
+  color: #dde6ed;
+  margin-bottom: 2rem;
+  align-self: end;
+}
+
 .contact-logo {
-  filter: brightness(0);
+  filter: brightness(100%);
   opacity: 70%;
   height: 17.8rem;
   margin-bottom: 2rem;
 }
 
+.contact-box {
+  width: 100%;
+}
+
 .contact-element {
   display: flex;
   flex-direction: column;
-  border-bottom: 1px solid #9db2bf;
-  width: 80%;
+  width: 100%;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.4rem;
   position: relative;
   padding-bottom: 0.4rem;
+  padding-left: 5.2rem;
   margin-top: 1.6rem;
 }
 
@@ -385,6 +463,10 @@ nav {
   bottom: 0.4rem;
 }
 
+.ph-clock {
+  top: 25px !important;
+}
+
 .contact--sub-info {
   color: #9db2bf;
   font-size: 1.6rem;
@@ -392,7 +474,7 @@ nav {
 
 .contact--main-info {
   font-size: 2.4rem;
-  color: #27374d;
+  color: #dde6ed;
 }
 .last-contact {
   display: flex;
@@ -404,7 +486,7 @@ nav {
   justify-content: space-between;
   gap: 2.4rem;
   flex: 0;
-  color: #27374d;
+  color: #dde6ed;
   width: 100%;
 }
 
