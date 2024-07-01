@@ -9,7 +9,7 @@
 /*******************/
 /******HEADER*******/
 /*******************/
-header {
+.overview-header {
   background-image: linear-gradient(
       rgba(39, 55, 77, 0.17),
       rgba(39, 55, 77, 0.17)
@@ -20,56 +20,6 @@ header {
   background-repeat: no-repeat;
   height: 100vh;
   position: relative;
-}
-
-.nav-container {
-  background-color: #27374d;
-  padding: 1.2rem 4.4rem;
-  position: absolute;
-  width: 100%;
-  box-shadow: 0 4px 13px 5px rgba(3, 3, 3, 0.2);
-  position: fixed;
-  top: 0;
-  z-index: 11;
-}
-
-nav {
-  display: flex;
-  height: 6.4rem;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-}
-
-.nav-btn::after {
-  content: '';
-  width: 1px;
-  height: 2px;
-  background-color: transparent;
-  display: block;
-  transition: all 0.5s;
-  animation: infinite;
-  margin-top: 0.4rem;
-}
-
-.nav-btn:hover::after {
-  content: '';
-  width: 100%;
-  height: 2px;
-  background-color: #141c27;
-}
-
-.logo-container img {
-  height: 6.4rem;
-}
-
-.nav-menu {
-  display: flex;
-  gap: 4.8rem;
-}
-
-.nav-item {
-  font-size: 2.4rem;
 }
 
 .hero {
@@ -146,7 +96,8 @@ nav {
 /******COMPANY*******/
 /********************/
 .section-company {
-  margin-top: 12.8rem;
+  margin-top: 3.2rem;
+  padding-top: 9.4rem;
 }
 
 .company-info {
@@ -189,7 +140,8 @@ nav {
 /******REALIZATIONS*******/
 /*************************/
 .section-realizations {
-  margin-top: 12.8rem;
+  margin-top: 7.2rem;
+  padding-top: 9.4rem;
   position: relative;
 }
 .realizations-box {
@@ -249,7 +201,8 @@ nav {
 /******OFFERT*******/
 /*******************/
 .section-offert {
-  margin-top: 15.6rem;
+  margin-top: 7.2rem;
+  padding-top: 9.4rem;
 }
 
 .offert-grid {
@@ -261,23 +214,35 @@ nav {
 
 .offert-item {
   height: 30rem;
-  width: 100%;
-  background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 3.2rem;
   text-align: center;
   box-shadow: 0 0 9px 5px rgba(3, 3, 3, 0.1);
   cursor: pointer;
   text-transform: uppercase;
   transition: all 0.3s;
-  object-fit: cover;
+  overflow: hidden;
+  position: relative;
 }
 
-.offert-item:hover {
+.offert-item img {
+  width: 100%;
+  opacity: 0.9;
+  transition: all 0.3s;
+  height: 100%;
+}
+
+.offert-item p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 111;
+  width: 100%;
+}
+
+.offert-item:hover img {
   box-shadow: 0 0 9px 9px rgba(3, 3, 3, 0.1);
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .offert-item1 {
@@ -340,7 +305,8 @@ nav {
 /******CONTACT*******/
 /********************/
 .section-contact {
-  margin-top: 18rem;
+  margin-top: 7.2rem;
+  padding-top: 9.4rem;
   position: relative;
   padding-bottom: 15.8rem;
 }
@@ -496,63 +462,4 @@ nav {
   width: 100%;
   z-index: -10;
   opacity: 20%;
-}
-
-/*******************/
-/******FOOTER*******/
-/*******************/
-.footer {
-  background-color: #141c27;
-  color: #fff;
-  padding: 4.4rem 3.2rem 8rem 3.2rem;
-}
-
-.footer-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  gap: 2.4rem;
-  margin: 0 auto;
-  max-width: 180rem;
-}
-
-.footer-logo {
-  height: 6.4rem;
-}
-
-.footer-title {
-  font-size: 2rem;
-  margin-bottom: 1.2rem;
-}
-
-.footer-text {
-  font-size: 1.4rem;
-  line-height: 1.8;
-}
-
-.footer-openhours {
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-  margin-top: 1.2rem;
-}
-
-.footer-openhours .openhours {
-  color: #fff;
-}
-
-.footer-contact .footer-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.footer-offert .footer-text {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.footer-title .link {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  justify-content: flex-end;
 }

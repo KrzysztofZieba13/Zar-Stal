@@ -1,0 +1,148 @@
+extends base
+
+
+
+mixin testimonial(imgSrc)
+  img.client-logo(src=imgSrc alt='logo firmy która zaufała')
+
+mixin companyInfoCart(cartIcon ,cartTitle, cartDescription)
+  .info-detail
+    .info-icon 
+      i.ph.ph-=`${cartIcon}`
+    p.info-name= cartTitle
+    p.info-description= cartDescription
+
+mixin contactElement(icon, subInfo, mainInfo)
+  .contact-element 
+    i.ph.icon-contact.ph-=`${icon}`
+    span.contact--sub-info= subInfo
+    p.contact--main-info= mainInfo
+
+block append head 
+  link(rel='stylesheet' href='/css/style.css')
+
+
+block content
+  header.overview-header
+    .hero 
+      .hero--text-box
+        h1.primary-header.hero-header ZAR-STAL <br> KONSTRUKCJE STALOWE
+        p.hero-text Specjalizuje się w produkcji konstrukcji stalowych, elementów stalowych, świetlików kalenicowych, kontenerów, hal magazynowych, produkcyjnych, sportowych czy rolniczych. Produkujemy, dostarczamy oraz montujemy konstrukcje w Polsce i za granicą.
+        .hero-btns 
+          a.btn.btn-realization.link(href='#realizacje') REALIZACJE
+          a.btn.btn-offert.link(href='#oferta') OFERTA
+
+  ///////////////////////////////////////////
+  ///////////////TESTIMONIALS////////////////
+  ///////////////////////////////////////////
+
+
+  section.section-testimonials
+    .container 
+      span.subtitle klienci
+      h2.secondary-header Zaufali Nam
+      .clients-logo
+        +testimonial('../img/clients-logo/logo1.png')
+        +testimonial('../img/clients-logo/logo2.png')
+        +testimonial('../img/clients-logo/logo3.png')
+        +testimonial('../img/clients-logo/logo4.png')
+  //////////////////////////////////////
+  ///////////////COMPANY////////////////
+  //////////////////////////////////////
+  section.section-company#firma
+    .container 
+      span.subtitle firma
+      h2.secondary-header Dlaczego My?
+      .company-info
+        +companyInfoCart('gear', 'Doświadczenie', 'Posiadamy duże doświadczenie, dysponujemy wykwalifikowanym zespołem spawaczy i&nbsp;monterów dlatego wykonywane przez nas usługi są najwyższej jakości')
+        +companyInfoCart('certificate', 'Certyfikat', 'Posiadamy certyfikat zarządzania jakością zgodnie z normą ISO 9001, dzięki czemu nasze wyroby wyróżnia trwałość i&nbsp;solidność.')
+        +companyInfoCart('seal-check', 'Gwarancja', 'Gwarantujemy generalne wykonawstwo od tworzenia projektów wykonawczych aż po oddanie obiektu do użytku, zgodnie z oczekiwaniami klientów.')
+        +companyInfoCart('clock-countdown', 'Terminowość', 'Wyjątkową wagę przykładamy do terminowego zakończenia prac, jednocześnie dbając o każdy szczegół, aby klient był zadowolony z&nbsp;efektu końcowego.')
+        +companyInfoCart('shield-check', 'Bezpieczeństwo', 'Stosujemy się do wszelkich wytycznych i&nbsp;norm, dbamy o bezpieczeństwo naszych konstrukcji, zapewniając ich trwałość i&nbsp;niezawodność.')
+        +companyInfoCart('sketch-logo', 'Najwyższa Jakość', 'Stosujemy wyłącznie materiały najwyższej jakości, które są atestowane i&nbsp;certyfikowane, co zapewnia długowieczność i&nbsp;solidność naszych konstrukcji.')
+
+
+  //////////////////////////////////////
+  ////////////REALIZATIONS//////////////
+  //////////////////////////////////////
+  section.section-realizations#realizacje 
+    .container 
+      span.subtitle realizacje
+      h2.secondary-header Nasze Realizacje
+      .realizations-box 
+        img.realization-img(src='../img/realization/realizacja1.JPG' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
+        .realization-desc
+          h3.third-header nazwa realizacji I 
+          p.text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean laoreet malesuada urna, vitae ullamcorper sem sollicitudin vel. Integer convallis velit et eros egestas sollicitudin. Vivamus ac ligula diam. Vestibulum vitae nunc id neque facilisis convallis.
+          a(href='#').btn.link.btn--see-realization Zobacz Realizację
+        .realization-desc
+          h3.third-header nazwa realizacji II
+          p.text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean laoreet malesuada urna, vitae ullamcorper sem sollicitudin vel. Integer convallis velit et eros egestas sollicitudin. Vivamus ac ligula diam. Vestibulum vitae nunc id neque facilisis convallis.
+          a(href='#').btn.link.btn--see-realization Zobacz Realizację
+        img.realization-img(src='../img/realization/realizacja2.JPG' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
+      a(href='#').btn.link.btn--see-morerealizations Zobacz Więcej Realizacji
+    img(src='../img/crane-bg.png').construction-bg
+  ////////////////////////////////
+  ////////////OFFERT//////////////
+  ////////////////////////////////
+  section.section-offert#oferta
+    .container 
+      span.subtitle oferta
+      h2.secondary-header Nasza Oferta
+      .offert-grid
+        .offert-item 
+          img(src="../img/offert/oferta1.png", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
+          p Konstrukcje Stalowe
+        .offert-item 
+          img(src="../img/offert/oferta2.jpg", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
+          p Elementy Stalowe
+        .offert-item 
+          img(src="../img/offert/oferta3.jpg", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
+          p Kontenery
+        .offert-item 
+          img(src="../img/offert/oferta4.jpg", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
+          p Świetliki Kalenicowe
+        .offert-item 
+          img(src="../img/offert/oferta5.jpg", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
+          p Hale magazynowe <br> rolnicze <br> i produkcyjne
+        .offert-item 
+          img(src="../img/offert/oferta6.jpg", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
+          p Hale sportowe
+  /////////////////////////////////
+  ////////////CONTACT//////////////
+  /////////////////////////////////
+  section.section-contact#kontakt
+    .container 
+      span.subtitle kontakt
+      h2.secondary-header Skontaktuj Się
+      .contact-panel 
+        .contact--left-col
+          img.contact-logo(src='../img/logoContact.png' alt='logo Zar-Stal')
+          .contact-box
+            +contactElement('map-pin', 'Miejscowość', 'Wylewa, 244a')
+            +contactElement('phone', 'Właściciel', '504 200 637')
+            +contactElement('phone', 'Kierownik Produkcji', '502 307 540')
+            +contactElement('phone', 'Sekretariat', '786 801 755')
+            +contactElement('envelope-simple', 'Email', 'biuro@zar-stal.pl')
+            .contact-element 
+              i.ph.ph-clock.icon-contact
+              span.contact--sub-info Godziny Otwarcia
+              .contact--main-info.last-contact 
+                .openhours 
+                  span pn-pt
+                  span 06:00-16:00 
+                .openhours 
+                  span sb 
+                  span 06:00-13:00 
+                .openhours
+                  span nd 
+                  span nieczynne
+        .contact--right-col
+          h3.contact-header Napisz do nas
+          form.form-contact
+            input#contact-name.input-contact(type='text' placeholder='Imię i nazwisko / Firma')
+            input#contact-email.input-contact(type='email' placeholder='Email')
+            input#contact-phone.input-contact(type='tel' placeholder='Telefon')
+            textarea#contact-message.textarea-contact(name="message" placeholder='Treść wiadomości')
+            input#contact-submit.input-submit(type="submit" value='Wyślij wiadomość')
+    img(src='../img/construction-bg.png').construction-bg

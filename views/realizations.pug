@@ -1,0 +1,76 @@
+extends base
+
+block append head 
+  link(rel='stylesheet', href='/css/realizations.css')
+
+mixin realizationCart(imgSrc, loc, title, link)
+  .realization-cart 
+    .realization--cart__img
+      a(href='#')
+        img(src=`../img/realization/${imgSrc}`, alt="Hala wykonana przez Zar-Stal")
+    .cart-info 
+      .cart-content
+        .cart-location 
+          i.ph.ph-map-pin
+          span= loc
+        p.cart-title= title
+      .see--more-box
+        a.link(href=link) Zobacz Szczegóły
+          i.ph.ph-arrow-right
+
+//- mixin realizationElementCart(imgSrc, loc, title)
+
+
+block content 
+  header.realizations-header
+    h1.primary-header Nasze Realizacje
+    p.realizations--header-text Dowiedz się wiecej, o naszych konstrukcjach, które stworzyliśmy na przestrzeni lat i nie tylko
+
+  section.section-realizations 
+    .container-realizations
+      p.subtitle konstrukcje
+      h2.secondary-header Hale Konstrukcyjne
+      .realizations-box 
+        +realizationCart('realization1/realizacja1.JPG', 'Przeworsk', 'Okręgowa stacja kontroli pojazdów', '#')
+        +realizationCart('realization2/realizacja2.JPG', 'Wierzbna', 'Hala naprawy maszyn', '#')
+        +realizationCart('realization3/realizacja3.JPG', 'Wylewa', 'Hala recyklingowa opon', '#')
+        +realizationCart('realization4/realizacja4.JPG', 'Wylewa', 'Tartak i magazyn', '#')
+        +realizationCart('realization6/realizacja6.JPG', 'Wylewa', 'Magazyn i hala produkcyjna konstrukcji stalowych', '#')
+        +realizationCart('realization7/realizacja7.JPG', 'Leżachów', 'Magazyn i hala produkcyjna nawozów', '#')
+  section.section--realizations-elements 
+    .container-realizations
+      p.subtitle elementy
+      h2.secondary-header Elementy Stalowe
+      .realizations-box 
+        .realization-cart 
+          .realization--cart-element__img
+            img(src=`../img/realization/steel-elements/element-1-1.jpg`, alt="Element stalowy wykonany przez Zar-Stal")
+            i.ph.ph-images.mulitple-images
+          .element-info
+            p.element-title Kontenery więzadłowe
+            p.text.elements--see-photos 
+              span Zobacz zdjęcia
+        .realization-cart 
+          .realization--cart-element__img
+            img(src=`../img/realization/steel-elements/element-2-1.jpg`, alt="Element stalowy wykonany przez Zar-Stal")
+          .element-info
+            p.element-title Wzmocnienia takie jakie
+            p.text.elements--see-photos 
+              span Zobacz zdjęcia
+        .realization-cart 
+          .realization--cart-element__img
+            img(src=`../img/realization/steel-elements/element-3-1.jpg`, alt="Element stalowy wykonany przez Zar-Stal")
+          .element-info
+            p.element-title Łyżka do koparki mini
+            p.text.elements--see-photos 
+              span Zobacz zdjęcia
+        .realization-cart 
+          .realization--cart-element__img
+            img(src=`../img/realization/steel-elements/element-4-1.jpg`, alt="Element stalowy wykonany przez Zar-Stal")
+            i.ph.ph-images.mulitple-images
+          .element-info
+            p.element-title Maszyna do skrawkowania <br> euro-palet
+            p.text.elements--see-photos 
+              span Zobacz zdjęcia
+      
+

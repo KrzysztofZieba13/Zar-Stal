@@ -1,0 +1,139 @@
+.realizations-header {
+  margin-top: 8.8rem;
+  background-color: #3d4b5f;
+  text-align: center;
+  padding: 9.6rem 0;
+}
+
+.realizations--header-text {
+  font-size: 2.4rem;
+  margin-top: 2.4rem;
+}
+
+.section-realizations,
+.section--realizations-elements {
+  padding: 3.2rem 15.8rem;
+  margin-top: 6.2rem;
+}
+
+.realizations-box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3.2rem;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  margin-top: 5.2rem;
+}
+
+.realization-cart {
+  background-color: #dde6ed;
+  color: #27374d;
+  box-shadow: 0 0 7px 5px rgba(3, 3, 3, 0.2);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+}
+
+.realization--cart__img {
+  width: 100%;
+  height: 20.6rem;
+}
+
+.realization--cart__img a img,
+.realization--cart-element__img img {
+  width: 100%;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  height: 20.6rem;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.realization--cart-element__img {
+  position: relative;
+}
+
+.cart-info {
+  height: 100%;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 16rem;
+}
+
+.cart-location {
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #526d82;
+}
+
+.cart-title {
+  font-size: 2.5rem;
+  line-height: 1.4;
+  margin-top: 0.8rem;
+}
+
+.see--more-box {
+  font-size: 1.6rem;
+  color: #526d82;
+  transition: all 0.3s;
+}
+
+.see--more-box a:link,
+.see--more-box a:visited {
+  color: #526d82;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  position: relative;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s;
+}
+
+.see--more-box a i {
+  transition: transform 0.3s ease;
+}
+
+.see--more-box a:hover i.ph {
+  transform: translateX(10px);
+}
+
+.element-info {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.element-title {
+  font-size: 2rem;
+  line-height: 1.5;
+  padding-bottom: 1.2rem;
+}
+
+.elements--see-photos span {
+  color: #526d82;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid transparent;
+}
+
+.elements--see-photos span:hover {
+  color: #27374d;
+  border-bottom: 1px solid #27374d;
+}
+
+.mulitple-images {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 3.2rem;
+  background-color: rgba(221, 230, 237, 0.6);
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+}
