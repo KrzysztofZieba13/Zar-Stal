@@ -75,3 +75,18 @@ body {
   margin: 0 auto;
   max-width: 150rem;
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(39, 55, 77, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 9990;
+}
+
+.hidden {
+  display: none !important;
+}
