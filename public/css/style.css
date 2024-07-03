@@ -77,13 +77,23 @@
 /******TESTIMONIALS*******/
 /*************************/
 .section-testimonials {
-  margin-top: 8rem;
+  margin-top: 4.4rem;
+}
+
+.trusted-us {
+  text-align: center;
+  font-size: 1.6rem;
+  color: #a0a0a0;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 0.75px;
 }
 
 .clients-logo {
   margin-top: 4.4rem;
   display: flex;
-  height: 9.6rem;
+  gap: 4.4rem;
+  height: 8rem;
   justify-content: space-around;
 }
 

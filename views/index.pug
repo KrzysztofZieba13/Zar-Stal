@@ -5,12 +5,13 @@ extends base
 mixin testimonial(imgSrc)
   img.client-logo(src=imgSrc alt='logo firmy która zaufała')
 
-mixin companyInfoCart(cartIcon ,cartTitle, cartDescription)
+mixin companyInfoCart(cartIcon, cartTitle, cartDescription)
   .info-detail
     .info-icon 
       i.ph.ph-=`${cartIcon}`
     p.info-name= cartTitle
-    p.info-description= cartDescription
+    p.info-description!= cartDescription
+
 
 mixin contactElement(icon, subInfo, mainInfo)
   .contact-element 
@@ -38,14 +39,14 @@ block content
 
 
   section.section-testimonials
-    .container 
-      span.subtitle klienci
-      h2.secondary-header Zaufali Nam
+    .container
+      p.trusted-us Zaufali Nam
       .clients-logo
         +testimonial('../img/clients-logo/logo1.png')
         +testimonial('../img/clients-logo/logo2.png')
         +testimonial('../img/clients-logo/logo3.png')
         +testimonial('../img/clients-logo/logo4.png')
+        +testimonial('../img/clients-logo/logo5.png')
   //////////////////////////////////////
   ///////////////COMPANY////////////////
   //////////////////////////////////////
@@ -55,13 +56,11 @@ block content
       h2.secondary-header Dlaczego My?
       .company-info
         +companyInfoCart('gear', 'Doświadczenie', 'Posiadamy duże doświadczenie, dysponujemy wykwalifikowanym zespołem spawaczy i&nbsp;monterów dlatego wykonywane przez nas usługi są najwyższej jakości')
-        +companyInfoCart('certificate', 'Certyfikat', 'Posiadamy certyfikat zarządzania jakością zgodnie z normą ISO 9001, dzięki czemu nasze wyroby wyróżnia trwałość i&nbsp;solidność.')
-        +companyInfoCart('seal-check', 'Gwarancja', 'Gwarantujemy generalne wykonawstwo od tworzenia projektów wykonawczych aż po oddanie obiektu do użytku, zgodnie z oczekiwaniami klientów.')
-        +companyInfoCart('clock-countdown', 'Terminowość', 'Wyjątkową wagę przykładamy do terminowego zakończenia prac, jednocześnie dbając o każdy szczegół, aby klient był zadowolony z&nbsp;efektu końcowego.')
-        +companyInfoCart('shield-check', 'Bezpieczeństwo', 'Stosujemy się do wszelkich wytycznych i&nbsp;norm, dbamy o bezpieczeństwo naszych konstrukcji, zapewniając ich trwałość i&nbsp;niezawodność.')
+        +companyInfoCart('certificate', 'Certyfikat', 'Posiadamy certyfikat zarządzania jakością zgodnie z&nbsp;normą ISO 9001, dzięki czemu nasze wyroby wyróżnia trwałość i&nbsp;solidność.')
+        +companyInfoCart('seal-check', 'Gwarancja', 'Gwarantujemy generalne wykonawstwo od tworzenia projektów wykonawczych aż po oddanie obiektu do użytku, zgodnie z&nbsp;oczekiwaniami klientów.')
+        +companyInfoCart('clock-countdown', 'Terminowość', 'Wyjątkową wagę przykładamy do terminowego zakończenia prac, jednocześnie dbając o&nbsp;każdy szczegół, aby klient był zadowolony z&nbsp;efektu końcowego.')
+        +companyInfoCart('shield-check', 'Bezpieczeństwo', 'Stosujemy się do wszelkich wytycznych i&nbsp;norm, dbamy o&nbsp;bezpieczeństwo naszych konstrukcji, zapewniając ich trwałość i&nbsp;niezawodność.')
         +companyInfoCart('sketch-logo', 'Najwyższa Jakość', 'Stosujemy wyłącznie materiały najwyższej jakości, które są atestowane i&nbsp;certyfikowane, co zapewnia długowieczność i&nbsp;solidność naszych konstrukcji.')
-
-
   //////////////////////////////////////
   ////////////REALIZATIONS//////////////
   //////////////////////////////////////
@@ -70,17 +69,17 @@ block content
       span.subtitle realizacje
       h2.secondary-header Nasze Realizacje
       .realizations-box 
-        img.realization-img(src='../img/realization/realizacja1.JPG' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
+        img.realization-img(src='../img/realization/realization1/realizacja1-overview.JPG' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
         .realization-desc
           h3.third-header nazwa realizacji I 
           p.text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean laoreet malesuada urna, vitae ullamcorper sem sollicitudin vel. Integer convallis velit et eros egestas sollicitudin. Vivamus ac ligula diam. Vestibulum vitae nunc id neque facilisis convallis.
-          a(href='#').btn.link.btn--see-realization Zobacz Realizację
+          a(href='/realizacja/1').btn.link.btn--see-realization Zobacz Realizację
         .realization-desc
           h3.third-header nazwa realizacji II
           p.text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean laoreet malesuada urna, vitae ullamcorper sem sollicitudin vel. Integer convallis velit et eros egestas sollicitudin. Vivamus ac ligula diam. Vestibulum vitae nunc id neque facilisis convallis.
-          a(href='#').btn.link.btn--see-realization Zobacz Realizację
-        img.realization-img(src='../img/realization/realizacja2.JPG' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
-      a(href='#').btn.link.btn--see-morerealizations Zobacz Więcej Realizacji
+          a(href='/realizacja/2').btn.link.btn--see-realization Zobacz Realizację
+        img.realization-img(src='../img/realization/realization2/realizacja2-overview.JPG' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
+      a(href='/realizacje').btn.link.btn--see-morerealizations Zobacz Więcej Realizacji
     img(src='../img/crane-bg.png').construction-bg
   ////////////////////////////////
   ////////////OFFERT//////////////

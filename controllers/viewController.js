@@ -13,3 +13,11 @@ exports.getRealizations = async (req, res) => {
     console.log(err);
   }
 };
+
+exports.getSingleRealization = async (req, res) => {
+  try {
+    res.status(200).render('singleRealization');
+  } catch (err) {
+    console.log(err);
+  }
+};

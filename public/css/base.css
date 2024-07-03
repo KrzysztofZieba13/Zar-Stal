@@ -100,9 +100,21 @@ nav {
   grid-template-columns: 1fr 1fr;
 }
 
-.footer-title .link {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  justify-content: flex-end;
+.footer-title:last-child {
+  /* display: flex; */
+  /* align-items: center; */
+  /* gap: 1.2rem;
+  justify-content: flex-end; */
+  text-align: right;
+}
+
+.footer-title .link i,
+.footer-title .link i {
+  transition: all 0.3s;
+  display: inline-block;
+}
+
+.footer-title .link:hover i,
+.footer-title .link:active i {
+  transform: translateY(-30%) !important;
 }

@@ -6,7 +6,7 @@ block append head
 mixin realizationCart(imgSrc, loc, title, link)
   .realization-cart 
     .realization--cart__img
-      a(href='#')
+      a(href=link)
         img(src=`../img/realization/${imgSrc}`, alt="Hala wykonana przez Zar-Stal")
     .cart-info 
       .cart-content
@@ -18,59 +18,66 @@ mixin realizationCart(imgSrc, loc, title, link)
         a.link(href=link) Zobacz Szczegóły
           i.ph.ph-arrow-right
 
-//- mixin realizationElementCart(imgSrc, loc, title)
+mixin realizationElementCart(imgSrc, title)
+  .realization-cart 
+    .realization--cart-element__img
+      img(src=`../img/realization/${imgSrc}`, alt="Element stalowy wykonany przez Zar-Stal")
+      i.ph.ph-images.mulitple-images
+    .element-info
+      p.element-title= title
+      p.text.elements--see-photos 
+        span Zobacz zdjęcia
 
 
 block content 
   header.realizations-header
     h1.primary-header Nasze Realizacje
     p.realizations--header-text Dowiedz się wiecej, o naszych konstrukcjach, które stworzyliśmy na przestrzeni lat i nie tylko
+    .realizations--header-btns 
+      a.btn.link(href="#steel-constructions") Hale Stalowe
+      a.btn.link(href="#steel-elements") Elementy Stalowe
+      a.btn.link(href="#steel-machines") Maszyny
+      a.btn.link(href="#steel-containers") Kontenery
 
-  section.section-realizations 
+  section.section-realizations#steel-constructions
     .container-realizations
       p.subtitle konstrukcje
-      h2.secondary-header Hale Konstrukcyjne
+      h2.secondary-header Hale Stalowe
       .realizations-box 
-        +realizationCart('realization1/realizacja1.JPG', 'Przeworsk', 'Okręgowa stacja kontroli pojazdów', '#')
-        +realizationCart('realization2/realizacja2.JPG', 'Wierzbna', 'Hala naprawy maszyn', '#')
-        +realizationCart('realization3/realizacja3.JPG', 'Wylewa', 'Hala recyklingowa opon', '#')
-        +realizationCart('realization4/realizacja4.JPG', 'Wylewa', 'Tartak i magazyn', '#')
-        +realizationCart('realization6/realizacja6.JPG', 'Wylewa', 'Magazyn i hala produkcyjna konstrukcji stalowych', '#')
-        +realizationCart('realization7/realizacja7.JPG', 'Leżachów', 'Magazyn i hala produkcyjna nawozów', '#')
-  section.section--realizations-elements 
+        +realizationCart('realization1/realizacja1.JPG', 'Przeworsk', 'Okręgowa stacja kontroli pojazdów', '/realizacja/1')
+        +realizationCart('realization2/realizacja2.JPG', 'Wierzbna', 'Hala naprawy maszyn', '/realizacja/2')
+        +realizationCart('realization3/realizacja3.JPG', 'Wylewa', 'Hala recyklingowa opon', '/realizacja/3')
+        +realizationCart('realization4/realizacja4.JPG', 'Wylewa', 'Tartak i magazyn', '/realizacja/4')
+        +realizationCart('realization6/realizacja6.JPG', 'Wylewa', 'Magazyn i hala produkcyjna konstrukcji stalowych', '/realizacja/5')
+        +realizationCart('realization7/realizacja7.JPG', 'Leżachów', 'Magazyn i hala produkcyjna nawozów', '/realizacja/6')
+
+  section.section--realizations-elements#steel-elements
     .container-realizations
       p.subtitle elementy
       h2.secondary-header Elementy Stalowe
       .realizations-box 
-        .realization-cart 
-          .realization--cart-element__img
-            img(src=`../img/realization/steel-elements/element-1-1.jpg`, alt="Element stalowy wykonany przez Zar-Stal")
-            i.ph.ph-images.mulitple-images
-          .element-info
-            p.element-title Kontenery więzadłowe
-            p.text.elements--see-photos 
-              span Zobacz zdjęcia
-        .realization-cart 
-          .realization--cart-element__img
-            img(src=`../img/realization/steel-elements/element-2-1.jpg`, alt="Element stalowy wykonany przez Zar-Stal")
-          .element-info
-            p.element-title Wzmocnienia takie jakie
-            p.text.elements--see-photos 
-              span Zobacz zdjęcia
-        .realization-cart 
-          .realization--cart-element__img
-            img(src=`../img/realization/steel-elements/element-3-1.jpg`, alt="Element stalowy wykonany przez Zar-Stal")
-          .element-info
-            p.element-title Łyżka do koparki mini
-            p.text.elements--see-photos 
-              span Zobacz zdjęcia
-        .realization-cart 
-          .realization--cart-element__img
-            img(src=`../img/realization/steel-elements/element-4-1.jpg`, alt="Element stalowy wykonany przez Zar-Stal")
-            i.ph.ph-images.mulitple-images
-          .element-info
-            p.element-title Maszyna do skrawkowania <br> euro-palet
-            p.text.elements--see-photos 
-              span Zobacz zdjęcia
-      
+        +realizationElementCart('steel-elements/element-1-1.jpg', 'Kontenery Białe')
+        +realizationElementCart('steel-elements/element-2-1.jpg', 'Wzmocnienia takie jakie są białe')
+        +realizationElementCart('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini')
+        +realizationElementCart('steel-elements/element-4-1.jpg', 'Maszyna do skrawkowania euro-palet')
+        
+  section.section--realizations-machines#steel-machines 
+    .container-realizations
+      p.subtitle maszyny
+      h2.secondary-header Maszyny
+      .realizations-box 
+        +realizationElementCart('steel-elements/element-1-1.jpg', 'Kontenery Białe')
+        +realizationElementCart('steel-elements/element-2-1.jpg', 'Wzmocnienia takie jakie są białe')
+        +realizationElementCart('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini')
+        +realizationElementCart('steel-elements/element-4-1.jpg', 'Maszyna do skrawkowania euro-palet')
+  
+  section.section--realizations-containers#steel-containers
+    .container-realizations
+      p.subtitle kontenery
+      h2.secondary-header Kontenery
+      .realizations-box 
+        +realizationElementCart('steel-elements/element-1-1.jpg', 'Kontenery Białe')
+        +realizationElementCart('steel-elements/element-2-1.jpg', 'Wzmocnienia takie jakie są białe')
+        +realizationElementCart('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini')
+        +realizationElementCart('steel-elements/element-4-1.jpg', 'Maszyna do skrawkowania euro-palet')
 

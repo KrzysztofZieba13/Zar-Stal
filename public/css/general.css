@@ -26,6 +26,7 @@ body {
 .link:visited {
   color: #fff;
   text-decoration: none;
+  transition: all 0.3s;
 }
 
 .btn {

@@ -1,0 +1,47 @@
+extends base
+
+block append head
+  link(rel='stylesheet', href='/css/singleRealization.css')
+
+block content 
+  section.section--single-realization 
+    .columns
+      .realization--column-left
+        .realization-description
+          p.location
+            i.ph.ph-map-pin 
+            span Przeworsk
+          h3.third-header.realization-header Tytuł Realizacji I
+          p.text.realization-text Krótki opis realizacji lorem ipsum dolor sit omet non akda krótki opis realizacji lorem ipsum dolor sit omet non akda
+        
+        .realization-specifications 
+          p.specification-title Specyfikacja
+          .specifications-element 
+            p.element-title Szerokość
+            p.element-value 16m
+          .specifications-element 
+            p.element-title Długość
+            p.element-value 20m
+          .specifications-element 
+            p.element-title Wysokość
+            p.element-value 8m
+          .specifications-element 
+            p.element-title Powierzchnia
+            p.element-value 320m
+              sup 2
+
+        .realization-moreinfo 
+          p.moreinfo-title Więcej Informacji? 
+          a.link.btn.moreinfo-btn(href='/#kontakt') Skontaktuj się z nami 
+
+      .realization--column-right 
+        img.realization--img-main(src='../img/realization/realization1/realizacja1.JPG', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        .realization-imgs
+          .realization--img-small 
+            img(src='../img/realization/realization1/DJI_0095.JPG', alt='zdjęcie podglądowe realizacji wykonanej przez Zar-Stal')
+          .realization--img-small 
+            img(src='../img/realization/realization1/DJI_0096.JPG', alt='zdjęcie podglądowe realizacji wykonanej przez Zar-Stal')
+          .realization--img-small 
+            img(src='../img/realization/realization1/DJI_0101.JPG', alt='zdjęcie podglądowe realizacji wykonanej przez Zar-Stal')
+            .img-overlay
+              p.img-count +2
