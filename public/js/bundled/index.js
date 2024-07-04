@@ -585,86 +585,96 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"lT62u":[function(require,module,exports) {
 var _galleryRealizations = require("./galleryRealizations");
+var _galleryElements = require("./galleryElements");
 const realizationGalleryBox = document.querySelector(".wide--screen-gallery ");
-if (realizationGalleryBox) {
-    console.log("galeria wykryta");
-    _galleryRealizations.galleryActions(realizationGalleryBox);
-}
+const sectionSteelElements = document.querySelector(".section--realizations-elements");
+if (realizationGalleryBox) _galleryRealizations.galleryActions(realizationGalleryBox);
+document.addEventListener("DOMContentLoaded", ()=>{
+    const openGalleryByImage = document.querySelectorAll(".realization--cart-element__img");
+    const seePhotosButtons = document.querySelectorAll(".element-see-photos-btn");
+    openGalleryByImage.forEach((imageAsBtn)=>{
+        imageAsBtn.addEventListener("click", (e)=>{
+            const gallery = e.target.closest(".realization-cart").querySelector(".wide--screen-galleryElements");
+            gallery.classList.remove("hidden");
+            gallery.querySelector(".overlay").classList.remove("hidden");
+            _galleryElements.galleryElementsActions(gallery);
+        });
+    });
+    seePhotosButtons.forEach((button)=>{
+        button.addEventListener("click", (e)=>{
+            const gallery = e.target.closest(".realization-cart").querySelector(".wide--screen-galleryElements");
+            gallery.classList.remove("hidden");
+            gallery.querySelector(".overlay").classList.remove("hidden");
+            _galleryElements.galleryElementsActions(gallery);
+        });
+    });
+});
 
-},{"./galleryRealizations":"dti8X"}],"dti8X":[function(require,module,exports) {
+},{"./galleryRealizations":"dti8X","./galleryElements":"k2fC4"}],"dti8X":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "showSlide", ()=>showSlide);
 parcelHelpers.export(exports, "galleryActions", ()=>galleryActions);
 const closeGallery = document.querySelector(".gallery--btn-close");
 const overlay = document.querySelector(".overlay");
 const overviewImgs = document.querySelector(".realization--column-right ");
 const nextBtn = document.querySelector(".gallery--btn-next");
 const prevBtn = document.querySelector(".gallery--btn-prev");
-const galleryImgs = document.querySelectorAll(".realization--gallery-img");
-const showSlide = (goToSlide, direction)=>{
+const galleryImages = document.querySelectorAll(".realization--gallery-img");
+const closeGalleryHandler = (gallery)=>{
+    gallery.classList.add("hidden");
+    overlay.classList.add("hidden");
+};
+const updateNavButtonsHandler = (nextValue, prevValue)=>{
+    nextBtn.dataset.goTo = nextValue;
+    prevBtn.dataset.goTo = prevValue;
+};
+const showSlide = (goToSlide, direction, galleryImgs)=>{
     galleryImgs.forEach((el)=>el.classList.remove("gallery-active"));
     if (+goToSlide > galleryImgs.length) {
-        console.log("za duzo");
-        nextBtn.dataset.goTo = 2;
-        prevBtn.dataset.goTo = 0;
+        console.log("jest wiekszy");
+        updateNavButtonsHandler(2, 0);
         return galleryImgs[0].classList.add("gallery-active");
     }
     if (+goToSlide < 1) {
-        console.log("za malo");
-        nextBtn.dataset.goTo = galleryImgs.length + 1;
-        prevBtn.dataset.goTo = galleryImgs.length - 1;
+        console.log("jest mniejszy");
+        updateNavButtonsHandler(galleryImgs.length + 1, galleryImgs.length - 1);
         return galleryImgs[galleryImgs.length - 1].classList.add("gallery-active");
     }
+    console.log("aktualny slide " + goToSlide);
     galleryImgs[+goToSlide - 1].classList.add("gallery-active");
-    if (direction === "next") {
-        nextBtn.dataset.goTo = +nextBtn.dataset.goTo + 1;
-        prevBtn.dataset.goTo = +prevBtn.dataset.goTo + 1;
-    }
-    if (direction === "prev") {
-        nextBtn.dataset.goTo = +nextBtn.dataset.goTo - 1;
-        prevBtn.dataset.goTo = +prevBtn.dataset.goTo - 1;
-    }
-    if (direction === "selected") {
-        nextBtn.dataset.goTo = +goToSlide + 1;
-        prevBtn.dataset.goTo = +goToSlide - 1;
-    }
+    if (direction === "next") updateNavButtonsHandler(+nextBtn.dataset.goTo + 1, +prevBtn.dataset.goTo + 1);
+    if (direction === "prev") updateNavButtonsHandler(+nextBtn.dataset.goTo - 1, +prevBtn.dataset.goTo - 1);
+    if (direction === "selected") updateNavButtonsHandler(+goToSlide + 1, +goToSlide - 1);
 };
 const galleryActions = (gallery)=>{
-    closeGallery.addEventListener("click", ()=>{
-        gallery.classList.add("hidden");
-        overlay.classList.add("hidden");
-    });
-    overlay.addEventListener("click", ()=>{
-        gallery.classList.add("hidden");
-        overlay.classList.add("hidden");
-    });
-    overviewImgs.addEventListener("click", (e)=>{
+    closeGallery.addEventListener("click", ()=>closeGalleryHandler(gallery));
+    overlay.addEventListener("click", ()=>closeGalleryHandler(gallery));
+    // only for single realization
+    if (overviewImgs) overviewImgs.addEventListener("click", (e)=>{
         gallery.classList.remove("hidden");
         overlay.classList.remove("hidden");
         const goTo = e.target.closest(".realization-img").dataset.goTo;
-        showSlide(goTo, "selected");
+        showSlide(goTo, "selected", galleryImages);
     });
     nextBtn.addEventListener("click", (e)=>{
-        let goTo = e.target.closest(".gallery--btn-next").dataset.goTo;
-        showSlide(goTo, "next");
+        const goTo = e.target.closest(".gallery--btn-next").dataset.goTo;
+        showSlide(goTo, "next", galleryImages);
     });
     prevBtn.addEventListener("click", (e)=>{
-        let goTo = e.target.closest(".gallery--btn-prev").dataset.goTo;
-        showSlide(goTo, "prev");
+        const goTo = e.target.closest(".gallery--btn-prev").dataset.goTo;
+        showSlide(goTo, "prev", galleryImages);
     });
     // KEYBOARD BUTTONS
     document.addEventListener("keydown", (e)=>{
-        if (e.key === "Escape") {
-            gallery.classList.add("hidden");
-            overlay.classList.add("hidden");
-        }
+        if (e.key === "Escape") closeGalleryHandler(gallery);
         if (e.key === "ArrowRight") {
             let goTo = nextBtn.dataset.goTo;
-            showSlide(goTo, "next");
+            showSlide(goTo, "next", galleryImages);
         }
         if (e.key === "ArrowLeft") {
             let goTo = prevBtn.dataset.goTo;
-            showSlide(goTo, "prev");
+            showSlide(goTo, "prev", galleryImages);
         }
     });
 };
@@ -699,6 +709,67 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["5Yzg5","lT62u"], "lT62u", "parcelRequire2a96")
+},{}],"k2fC4":[function(require,module,exports) {
+//TODO: REFACTORE THIS AND FROM 'galleryRealizations.js'!!!!!!
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "galleryElementsActions", ()=>galleryElementsActions);
+const galleryElementsActions = (gallery)=>{
+    const nextBtn = gallery.querySelector(".gallery--btn-next");
+    const prevBtn = gallery.querySelector(".gallery--btn-prev");
+    const galleryImages = gallery.querySelectorAll(".realization--gallery-img");
+    const closeBtn = gallery.querySelector(".gallery--btn-close ");
+    const overlay = gallery.querySelector(".overlay");
+    const closeGalleryHandler = (gallery)=>{
+        gallery.classList.add("hidden");
+        overlay.classList.add("hidden");
+    };
+    const updateNavButtonsHandler = (nextValue, prevValue)=>{
+        nextBtn.dataset.goTo = nextValue;
+        prevBtn.dataset.goTo = prevValue;
+    };
+    const showSlide = (goToSlide, direction, galleryImgs)=>{
+        galleryImgs.forEach((el)=>el.classList.remove("gallery-active"));
+        if (+goToSlide > galleryImgs.length) {
+            console.log("jest wiekszy");
+            updateNavButtonsHandler(2, 0);
+            return galleryImgs[0].classList.add("gallery-active");
+        }
+        if (+goToSlide < 1) {
+            console.log("jest mniejszy");
+            updateNavButtonsHandler(galleryImgs.length + 1, galleryImgs.length - 1);
+            return galleryImgs[galleryImgs.length - 1].classList.add("gallery-active");
+        }
+        console.log("aktualny slide " + goToSlide);
+        galleryImgs[+goToSlide - 1].classList.add("gallery-active");
+        if (direction === "next") updateNavButtonsHandler(+nextBtn.dataset.goTo + 1, +prevBtn.dataset.goTo + 1);
+        if (direction === "prev") updateNavButtonsHandler(+nextBtn.dataset.goTo - 1, +prevBtn.dataset.goTo - 1);
+        if (direction === "selected") updateNavButtonsHandler(+goToSlide + 1, +goToSlide - 1);
+    };
+    nextBtn.addEventListener("click", (e)=>{
+        const goTo = e.target.closest(".gallery--btn-next").dataset.goTo;
+        showSlide(goTo, "next", galleryImages);
+    });
+    prevBtn.addEventListener("click", (e)=>{
+        const goTo = e.target.closest(".gallery--btn-prev").dataset.goTo;
+        showSlide(goTo, "prev", galleryImages);
+    });
+    // KEYBOARD BUTTONS
+    document.addEventListener("keydown", (e)=>{
+        if (e.key === "Escape") closeGalleryHandler(gallery);
+        if (e.key === "ArrowRight") {
+            let goTo = nextBtn.dataset.goTo;
+            showSlide(goTo, "next", galleryImages);
+        }
+        if (e.key === "ArrowLeft") {
+            let goTo = prevBtn.dataset.goTo;
+            showSlide(goTo, "prev", galleryImages);
+        }
+    });
+    closeBtn.addEventListener("click", ()=>closeGalleryHandler(gallery));
+    overlay.addEventListener("click", ()=>closeGalleryHandler(gallery));
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5oERU"}]},["5Yzg5","lT62u"], "lT62u", "parcelRequire2a96")
 
 //# sourceMappingURL=index.js.map

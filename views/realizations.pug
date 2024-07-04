@@ -2,6 +2,9 @@ extends base
 
 block append head 
   link(rel='stylesheet', href='/css/realizations.css')
+  link(rel='stylesheet', href='/css/gallery.css')
+  script(src='/js/bundled/index.js' defer)
+
 
 mixin realizationCart(imgSrc, loc, title, link)
   .realization-cart 
@@ -26,7 +29,60 @@ mixin realizationElementCart(imgSrc, title)
     .element-info
       p.element-title= title
       p.text.elements--see-photos 
+        span.element-see-photos-btn Zobacz zdjęcia
+    .wide--screen-galleryElements.hidden
+      .img--gallery-box
+        img.realization--gallery-img.gallery-active(data-realization-img=1 src='../img/realization/steel-elements/element-1-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        img.realization--gallery-img(data-realization-img=2 src='../img/realization/steel-elements/element-2-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        img.realization--gallery-img(data-realization-img=3 src='../img/realization/steel-elements/element-3-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        img.realization--gallery-img(data-realization-img=4 src='../img/realization/steel-elements/element-4-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        .gallery-counter 
+          .gallery-dot.gallery-active
+          .gallery-dot
+          .gallery-dot
+          .gallery-dot
+      .gallery--btn-prev.gallery-btns(data-go-to=0)
+        span 
+          i.ph.ph-caret-left
+      .gallery--btn-next.gallery-btns(data-go-to=2) 
+        span 
+          i.ph.ph-caret-right
+        
+      .gallery--btn-close 
+        i.ph.ph-x
+      .overlay.hidden
+
+mixin lastDance(imgSrc, title)
+  .realization-cart 
+    .realization--cart-element__img
+      img(src=`../img/realization/${imgSrc}`, alt="Element stalowy wykonany przez Zar-Stal")
+      i.ph.ph-images.mulitple-images
+    .element-info
+      p.element-title= title
+      p.text.elements--see-photos 
         span Zobacz zdjęcia
+    .wide--screen-galleryElements.hidden
+      .img--gallery-box
+        img.realization--gallery-img.gallery-active(data-realization-img=1 src='../img/realization/steel-elements/element-1-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        img.realization--gallery-img(data-realization-img=2 src='../img/realization/steel-elements/element-2-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        img.realization--gallery-img(data-realization-img=3 src='../img/realization/steel-elements/element-3-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        img.realization--gallery-img(data-realization-img=4 src='../img/realization/steel-elements/element-4-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        img.realization--gallery-img(data-realization-img=4 src='../img/realization/steel-elements/element-wide-5-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        .gallery-counter 
+          .gallery-dot.gallery-active
+          .gallery-dot
+          .gallery-dot
+          .gallery-dot
+      .gallery--btn-prev.gallery-btns(data-go-to=0)
+        span 
+          i.ph.ph-caret-left
+      .gallery--btn-next.gallery-btns(data-go-to=2) 
+        span 
+          i.ph.ph-caret-right
+        
+      .gallery--btn-close 
+        i.ph.ph-x
+      .overlay.hidden
 
 
 block content 
@@ -44,7 +100,7 @@ block content
       p.subtitle konstrukcje
       h2.secondary-header Hale Stalowe
       .realizations-box 
-        +realizationCart('realization1/realizacja1.JPG', 'Przeworsk', 'Okręgowa stacja kontroli pojazdów', '/realizacja/1')
+        +realizationCart('realization1/realizacja-th-1-1.JPG', 'Przeworsk', 'Okręgowa stacja kontroli pojazdów', '/realizacja/1')
         +realizationCart('realization2/realizacja2.JPG', 'Wierzbna', 'Hala naprawy maszyn', '/realizacja/2')
         +realizationCart('realization3/realizacja3.JPG', 'Wylewa', 'Hala recyklingowa opon', '/realizacja/3')
         +realizationCart('realization4/realizacja4.JPG', 'Wylewa', 'Tartak i magazyn', '/realizacja/4')
@@ -60,7 +116,8 @@ block content
         +realizationElementCart('steel-elements/element-2-1.jpg', 'Wzmocnienia takie jakie są białe')
         +realizationElementCart('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini')
         +realizationElementCart('steel-elements/element-4-1.jpg', 'Maszyna do skrawkowania euro-palet')
-        
+    
+
   section.section--realizations-machines#steel-machines 
     .container-realizations
       p.subtitle maszyny
@@ -79,5 +136,4 @@ block content
         +realizationElementCart('steel-elements/element-1-1.jpg', 'Kontenery Białe')
         +realizationElementCart('steel-elements/element-2-1.jpg', 'Wzmocnienia takie jakie są białe')
         +realizationElementCart('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini')
-        +realizationElementCart('steel-elements/element-4-1.jpg', 'Maszyna do skrawkowania euro-palet')
-
+        +lastDance('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini')
