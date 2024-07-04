@@ -130,6 +130,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 9999;
 }
 
 .gallery-active {
@@ -143,11 +144,12 @@
   transform: translateY(-50%);
   display: flex;
   align-items: center;
-  background-color: rgba(20, 28, 39, 0.2);
+  background-color: rgba(20, 28, 39, 0.5);
   transition: all 0.3s;
   padding: 2.4rem 1.2rem;
   cursor: pointer;
   font-size: 3.2rem;
+  z-index: 9999;
 }
 
 .gallery-btns:hover {
@@ -168,6 +170,7 @@
   right: 10px;
   font-size: 4.4rem;
   cursor: pointer;
+  z-index: 9999;
 }
 
 .gallery-counter {
@@ -190,4 +193,8 @@
 
 .gallery-dot.gallery-active {
   background-color: #27374d;
+}
+
+.img--gallery-box {
+  z-index: 9999;
 }
