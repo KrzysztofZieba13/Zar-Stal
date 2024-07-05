@@ -5,6 +5,7 @@ export const galleryElementsActions = (gallery) => {
   const galleryImages = gallery.querySelectorAll('.realization--gallery-img');
   const closeBtn = gallery.querySelector('.gallery--btn-close ');
   const overlay = gallery.querySelector('.overlay');
+  const dotsButtons = gallery.querySelector('.gallery-counter');
 
   const closeGalleryHandler = (gallery) => {
     gallery.classList.add('hidden');
@@ -22,11 +23,20 @@ export const galleryElementsActions = (gallery) => {
     if (+goToSlide > galleryImgs.length) {
       console.log('jest wiekszy');
       updateNavButtonsHandler(2, 0);
+      dotsButtons.querySelectorAll('.gallery-dot').forEach((el) => {
+        el.classList.remove('gallery-active');
+        if (+el.dataset.goTo === 1) el.classList.add('gallery-active');
+      });
       return galleryImgs[0].classList.add('gallery-active');
     }
     if (+goToSlide < 1) {
       console.log('jest mniejszy');
       updateNavButtonsHandler(galleryImgs.length + 1, galleryImgs.length - 1);
+      dotsButtons.querySelectorAll('.gallery-dot').forEach((el) => {
+        el.classList.remove('gallery-active');
+        if (+el.dataset.goTo === galleryImages.length)
+          el.classList.add('gallery-active');
+      });
       return galleryImgs[galleryImgs.length - 1].classList.add(
         'gallery-active'
       );
@@ -47,6 +57,11 @@ export const galleryElementsActions = (gallery) => {
       );
     if (direction === 'selected')
       updateNavButtonsHandler(+goToSlide + 1, +goToSlide - 1);
+
+    dotsButtons.querySelectorAll('.gallery-dot').forEach((el) => {
+      el.classList.remove('gallery-active');
+      if (+goToSlide === +el.dataset.goTo) el.classList.add('gallery-active');
+    });
   };
 
   nextBtn.addEventListener('click', (e) => {
@@ -70,6 +85,12 @@ export const galleryElementsActions = (gallery) => {
       let goTo = prevBtn.dataset.goTo;
       showSlide(goTo, 'prev', galleryImages);
     }
+  });
+
+  dotsButtons.addEventListener('click', (e) => {
+    const button = e.target.closest('.gallery-dot');
+    if (!button) return;
+    showSlide(button.dataset.goTo, 'selected', galleryImages);
   });
 
   closeBtn.addEventListener('click', () => closeGalleryHandler(gallery));

@@ -1,11 +1,10 @@
 .nav-container {
   background-color: #27374d;
   padding: 1.2rem 4.4rem;
-  position: absolute;
   width: 100%;
   box-shadow: 0 4px 13px 5px rgba(3, 3, 3, 0.2);
-  position: fixed;
-  top: 0;
+  /* position: fixed; */
+  /* top: 0; */
   z-index: 1777;
 }
 
@@ -15,6 +14,11 @@ nav {
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
+}
+
+.open-nav,
+.close-nav {
+  display: none;
 }
 
 .nav-btn::after {
@@ -42,10 +46,16 @@ nav {
 .nav-menu {
   display: flex;
   gap: 4.8rem;
+  width: 100%;
+  justify-content: flex-end;
 }
 
 .nav-item {
   font-size: 2.4rem;
+}
+
+.mobile--nav-btns {
+  font-size: 4.4rem;
 }
 
 /*******************/
@@ -59,8 +69,9 @@ nav {
 
 .footer-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  gap: 2.4rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr 0.5fr;
+  column-gap: 2.4rem;
+  row-gap: 4.4rem;
   margin: 0 auto;
   max-width: 180rem;
 }
@@ -82,7 +93,7 @@ nav {
 .footer-openhours {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 60%;
   margin-top: 1.2rem;
 }
 
@@ -90,7 +101,8 @@ nav {
   color: #fff;
 }
 
-.footer-contact .footer-text {
+.footer-contact .footer-text,
+.footer-nav .footer-text {
   display: flex;
   flex-direction: column;
 }
@@ -98,6 +110,7 @@ nav {
 .footer-offert .footer-text {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  column-gap: 2.4rem;
 }
 
 .footer-title:last-child {

@@ -16,10 +16,16 @@ html {
   scroll-behavior: smooth;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   background-color: #27374d;
   color: #fff;
   font-family: Lato, 'sans serif';
+  position: relative;
+  overflow-x: hidden;
 }
 
 .link:link,

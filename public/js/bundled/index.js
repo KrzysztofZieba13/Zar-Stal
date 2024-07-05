@@ -621,6 +621,7 @@ const overviewImgs = document.querySelector(".realization--column-right ");
 const nextBtn = document.querySelector(".gallery--btn-next");
 const prevBtn = document.querySelector(".gallery--btn-prev");
 const galleryImages = document.querySelectorAll(".realization--gallery-img");
+const dotsButtons = document.querySelector(".gallery-counter");
 const closeGalleryHandler = (gallery)=>{
     gallery.classList.add("hidden");
     overlay.classList.add("hidden");
@@ -634,11 +635,23 @@ const showSlide = (goToSlide, direction, galleryImgs)=>{
     if (+goToSlide > galleryImgs.length) {
         console.log("jest wiekszy");
         updateNavButtonsHandler(2, 0);
+        dotsButtons.querySelectorAll(".gallery-dot").forEach((el)=>{
+            el.classList.remove("gallery-active");
+            if (+el.dataset.goTo === 1) el.classList.add("gallery-active");
+        });
         return galleryImgs[0].classList.add("gallery-active");
     }
     if (+goToSlide < 1) {
         console.log("jest mniejszy");
         updateNavButtonsHandler(galleryImgs.length + 1, galleryImgs.length - 1);
+        dotsButtons.querySelectorAll(".gallery-dot").forEach((el)=>{
+            el.classList.remove("gallery-active");
+            if (+goToSlide === +el.dataset.goTo) el.classList.add("gallery-active");
+        });
+        dotsButtons.querySelectorAll(".gallery-dot").forEach((el)=>{
+            el.classList.remove("gallery-active");
+            if (+el.dataset.goTo === galleryImages.length) el.classList.add("gallery-active");
+        });
         return galleryImgs[galleryImgs.length - 1].classList.add("gallery-active");
     }
     console.log("aktualny slide " + goToSlide);
@@ -646,6 +659,10 @@ const showSlide = (goToSlide, direction, galleryImgs)=>{
     if (direction === "next") updateNavButtonsHandler(+nextBtn.dataset.goTo + 1, +prevBtn.dataset.goTo + 1);
     if (direction === "prev") updateNavButtonsHandler(+nextBtn.dataset.goTo - 1, +prevBtn.dataset.goTo - 1);
     if (direction === "selected") updateNavButtonsHandler(+goToSlide + 1, +goToSlide - 1);
+    dotsButtons.querySelectorAll(".gallery-dot").forEach((el)=>{
+        el.classList.remove("gallery-active");
+        if (+goToSlide === +el.dataset.goTo) el.classList.add("gallery-active");
+    });
 };
 const galleryActions = (gallery)=>{
     closeGallery.addEventListener("click", ()=>closeGalleryHandler(gallery));
@@ -664,6 +681,11 @@ const galleryActions = (gallery)=>{
     prevBtn.addEventListener("click", (e)=>{
         const goTo = e.target.closest(".gallery--btn-prev").dataset.goTo;
         showSlide(goTo, "prev", galleryImages);
+    });
+    dotsButtons.addEventListener("click", (e)=>{
+        const button = e.target.closest(".gallery-dot");
+        if (!button) return;
+        showSlide(button.dataset.goTo, "selected", galleryImages);
     });
     // KEYBOARD BUTTONS
     document.addEventListener("keydown", (e)=>{
@@ -720,6 +742,7 @@ const galleryElementsActions = (gallery)=>{
     const galleryImages = gallery.querySelectorAll(".realization--gallery-img");
     const closeBtn = gallery.querySelector(".gallery--btn-close ");
     const overlay = gallery.querySelector(".overlay");
+    const dotsButtons = gallery.querySelector(".gallery-counter");
     const closeGalleryHandler = (gallery)=>{
         gallery.classList.add("hidden");
         overlay.classList.add("hidden");
@@ -733,11 +756,19 @@ const galleryElementsActions = (gallery)=>{
         if (+goToSlide > galleryImgs.length) {
             console.log("jest wiekszy");
             updateNavButtonsHandler(2, 0);
+            dotsButtons.querySelectorAll(".gallery-dot").forEach((el)=>{
+                el.classList.remove("gallery-active");
+                if (+el.dataset.goTo === 1) el.classList.add("gallery-active");
+            });
             return galleryImgs[0].classList.add("gallery-active");
         }
         if (+goToSlide < 1) {
             console.log("jest mniejszy");
             updateNavButtonsHandler(galleryImgs.length + 1, galleryImgs.length - 1);
+            dotsButtons.querySelectorAll(".gallery-dot").forEach((el)=>{
+                el.classList.remove("gallery-active");
+                if (+el.dataset.goTo === galleryImages.length) el.classList.add("gallery-active");
+            });
             return galleryImgs[galleryImgs.length - 1].classList.add("gallery-active");
         }
         console.log("aktualny slide " + goToSlide);
@@ -745,6 +776,10 @@ const galleryElementsActions = (gallery)=>{
         if (direction === "next") updateNavButtonsHandler(+nextBtn.dataset.goTo + 1, +prevBtn.dataset.goTo + 1);
         if (direction === "prev") updateNavButtonsHandler(+nextBtn.dataset.goTo - 1, +prevBtn.dataset.goTo - 1);
         if (direction === "selected") updateNavButtonsHandler(+goToSlide + 1, +goToSlide - 1);
+        dotsButtons.querySelectorAll(".gallery-dot").forEach((el)=>{
+            el.classList.remove("gallery-active");
+            if (+goToSlide === +el.dataset.goTo) el.classList.add("gallery-active");
+        });
     };
     nextBtn.addEventListener("click", (e)=>{
         const goTo = e.target.closest(".gallery--btn-next").dataset.goTo;
@@ -765,6 +800,11 @@ const galleryElementsActions = (gallery)=>{
             let goTo = prevBtn.dataset.goTo;
             showSlide(goTo, "prev", galleryImages);
         }
+    });
+    dotsButtons.addEventListener("click", (e)=>{
+        const button = e.target.closest(".gallery-dot");
+        if (!button) return;
+        showSlide(button.dataset.goTo, "selected", galleryImages);
     });
     closeBtn.addEventListener("click", ()=>closeGalleryHandler(gallery));
     overlay.addEventListener("click", ()=>closeGalleryHandler(gallery));

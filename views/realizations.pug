@@ -37,10 +37,10 @@ mixin realizationElementCart(imgSrc, title)
         img.realization--gallery-img(data-realization-img=3 src='../img/realization/steel-elements/element-3-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
         img.realization--gallery-img(data-realization-img=4 src='../img/realization/steel-elements/element-4-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
         .gallery-counter 
-          .gallery-dot.gallery-active
-          .gallery-dot
-          .gallery-dot
-          .gallery-dot
+          .gallery-dot.gallery-active(data-go-to=1)
+          .gallery-dot(data-go-to=2)
+          .gallery-dot(data-go-to=3)
+          .gallery-dot(data-go-to=4)
       .gallery--btn-prev.gallery-btns(data-go-to=0)
         span 
           i.ph.ph-caret-left
@@ -51,39 +51,6 @@ mixin realizationElementCart(imgSrc, title)
       .gallery--btn-close 
         i.ph.ph-x
       .overlay.hidden
-
-mixin lastDance(imgSrc, title)
-  .realization-cart 
-    .realization--cart-element__img
-      img(src=`../img/realization/${imgSrc}`, alt="Element stalowy wykonany przez Zar-Stal")
-      i.ph.ph-images.mulitple-images
-    .element-info
-      p.element-title= title
-      p.text.elements--see-photos 
-        span Zobacz zdjęcia
-    .wide--screen-galleryElements.hidden
-      .img--gallery-box
-        img.realization--gallery-img.gallery-active(data-realization-img=1 src='../img/realization/steel-elements/element-1-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
-        img.realization--gallery-img(data-realization-img=2 src='../img/realization/steel-elements/element-2-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
-        img.realization--gallery-img(data-realization-img=3 src='../img/realization/steel-elements/element-3-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
-        img.realization--gallery-img(data-realization-img=4 src='../img/realization/steel-elements/element-4-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
-        img.realization--gallery-img(data-realization-img=4 src='../img/realization/steel-elements/element-wide-5-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
-        .gallery-counter 
-          .gallery-dot.gallery-active
-          .gallery-dot
-          .gallery-dot
-          .gallery-dot
-      .gallery--btn-prev.gallery-btns(data-go-to=0)
-        span 
-          i.ph.ph-caret-left
-      .gallery--btn-next.gallery-btns(data-go-to=2) 
-        span 
-          i.ph.ph-caret-right
-        
-      .gallery--btn-close 
-        i.ph.ph-x
-      .overlay.hidden
-
 
 block content 
   header.realizations-header
@@ -136,4 +103,3 @@ block content
         +realizationElementCart('steel-elements/element-1-1.jpg', 'Kontenery Białe')
         +realizationElementCart('steel-elements/element-2-1.jpg', 'Wzmocnienia takie jakie są białe')
         +realizationElementCart('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini')
-        +lastDance('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini')
