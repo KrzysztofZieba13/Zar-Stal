@@ -1,0 +1,149 @@
+/* BELOW 1840px */
+@media (max-width: 115em) {
+  .realizations--header-btns .btn {
+    width: 20%;
+  }
+}
+
+/* BELOW 1696px */
+@media (max-width: 115em) {
+  .realizations-box {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* BELOW 1440px */
+@media (max-width: 90em) {
+  .realizations-box {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* BELOW 1200px */
+@media (max-width: 75em) {
+  .realizations {
+    padding-left: 5.2rem;
+    padding-right: 5.2rem;
+  }
+}
+
+/* BELOW 1120px */
+@media (max-width: 70em) {
+  .realizations-header {
+    padding: 4.4rem 3.2rem 4.4rem 3.2rem;
+    background-position: bottom left;
+  }
+
+  .realizations--header-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    column-gap: 2.4;
+  }
+
+  .realizations--header-btns .btn {
+    width: 80%;
+  }
+
+  .realizations--header-btns .btn:nth-child(odd) {
+    justify-self: end;
+  }
+
+  .realizations--header-btns .btn:nth-child(even) {
+    justify-self: start;
+  }
+}
+
+/* BELOW 992px */
+@media (max-width: 62em) {
+  .realizations-box {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    justify-items: center;
+    margin: 4.4rem auto 0 auto;
+  }
+
+  .realization-cart {
+    width: 80%;
+  }
+
+  .realization--cart__img {
+    height: 36rem;
+  }
+
+  .realization--cart__img a img,
+  .realization--cart-element__img img {
+    height: 36rem;
+  }
+}
+
+/* BELOW 816px */
+@media (max-width: 51em) {
+  .realization-cart {
+    width: 100%;
+  }
+}
+
+/* BELOW 704px */
+@media (max-width: 44em) {
+  .realizations--header-btns {
+    gap: 1.2rem;
+  }
+
+  .realizations-header {
+    background-image: url('../../img/realization/realization-bg-1-sm.png');
+    background-position: center bottom;
+  }
+
+  .realizations--header-btns .btn {
+    width: 100%;
+  }
+
+  .realization-cart {
+    width: 100%;
+  }
+
+  .realization--cart__img,
+  .realization--cart__img a img,
+  .realization--cart-element__img img {
+    height: 29rem;
+  }
+}
+
+/* BELOW 560px */
+@media (max-width: 35em) {
+  .realizations {
+    padding-left: 6.4rem;
+    padding-right: 6.4rem;
+  }
+
+  .realizations-header {
+    background-position: top center;
+  }
+
+  .realizations--header-btns {
+    grid-template-columns: 1fr;
+  }
+
+  .realizations-header .primary-header {
+    font-size: 4.4rem;
+  }
+
+  .realizations--header-text {
+    font-size: 2rem;
+  }
+
+  .realization--cart__img,
+  .realization--cart__img a img,
+  .realization--cart-element__img img {
+    height: 20rem;
+  }
+}
+
+/* BELOW 432px */
+@media (max-width: 27em) {
+  .realizations {
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+}

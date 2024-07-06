@@ -586,9 +586,13 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 },{}],"lT62u":[function(require,module,exports) {
 var _galleryRealizations = require("./galleryRealizations");
 var _galleryElements = require("./galleryElements");
+var _nav = require("./nav");
 const realizationGalleryBox = document.querySelector(".wide--screen-gallery ");
 const sectionSteelElements = document.querySelector(".section--realizations-elements");
+const navBar = document.querySelector(".nav-container");
+// GALLERY FOR ONE REALIZATION
 if (realizationGalleryBox) _galleryRealizations.galleryActions(realizationGalleryBox);
+// GALLERY FOR MANY REALIZATIONS
 document.addEventListener("DOMContentLoaded", ()=>{
     const openGalleryByImage = document.querySelectorAll(".realization--cart-element__img");
     const seePhotosButtons = document.querySelectorAll(".element-see-photos-btn");
@@ -609,8 +613,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
         });
     });
 });
+navBar;
 
-},{"./galleryRealizations":"dti8X","./galleryElements":"k2fC4"}],"dti8X":[function(require,module,exports) {
+},{"./galleryRealizations":"dti8X","./galleryElements":"k2fC4","./nav":"56f0v"}],"dti8X":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "showSlide", ()=>showSlide);
@@ -810,6 +815,27 @@ const galleryElementsActions = (gallery)=>{
     overlay.addEventListener("click", ()=>closeGalleryHandler(gallery));
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"5oERU"}]},["5Yzg5","lT62u"], "lT62u", "parcelRequire2a96")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"5oERU"}],"56f0v":[function(require,module,exports) {
+const openNavBtn = document.querySelector(".open-nav");
+const closeNavBtn = document.querySelector(".close-nav");
+const navMenu = document.querySelector(".nav-menu");
+const navBar = document.querySelector(".nav-container");
+const navBtns = document.querySelectorAll(".nav-btn");
+const toggleNavBarVisibility = ()=>{
+    navBar.classList.toggle("nav-open");
+    openNavBtn.classList.toggle("hidden");
+    closeNavBtn.classList.toggle("hidden");
+};
+openNavBtn.addEventListener("click", ()=>toggleNavBarVisibility());
+closeNavBtn.addEventListener("click", ()=>toggleNavBarVisibility());
+navBtns.forEach((button)=>{
+    button.addEventListener("click", ()=>{
+        navBar.classList.remove("nav-open");
+        openNavBtn.classList.remove("hidden");
+        closeNavBtn.classList.add("hidden");
+    });
+});
+
+},{}]},["5Yzg5","lT62u"], "lT62u", "parcelRequire2a96")
 
 //# sourceMappingURL=index.js.map

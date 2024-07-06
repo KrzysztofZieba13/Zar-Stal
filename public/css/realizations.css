@@ -1,5 +1,4 @@
 .realizations-header {
-  margin-top: 8.8rem;
   background-color: #3d4b5f;
   text-align: center;
   padding: 9.6rem 0;
@@ -12,6 +11,7 @@
 .realizations--header-text {
   font-size: 2.4rem;
   margin-top: 2.4rem;
+  line-height: 1.8;
 }
 
 .section-realizations,

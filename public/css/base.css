@@ -16,9 +16,8 @@ nav {
   margin: 0 auto;
 }
 
-.open-nav,
-.close-nav {
-  display: none;
+.nav-open .nav-menu {
+  transform: translateX(0) !important;
 }
 
 .nav-btn::after {
@@ -48,6 +47,11 @@ nav {
   gap: 4.8rem;
   width: 100%;
   justify-content: flex-end;
+  transition: all 0.3s;
+}
+
+.open-nav {
+  display: none;
 }
 
 .nav-item {
@@ -56,6 +60,7 @@ nav {
 
 .mobile--nav-btns {
   font-size: 4.4rem;
+  z-index: 1100;
 }
 
 /*******************/

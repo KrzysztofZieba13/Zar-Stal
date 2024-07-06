@@ -3,6 +3,7 @@ extends base
 block append head 
   link(rel='stylesheet', href='/css/realizations.css')
   link(rel='stylesheet', href='/css/gallery.css')
+  link(rel='stylesheet', href='/css/queries/queriesRealizations.css')
   script(src='/js/bundled/index.js' defer)
 
 
@@ -62,7 +63,7 @@ block content
       a.btn.link(href="#steel-machines") Maszyny
       a.btn.link(href="#steel-containers") Kontenery
 
-  section.section-realizations#steel-constructions
+  section.section-realizations.realizations#steel-constructions
     .container-realizations
       p.subtitle konstrukcje
       h2.secondary-header Hale Stalowe
@@ -74,7 +75,7 @@ block content
         +realizationCart('realization6/realizacja6.JPG', 'Wylewa', 'Magazyn i hala produkcyjna konstrukcji stalowych', '/realizacja/5')
         +realizationCart('realization7/realizacja7.JPG', 'Leżachów', 'Magazyn i hala produkcyjna nawozów', '/realizacja/6')
 
-  section.section--realizations-elements#steel-elements
+  section.section--realizations-elements.realizations#steel-elements
     .container-realizations
       p.subtitle elementy
       h2.secondary-header Elementy Stalowe
@@ -85,7 +86,7 @@ block content
         +realizationElementCart('steel-elements/element-4-1.jpg', 'Maszyna do skrawkowania euro-palet')
     
 
-  section.section--realizations-machines#steel-machines 
+  section.section--realizations-machines.realizations#steel-machines 
     .container-realizations
       p.subtitle maszyny
       h2.secondary-header Maszyny
@@ -95,7 +96,7 @@ block content
         +realizationElementCart('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini')
         +realizationElementCart('steel-elements/element-4-1.jpg', 'Maszyna do skrawkowania euro-palet')
   
-  section.section--realizations-containers#steel-containers
+  section.section--realizations-containers.realizations#steel-containers
     .container-realizations
       p.subtitle kontenery
       h2.secondary-header Kontenery
