@@ -22,8 +22,8 @@ mixin realizationCart(imgSrc, loc, title, link)
         a.link(href=link) Zobacz Szczegóły
           i.ph.ph-arrow-right
 
-mixin realizationElementCart(imgSrc, title)
-  .realization-cart 
+mixin realizationElementCart(imgSrc, title, id)
+  .realization-cart.realization--cart-element(id=id)
     .realization--cart-element__img
       img(src=`../img/realization/${imgSrc}`, alt="Element stalowy wykonany przez Zar-Stal")
       i.ph.ph-images.mulitple-images
@@ -31,21 +31,21 @@ mixin realizationElementCart(imgSrc, title)
       p.element-title= title
       p.text.elements--see-photos 
         span.element-see-photos-btn Zobacz zdjęcia
-    .wide--screen-galleryElements.hidden
+    .wide--screen-gallery.hidden
       .img--gallery-box
-        img.realization--gallery-img.gallery-active(data-realization-img=1 src='../img/realization/steel-elements/element-1-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
-        img.realization--gallery-img(data-realization-img=2 src='../img/realization/steel-elements/element-2-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
-        img.realization--gallery-img(data-realization-img=3 src='../img/realization/steel-elements/element-3-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
-        img.realization--gallery-img(data-realization-img=4 src='../img/realization/steel-elements/element-4-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        img.realization--gallery-img.gallery-active(data-realization-img=0 src='../img/realization/steel-elements/element-1-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        img.realization--gallery-img(data-realization-img=1 src='../img/realization/steel-elements/element-2-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        img.realization--gallery-img(data-realization-img=2 src='../img/realization/steel-elements/element-3-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        img.realization--gallery-img(data-realization-img=3 src='../img/realization/steel-elements/element-4-1.jpg', alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
         .gallery-counter 
-          .gallery-dot.gallery-active(data-go-to=1)
+          .gallery-dot.gallery-active(data-go-to=0)
+          .gallery-dot(data-go-to=1)
           .gallery-dot(data-go-to=2)
           .gallery-dot(data-go-to=3)
-          .gallery-dot(data-go-to=4)
-      .gallery--btn-prev.gallery-btns(data-go-to=0)
+      .gallery--btn-prev.gallery-btns(data-go-to=3)
         span 
           i.ph.ph-caret-left
-      .gallery--btn-next.gallery-btns(data-go-to=2) 
+      .gallery--btn-next.gallery-btns(data-go-to=1) 
         span 
           i.ph.ph-caret-right
         
@@ -80,10 +80,10 @@ block content
       p.subtitle elementy
       h2.secondary-header Elementy Stalowe
       .realizations-box 
-        +realizationElementCart('steel-elements/element-1-1.jpg', 'Kontenery Białe')
-        +realizationElementCart('steel-elements/element-2-1.jpg', 'Wzmocnienia takie jakie są białe')
-        +realizationElementCart('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini')
-        +realizationElementCart('steel-elements/element-4-1.jpg', 'Maszyna do skrawkowania euro-palet')
+        +realizationElementCart('steel-elements/element-1-1.jpg', 'Kontenery Białe', 'element-one')
+        +realizationElementCart('steel-elements/element-2-1.jpg', 'Wzmocnienia takie jakie są białe', 'element-two')
+        +realizationElementCart('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini', 'element-three')
+        +realizationElementCart('steel-elements/element-4-1.jpg', 'Maszyna do skrawkowania euro-palet', 'element-four')
     
 
   section.section--realizations-machines.realizations#steel-machines 
@@ -91,16 +91,16 @@ block content
       p.subtitle maszyny
       h2.secondary-header Maszyny
       .realizations-box 
-        +realizationElementCart('steel-elements/element-1-1.jpg', 'Kontenery Białe')
-        +realizationElementCart('steel-elements/element-2-1.jpg', 'Wzmocnienia takie jakie są białe')
-        +realizationElementCart('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini')
-        +realizationElementCart('steel-elements/element-4-1.jpg', 'Maszyna do skrawkowania euro-palet')
+        +realizationElementCart('steel-elements/element-1-1.jpg', 'Kontenery Białe', 'machine-one')
+        +realizationElementCart('steel-elements/element-2-1.jpg', 'Wzmocnienia takie jakie są białe', 'machine-two')
+        +realizationElementCart('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini', 'machine-three')
+        +realizationElementCart('steel-elements/element-4-1.jpg', 'Maszyna do skrawkowania euro-palet', 'machine-four')
   
   section.section--realizations-containers.realizations#steel-containers
     .container-realizations
       p.subtitle kontenery
       h2.secondary-header Kontenery
       .realizations-box 
-        +realizationElementCart('steel-elements/element-1-1.jpg', 'Kontenery Białe')
-        +realizationElementCart('steel-elements/element-2-1.jpg', 'Wzmocnienia takie jakie są białe')
-        +realizationElementCart('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini')
+        +realizationElementCart('steel-elements/element-1-1.jpg', 'Kontenery Białe', 'container-one')
+        +realizationElementCart('steel-elements/element-2-1.jpg', 'Wzmocnienia takie jakie są białe', 'container-two')
+        +realizationElementCart('steel-elements/element-3-1.jpg', 'Łyżka do koparki mini', 'container-three')

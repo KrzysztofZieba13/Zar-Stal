@@ -112,14 +112,28 @@
 
 /* BELOW 512px */
 @media (max-width: 32em) {
+  .footer-logo {
+    justify-self: start;
+  }
+  .footer-goup {
+    grid-row: 1/2;
+    justify-self: start;
+  }
+
+  .footer-contact {
+    grid-row: 2/3;
+    grid-column: 1/-1;
+  }
+
   .footer-offert {
     grid-row: 3/4;
-    grid-column: 2/3;
+    grid-column: 1/-1;
     align-self: start;
     justify-self: start;
   }
 
-  .footer-goup {
-    grid-row: 1/2;
+  .footer-nav {
+    grid-row: 2/3;
+    grid-column: 3/-1;
   }
 }
