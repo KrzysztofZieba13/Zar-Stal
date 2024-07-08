@@ -16,7 +16,8 @@ exports.getRealizations = async (req, res) => {
 
 exports.getSingleRealization = async (req, res) => {
   try {
-    res.status(200).render('singleRealization');
+    console.log(req.params.id);
+    res.status(200).render('singleRealization', { id: req.params.id });
   } catch (err) {
     console.log(err);
   }

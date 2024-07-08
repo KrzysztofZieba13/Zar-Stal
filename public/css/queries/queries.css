@@ -87,6 +87,11 @@
   html {
     font-size: 50%;
   }
+
+  /* TEMP */
+  .icon-contact {
+    left: 5% !important;
+  }
 }
 
 /* BELOW 928px */
@@ -146,6 +151,16 @@
   .btn--see-realization {
     width: 75%;
   }
+
+  /* TEMP */
+  .contact-panel {
+    width: 85% !important;
+  }
+
+  /* TEMP */
+  .icon-contact {
+    left: 0% !important;
+  }
 }
 
 /* BELOW 768px */
@@ -177,6 +192,11 @@
 @media (max-width: 40em) {
   html {
     font-size: 42.5%;
+  }
+
+  /* TEMP */
+  .icon-contact {
+    left: 25% !important;
   }
 
   .contact-box {

@@ -14,13 +14,14 @@
 }
 
 .realization--gallery-img {
-  width: 80%;
+  max-width: 80%;
   visibility: hidden;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 9999;
+  object-fit: contain;
 }
 
 .gallery-counter {
@@ -37,7 +38,7 @@
 .gallery-dot {
   width: 10px;
   height: 10px;
-  background-color: #fff;
+  background-color: #27374d;
   border-radius: 100px;
   cursor: pointer;
 }
@@ -47,7 +48,7 @@
 }
 
 .gallery-dot.gallery-active {
-  background-color: #27374d;
+  background-color: #fff;
 }
 
 .gallery--btn-prev {
