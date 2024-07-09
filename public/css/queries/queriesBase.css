@@ -57,6 +57,13 @@
   html {
     font-size: 56.25%;
   }
+
+  .global--goup-btn a:link,
+  .global--goup-btn a:visited {
+    padding: 1.6rem;
+    bottom: 15px;
+    right: 15px;
+  }
 }
 
 /* BELOW 1108px */

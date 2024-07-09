@@ -52,7 +52,7 @@ mixin realizationElementCart(imgSrc, title, id, imgArr)
       .overlay.hidden
 
 block content 
-  header.realizations-header
+  header.realizations-header.intersection-header
     h1.primary-header Nasze Realizacje
     p.realizations--header-text Dowiedz się wiecej, o naszych konstrukcjach, które stworzyliśmy na przestrzeni lat i nie tylko
     .realizations--header-btns 
@@ -66,7 +66,7 @@ block content
       p.subtitle konstrukcje
       h2.secondary-header Hale Stalowe
       .realizations-box 
-        +realizationCart('realization1/realizacja-th-1-1.JPG', 'Przeworsk', 'Okręgowa stacja kontroli pojazdów', '/realizacja/1')
+        +realizationCart('realization1/realizacja-th-1-1.jpg', 'Przeworsk', 'Okręgowa stacja kontroli pojazdów', '/realizacja/1')
         +realizationCart('realization2/realizacja2.JPG', 'Wierzbna', 'Hala naprawy maszyn', '/realizacja/2')
         +realizationCart('realization3/realizacja3.JPG', 'Wylewa', 'Hala recyklingowa opon', '/realizacja/3')
         +realizationCart('realization4/realizacja4.JPG', 'Wylewa', 'Tartak i magazyn', '/realizacja/4')

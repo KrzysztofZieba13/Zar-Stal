@@ -3,9 +3,9 @@
   padding: 1.2rem 4.4rem;
   width: 100%;
   box-shadow: 0 4px 13px 5px rgba(3, 3, 3, 0.2);
-  /* position: fixed; */
-  /* top: 0; */
-  z-index: 1777;
+  position: absolute;
+  top: 0;
+  z-index: 17777;
 }
 
 nav {
@@ -48,6 +48,11 @@ nav {
   width: 100%;
   justify-content: flex-end;
   transition: all 0.3s;
+}
+
+.sticky {
+  position: fixed !important;
+  background-color: rgba(38, 54, 77, 0.9);
 }
 
 .open-nav {
@@ -135,4 +140,33 @@ nav {
 .footer-title .link:hover i,
 .footer-title .link:active i {
   transform: translateY(-30%) !important;
+}
+
+/* INTERSECTION OBSERVER API */
+.global--goup-btn a:link,
+.global--goup-btn a:visited {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  font-size: 2.4rem;
+  cursor: pointer;
+  background-color: #141c27;
+  padding: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1000px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.global--goup-btn a:link i,
+.global--goup-btn a:visited i {
+  transition: transform 0.6s cubic-bezier(0.37, 0, 0.63, 1);
+  color: #fff;
+}
+
+.global--goup-btn a:hover i {
+  transform: translateY(-20%);
+  color: #fff;
 }

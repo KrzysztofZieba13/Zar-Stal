@@ -1,17 +1,21 @@
+/*eslint-disable */
 import * as nav from './nav';
 import ImageGallery from './gallery/imageGallery';
 import SingleGallery from './gallery/singleGallery';
+import * as mapLeaflet from './mapLeaflet';
 
 const sectionSingleRealization = document.querySelector(
-  '.section--single-realization'
+  '.section--single-realization',
 );
 const sectionSteelElements = document.querySelector(
-  '.section--realizations-elements'
+  '.section--realizations-elements',
 );
 const navBar = document.querySelector('.nav-container');
 const realizationCartElements = document.querySelectorAll(
-  '.realization--cart-element'
+  '.realization--cart-element',
 );
+const intersectionHeader = document.querySelector('.intersection-header');
+const mapContainer = document.getElementById('map');
 
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) {
@@ -24,3 +28,7 @@ if (realizationCartElements) {
     new ImageGallery(cart.id);
   });
 }
+
+if (intersectionHeader) nav.initIntersectionApi();
+
+if (mapContainer) mapLeaflet.displayMap();

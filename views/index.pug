@@ -1,6 +1,7 @@
 extends base
 
-
+block append head
+  link(rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="")
 
 mixin testimonial(imgSrc)
   img.client-logo(src=imgSrc alt='logo firmy która zaufała')
@@ -25,7 +26,7 @@ block append head
 
 
 block content
-  header.overview-header
+  header.overview-header.intersection-header
     .hero 
       .hero--text-box
         h1.primary-header.hero-header ZAR-STAL <br> KONSTRUKCJE STALOWE
@@ -70,7 +71,7 @@ block content
       span.subtitle realizacje
       h2.secondary-header Nasze Realizacje
       .realizations-box 
-        img.realization-img(src='../img/realization/realization1/realizacja1-overview.JPG' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
+        img.realization-img(src='../img/realization/realization1/realizacja1-overview.jpg' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
         .realization-desc
           h3.third-header nazwa realizacji I 
           p.text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean laoreet malesuada urna, vitae ullamcorper sem sollicitudin vel. Integer convallis velit et eros egestas sollicitudin. Vivamus ac ligula diam. Vestibulum vitae nunc id neque facilisis convallis.
@@ -91,7 +92,7 @@ block content
       h2.secondary-header Nasza Oferta
       .offert-grid
         .offert-item 
-          img(src="../img/offert/oferta1.png", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
+          img(src="../img/offert/oferta1.jpg", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
           p Konstrukcje Stalowe
         .offert-item 
           img(src="../img/offert/oferta2.jpg", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
@@ -146,3 +147,13 @@ block content
         //-     textarea#contact-message.textarea-contact(name="message" placeholder='Treść wiadomości')
         //-     input#contact-submit.input-submit(type="submit" value='Wyślij wiadomość')
     img(src='../img/construction-bg.png').construction-bg
+  #map 
+    //- img(src='../img/mapa.png', alt='mapa')
+    .make-route 
+      
+      a.link(href='https://maps.app.goo.gl/vK6gudVaf39LNmNL8')
+        span 
+          i.ph.ph-map-trifold
+        |Wyznacz Trasę 
+        
+  
