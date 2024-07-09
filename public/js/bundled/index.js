@@ -591,12 +591,14 @@ var _imageGalleryDefault = parcelHelpers.interopDefault(_imageGallery);
 var _singleGallery = require("./gallery/singleGallery");
 var _singleGalleryDefault = parcelHelpers.interopDefault(_singleGallery);
 var _mapLeaflet = require("./mapLeaflet");
+var _interObserver = require("./interObserver");
 const sectionSingleRealization = document.querySelector(".section--single-realization");
-const sectionSteelElements = document.querySelector(".section--realizations-elements");
 const navBar = document.querySelector(".nav-container");
 const realizationCartElements = document.querySelectorAll(".realization--cart-element");
 const intersectionHeader = document.querySelector(".intersection-header");
 const mapContainer = document.getElementById("map");
+const mainPage = document.querySelector(".overview-header");
+const manyRealizationsPage = document.querySelector(".realizations-header");
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) new (0, _singleGalleryDefault.default)("single-realizations");
 // GALLERY FOR MANY REALIZATIONS
@@ -605,8 +607,13 @@ if (realizationCartElements) realizationCartElements.forEach((cart)=>{
 });
 if (intersectionHeader) _nav.initIntersectionApi();
 if (mapContainer) _mapLeaflet.displayMap();
+if (manyRealizationsPage || mainPage) {
+    _interObserver.initRevalSections();
+    _interObserver.initLoadLazyImg();
+}
+if (mainPage) _interObserver.initLoadLazyImg();
 
-},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"il6Pq":[function(require,module,exports) {
+},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initIntersectionApi", ()=>initIntersectionApi);
@@ -810,15 +817,15 @@ const displayMap = ()=>{
         scrollWheelZoom: false
     }).setView([
         50.18,
-        22.59
+        22.6
     ], 12);
     _leaflet.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
     const marker = _leaflet.marker([
-        50.19,
-        22.59
+        50.194,
+        22.59931
     ]).addTo(map);
 };
 
@@ -11418,6 +11425,50 @@ const displayMap = ()=>{
     window.L = exports1;
 });
 
-},{}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
+},{}],"389lu":[function(require,module,exports) {
+/*eslint-disable*/ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initRevalSections", ()=>initRevalSections);
+parcelHelpers.export(exports, "initLoadLazyImg", ()=>initLoadLazyImg);
+const initRevalSections = ()=>{
+    const allSections = document.querySelectorAll(".section");
+    const revalSection = function(entries, observer) {
+        entries.forEach((entry)=>{
+            if (!entry.isIntersecting) return;
+            entry.target.classList.remove("section--hidden");
+            observer.unobserve(entry.target);
+        });
+    };
+    const sectionObserver = new IntersectionObserver(revalSection, {
+        root: null,
+        threshold: 0.15
+    });
+    allSections.forEach((section)=>{
+        sectionObserver.observe(section);
+        section.classList.add("section--hidden");
+    });
+};
+const initLoadLazyImg = ()=>{
+    const allLazyImgs = document.querySelectorAll("img[data-src]");
+    const loadImg = (entries, observer)=>{
+        entries.forEach((entry)=>{
+            if (!entry.isIntersecting) return;
+            // Replace src with data-src
+            entry.target.src = entry.target.dataset.src;
+            entry.target.addEventListener("load", function() {
+                entry.target.classList.remove("lazy-img");
+            });
+            observer.unobserve(entry.target);
+        });
+    };
+    const imgObserver = new IntersectionObserver(loadImg, {
+        root: null,
+        threshold: 0,
+        rootMargin: "200px"
+    });
+    allLazyImgs.forEach((img)=>imgObserver.observe(img));
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
 
 //# sourceMappingURL=index.js.map

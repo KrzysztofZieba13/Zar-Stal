@@ -3,12 +3,10 @@ import * as nav from './nav';
 import ImageGallery from './gallery/imageGallery';
 import SingleGallery from './gallery/singleGallery';
 import * as mapLeaflet from './mapLeaflet';
+import * as interObserver from './interObserver';
 
 const sectionSingleRealization = document.querySelector(
   '.section--single-realization',
-);
-const sectionSteelElements = document.querySelector(
-  '.section--realizations-elements',
 );
 const navBar = document.querySelector('.nav-container');
 const realizationCartElements = document.querySelectorAll(
@@ -16,6 +14,8 @@ const realizationCartElements = document.querySelectorAll(
 );
 const intersectionHeader = document.querySelector('.intersection-header');
 const mapContainer = document.getElementById('map');
+const mainPage = document.querySelector('.overview-header');
+const manyRealizationsPage = document.querySelector('.realizations-header');
 
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) {
@@ -32,3 +32,10 @@ if (realizationCartElements) {
 if (intersectionHeader) nav.initIntersectionApi();
 
 if (mapContainer) mapLeaflet.displayMap();
+
+if (manyRealizationsPage || mainPage) {
+  interObserver.initRevalSections();
+  interObserver.initLoadLazyImg();
+}
+
+if (mainPage) interObserver.initLoadLazyImg();

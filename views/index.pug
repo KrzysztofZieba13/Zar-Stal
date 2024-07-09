@@ -52,7 +52,7 @@ block content
   //////////////////////////////////////
   ///////////////COMPANY////////////////
   //////////////////////////////////////
-  section.section-company#firma
+  section.section.section-company.section--hidden#firma
     .container 
       span.subtitle firma
       h2.secondary-header Dlaczego My?
@@ -66,12 +66,12 @@ block content
   //////////////////////////////////////
   ////////////REALIZATIONS//////////////
   //////////////////////////////////////
-  section.section-realizations#realizacje 
+  section.section.section-realizations.section--hidden#realizacje 
     .container 
       span.subtitle realizacje
       h2.secondary-header Nasze Realizacje
       .realizations-box 
-        img.realization-img(src='../img/realization/realization1/realizacja1-overview.jpg' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
+        img.realization-img.lazy-img(src='../img/realization/realization1/realizacja-lazy-1-1.jpg' data-src='../img/realization/realization1/realizacja1-overview.jpg' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
         .realization-desc
           h3.third-header nazwa realizacji I 
           p.text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean laoreet malesuada urna, vitae ullamcorper sem sollicitudin vel. Integer convallis velit et eros egestas sollicitudin. Vivamus ac ligula diam. Vestibulum vitae nunc id neque facilisis convallis.
@@ -80,13 +80,13 @@ block content
           h3.third-header nazwa realizacji II
           p.text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean laoreet malesuada urna, vitae ullamcorper sem sollicitudin vel. Integer convallis velit et eros egestas sollicitudin. Vivamus ac ligula diam. Vestibulum vitae nunc id neque facilisis convallis.
           a(href='/realizacja/2').btn.link.btn--see-realization Zobacz Realizację
-        img.realization-img(src='../img/realization/realization2/realizacja2-overview.JPG' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
+        img.realization-img.lazy-img(src='../img/realization/realization2/realizacja-lazy-2-1.jpg' data-src='../img/realization/realization2/realizacja2-overview.JPG' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
       a(href='/realizacje').btn.link.btn--see-morerealizations Zobacz Więcej Realizacji
     img(src='../img/crane-bg.png').construction-bg
   ////////////////////////////////
   ////////////OFFERT//////////////
   ////////////////////////////////
-  section.section-offert#oferta
+  section.section.section-offert.section--hidden#oferta
     .container 
       span.subtitle oferta
       h2.secondary-header Nasza Oferta
@@ -112,7 +112,7 @@ block content
   /////////////////////////////////
   ////////////CONTACT//////////////
   /////////////////////////////////
-  section.section-contact#kontakt
+  section.section.section-contact.section--hidden#kontakt
     .container 
       span.subtitle kontakt
       h2.secondary-header Skontaktuj Się
@@ -147,7 +147,7 @@ block content
         //-     textarea#contact-message.textarea-contact(name="message" placeholder='Treść wiadomości')
         //-     input#contact-submit.input-submit(type="submit" value='Wyślij wiadomość')
     img(src='../img/construction-bg.png').construction-bg
-  #map 
+  #map
     //- img(src='../img/mapa.png', alt='mapa')
     .make-route 
       

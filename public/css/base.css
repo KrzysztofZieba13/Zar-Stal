@@ -5,7 +5,7 @@
   box-shadow: 0 4px 13px 5px rgba(3, 3, 3, 0.2);
   position: absolute;
   top: 0;
-  z-index: 17777;
+  z-index: 1777;
 }
 
 nav {
@@ -158,15 +158,23 @@ nav {
   border-radius: 1000px;
   color: #fff;
   text-decoration: none;
+  z-index: 17777;
 }
 
 .global--goup-btn a:link i,
 .global--goup-btn a:visited i {
   transition: transform 0.6s cubic-bezier(0.37, 0, 0.63, 1);
   color: #fff;
+  z-index: 17777;
 }
 
 .global--goup-btn a:hover i {
   transform: translateY(-20%);
   color: #fff;
+}
+
+/* REVAL SECTION */
+.section--hidden {
+  opacity: 0;
+  transform: translateY(8rem);
 }
