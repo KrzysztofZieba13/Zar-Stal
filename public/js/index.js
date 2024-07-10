@@ -4,6 +4,7 @@ import ImageGallery from './gallery/imageGallery';
 import SingleGallery from './gallery/singleGallery';
 import * as mapLeaflet from './mapLeaflet';
 import * as interObserver from './interObserver';
+import { initSlider } from './heroSlideshow';
 
 const sectionSingleRealization = document.querySelector(
   '.section--single-realization',
@@ -17,9 +18,17 @@ const mapContainer = document.getElementById('map');
 const mainPage = document.querySelector('.overview-header');
 const manyRealizationsPage = document.querySelector('.realizations-header');
 
+let navListener = false;
+
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) {
   new SingleGallery('single-realizations');
+}
+
+if (!navListener) {
+  console.log('kurwa');
+  nav.initNavHandlers();
+  navListener = true;
 }
 
 // GALLERY FOR MANY REALIZATIONS
@@ -38,4 +47,7 @@ if (manyRealizationsPage || mainPage) {
   interObserver.initLoadLazyImg();
 }
 
-if (mainPage) interObserver.initLoadLazyImg();
+if (mainPage) {
+  interObserver.initLoadLazyImg();
+  initSlider(mainPage);
+}

@@ -4,13 +4,14 @@
   top: 0;
   left: 0;
   height: 100%;
-  z-index: 9999;
+  z-index: 20000;
   width: 100%;
   color: #fff;
 }
 
 .img--gallery-box {
   z-index: 9999;
+  display: flex;
 }
 
 .realization--gallery-img {

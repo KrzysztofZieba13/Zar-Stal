@@ -13,9 +13,10 @@ const toggleNavBarVisibility = () => {
   closeNavBtn.classList.toggle('hidden');
 };
 
-openNavBtn.addEventListener('click', () => toggleNavBarVisibility());
-
-closeNavBtn.addEventListener('click', () => toggleNavBarVisibility());
+export const initNavHandlers = () => {
+  openNavBtn.addEventListener('click', () => toggleNavBarVisibility());
+  closeNavBtn.addEventListener('click', () => toggleNavBarVisibility());
+};
 
 navBtns.forEach((button) => {
   button.addEventListener('click', () => {
