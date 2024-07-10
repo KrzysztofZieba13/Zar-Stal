@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const viewRouter = require('../routes/viewRoutes');
+const realizationRouter = require('../routes/realizationRoutes');
 
 const app = express();
 
@@ -14,5 +15,6 @@ app.use(express.json({ limit: '10kb' }));
 app.enable('trust proxy');
 
 app.use('/', viewRouter);
+app.use('/api/v1/realizations', realizationRouter);
 
 module.exports = app;
