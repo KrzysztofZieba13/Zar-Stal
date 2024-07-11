@@ -1,4 +1,5 @@
 /*eslint-disable */
+
 const images = [
   '../img/hero-bg/showslide/showslide-1.jpg',
   '../img/hero-bg/showslide/showslide-2.jpg',
@@ -18,5 +19,5 @@ export const initSlider = (heroElement) => {
 
     if (i === images.length) i = 0;
     else preloadingBox.src = images[i];
-  }, 7000);
+  }, 5000);
 };

@@ -26,7 +26,6 @@ if (sectionSingleRealization) {
 }
 
 if (!navListener) {
-  console.log('kurwa');
   nav.initNavHandlers();
   navListener = true;
 }

@@ -604,7 +604,6 @@ let navListener = false;
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) new (0, _singleGalleryDefault.default)("single-realizations");
 if (!navListener) {
-    console.log("kurwa");
     _nav.initNavHandlers();
     navListener = true;
 }
@@ -635,7 +634,6 @@ const navMenu = document.querySelector(".nav-menu");
 const navBar = document.querySelector(".nav-container");
 const navBtns = document.querySelectorAll(".nav-btn");
 const toggleNavBarVisibility = ()=>{
-    console.log("xo");
     navBar.classList.toggle("nav-open");
     openNavBtn.classList.toggle("hidden");
     closeNavBtn.classList.toggle("hidden");
@@ -11502,7 +11500,7 @@ const initSlider = (heroElement)=>{
         heroElement.style.backgroundImage = `url(${images[i++]})`;
         if (i === images.length) i = 0;
         else preloadingBox.src = images[i];
-    }, 7000);
+    }, 5000);
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")

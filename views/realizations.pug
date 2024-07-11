@@ -4,6 +4,7 @@ block append head
   link(rel='stylesheet', href='/css/realizations.css')
   link(rel='stylesheet', href='/css/gallery.css')
   link(rel='stylesheet', href='/css/queries/queriesRealizations.css')
+  title Zar-Stal | Wszystkie Realizacje
 
 
 mixin realizationCart(imgSrc, loc, title, link)
@@ -77,7 +78,7 @@ block content
       p.subtitle elementy
       h2.secondary-header Elementy Stalowe
       .realizations-box 
-        +realizationElementCart('steel-elements/element-th-2-1.jpg', 'Wzmocnienia takie jakie są białe', 'element-two', ['element-wide-2-1.jpg'])
+        +realizationElementCart('steel-elements/element-th-2-1.jpg', 'Wzmocnienia', 'element-two', ['element-wide-2-1.jpg'])
         +realizationElementCart('steel-elements/element-th-3-1.jpg', 'Łyżka do koparki mini', 'element-three', ['element-wide-3-1.jpg'])
         +realizationElementCart('steel-elements/element-th-5-1.jpg', 'Łyżka do koparki', 'element-five', ['element-wide-5-1.jpg'])
     
@@ -87,7 +88,7 @@ block content
       p.subtitle maszyny
       h2.secondary-header Maszyny
       .realizations-box 
-        +realizationElementCart('steel-elements/element-th-4-1.jpg', 'Maszyna do skrawkowania euro-palet', 'element-four', ['element-wide-4-1.jpg', 'element-wide-4-2.jpg'])        
+        +realizationElementCart('steel-elements/element-th-4-1.jpg', 'Maszyna do euro-palet', 'element-four', ['element-wide-4-1.jpg', 'element-wide-4-2.jpg'])        
   
   section.section.section--hidden.section--realizations-containers.realizations#steel-containers
     .container-realizations

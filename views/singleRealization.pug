@@ -4,6 +4,7 @@ block append head
   link(rel='stylesheet', href='/css/singleRealization.css')
   link(rel='stylesheet', href='/css/gallery.css')
   link(rel='stylesheet', href='/css/queries/queriesSingleRealization.css')
+  title Zar-Stal | Szczegóły realizacji
 
 
 block content 
@@ -13,25 +14,61 @@ block content
         .realization-description
           p.location
             i.ph.ph-map-pin 
-            span Przeworsk
-          h3.third-header.realization-header Tytuł Realizacji I
-          p.text.realization-text Krótki opis realizacji lorem ipsum dolor sit omet non akda krótki opis realizacji lorem ipsum dolor sit omet non akda
+            span 
+              if id == 1
+                | Przeworsk
+              if id == 2
+                | Wierzbna
+              if id == 3
+                | Wylewa
+              if id == 4
+                | Wylewa
+              if id == 5
+                | Wylewa
+              if id == 6
+                | Leżachów
+          h3.third-header.realization-header 
+            if id == 1 
+              | Okręgowa Stacja kontroli pojazdów
+            if id == 2 
+              | Hala naprawy i konserwacji maszyn
+            if id == 3 
+              | Hala Recyklingowa opon
+            if id == 4 
+              | Tartak i magazyn
+            if id == 5 
+              | Magazyn i Hala produkcyjna konstrukcji stalowych
+            if id == 6 
+              | Magazyn i Hala produkcyjna nawozów
+          p.text.realization-text 
+            if id == 1
+              | Nowoczesny budynek wykonany z konstrukcji stalowej, posiada przestronny układ z dużymi bramami wjazdowymi, umożliwiającymi wygodny dostęp pojazdów do wnętrza. Hala przystosowana do wykonywania przeglądów technicznych pojazdów, spełniając wszystkie wymagania techniczne i bezpieczeństwa.
+            if id == 2
+              | Hala przeznaczona do naprawy oraz konserwacji maszyn. Budynek składa się z dużej, głównej części warsztatowej z wieloma bramami wjazdowymi, co umożliwia jednoczesne serwisowanie wielu maszyn.
+            if id == 3
+              | Hala recyklingowa opon wykonana z konstrukcji stalowej. Budynek jest duży, z szerokim dachem wyposażonym w liczne świetliki zapewniające naturalne oświetlenie wnętrza.
+            if id == 4
+              | Nowoczesna hala tartaku zbudowana z konstrukcji stalowej charakteryzuje się dużą wytrzymałością. Przestronne wnętrze umożliwia efektywną organizację procesów przetwarzania drewna, a solidne stalowe ramy zapewniają trwałość i bezpieczeństwo obiektu.
+            if id == 5
+              | Magazyn i hala produkcyjna wykonane z konstrukcji stalowej cechują się solidnością i elastycznością w użytkowaniu. Przestronne wnętrze oraz mocne stalowe ramy zapewniają trwałość i bezpieczeństwo, idealne dla efektywnej działalności magazynowej i produkcyjnej.
+            if id == 6
+              | Konstrukcja stalowa magazynu i hali produkcyjnej nawozów zapewnia niezbędną wytrzymałość i bezpieczeństwo dla przechowywanych materiałów oraz procesów produkcyjnych.
         
         .realization-specifications 
           p.specification-title Specyfikacja
           .specifications-element 
             p.element-title Szerokość
-            p.element-value 16m
+            p.element-value wkrótce
           .specifications-element 
             p.element-title Długość
-            p.element-value 20m
+            p.element-value wkrótce
           .specifications-element 
             p.element-title Wysokość
-            p.element-value 8m
+            p.element-value wkrótce
           .specifications-element 
             p.element-title Powierzchnia
-            p.element-value 320m
-              sup 2
+            p.element-value wkrótce
+              //- sup 2
 
         .realization-moreinfo 
           p.moreinfo-title Więcej Informacji? 

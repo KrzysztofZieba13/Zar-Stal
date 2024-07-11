@@ -2,6 +2,8 @@ extends base
 
 block append head
   link(rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="")
+  meta(name="description", content="Zar-Stal Konstrukcje Stalowe – Specjalizujemy się w produkcji konstrukcji stalowych, elementów stalowych, świetlików kalenicowych, kontenerów, hal magazynowych, produkcyjnych, sportowych czy rolniczych. Produkujemy, dostarczamy oraz montujemy konstrukcje w Polsce i za granicą.")
+
 
 mixin testimonial(imgSrc)
   img.client-logo(src=imgSrc alt='logo firmy która zaufała')
@@ -23,6 +25,7 @@ mixin contactElement(icon, subInfo, mainInfo)
 block append head 
   link(rel='stylesheet' href='/css/style.css')
   link(rel='stylesheet' href='/css/queries/queries.css')
+  title Zar-Stal | Konstrukcje Stalowe
 
 
 block content
@@ -74,16 +77,16 @@ block content
       .realizations-box 
         img.realization-img.lazy-img(src='../img/realization/realization1/realizacja-lazy-1-1.jpg' data-src='../img/realization/realization1/realizacja1-overview.jpg' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
         .realization-desc
-          h3.third-header nazwa realizacji I 
-          p.text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean laoreet malesuada urna, vitae ullamcorper sem sollicitudin vel. Integer convallis velit et eros egestas sollicitudin. Vivamus ac ligula diam. Vestibulum vitae nunc id neque facilisis convallis.
+          h3.third-header Okręgowa Stacja Kontroli Pojazdów
+          p.text Nowoczesny budynek wykonany z konstrukcji stalowej, posiada przestronny układ z dużymi bramami wjazdowymi, umożliwiającymi wygodny dostęp pojazdów do wnętrza. Hala przystosowana do wykonywania przeglądów technicznych pojazdów, spełniając wszystkie wymagania techniczne i bezpieczeństwa.
           a(href='/realizacja/1').btn.link.btn--see-realization Zobacz Realizację
         .realization-desc
-          h3.third-header nazwa realizacji II
-          p.text Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean laoreet malesuada urna, vitae ullamcorper sem sollicitudin vel. Integer convallis velit et eros egestas sollicitudin. Vivamus ac ligula diam. Vestibulum vitae nunc id neque facilisis convallis.
+          h3.third-header Hala Naprawy <br> i konserwacji maszyn
+          p.text Hala przeznaczona do naprawy oraz konserwacji maszyn. Budynek składa się z dużej, głównej części warsztatowej z wieloma bramami wjazdowymi, co umożliwia jednoczesne serwisowanie wielu maszyn.
           a(href='/realizacja/2').btn.link.btn--see-realization Zobacz Realizację
         img.realization-img.lazy-img(src='../img/realization/realization2/realizacja-lazy-2-1.jpg' data-src='../img/realization/realization2/realizacja2-overview.JPG' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
       a(href='/realizacje').btn.link.btn--see-morerealizations Zobacz Więcej Realizacji
-    img(src='../img/crane-bg.png').crane-bg
+    img(src='../img/crane-bg.png' alt='dźwig w tle').crane-bg
   ////////////////////////////////
   ////////////OFFERT//////////////
   ////////////////////////////////
@@ -147,7 +150,7 @@ block content
         //-     input#contact-phone.input-contact(type='tel' placeholder='Telefon')
         //-     textarea#contact-message.textarea-contact(name="message" placeholder='Treść wiadomości')
         //-     input#contact-submit.input-submit(type="submit" value='Wyślij wiadomość')
-    img(src='../img/construction-bg.png').construction-bg
+    img(src='../img/construction-bg.png' alt='konstrukcja w tle').construction-bg
   #map
     //- img(src='../img/mapa.png', alt='mapa')
     .make-route 

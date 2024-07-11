@@ -7,7 +7,6 @@ const navBar = document.querySelector('.nav-container');
 const navBtns = document.querySelectorAll('.nav-btn');
 
 const toggleNavBarVisibility = () => {
-  console.log('xo');
   navBar.classList.toggle('nav-open');
   openNavBtn.classList.toggle('hidden');
   closeNavBtn.classList.toggle('hidden');
