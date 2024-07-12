@@ -3,6 +3,19 @@ const realizationController = require('../controllers/realizationController');
 
 const router = express.Router();
 
-router.post('/', realizationController.createRealization);
+router
+  .route('/')
+  .post(
+    realizationController.uploadRealizationImages,
+    realizationController.resizeRealizationImages,
+    realizationController.createRealization,
+  )
+  .get(realizationController.getAllRealizatons);
+
+router
+  .route('/realization/:id')
+  .get(realizationController.getRealization)
+  .patch(realizationController.updateRealization)
+  .delete(realizationController.deleteRealization);
 
 module.exports = router;

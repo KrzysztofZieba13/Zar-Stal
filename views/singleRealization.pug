@@ -14,90 +14,44 @@ block content
         .realization-description
           p.location
             i.ph.ph-map-pin 
-            span 
-              if id == 1
-                | Przeworsk
-              if id == 2
-                | Wierzbna
-              if id == 3
-                | Wylewa
-              if id == 4
-                | Wylewa
-              if id == 5
-                | Wylewa
-              if id == 6
-                | Leżachów
-          h3.third-header.realization-header 
-            if id == 1 
-              | Okręgowa Stacja kontroli pojazdów
-            if id == 2 
-              | Hala naprawy i konserwacji maszyn
-            if id == 3 
-              | Hala Recyklingowa opon
-            if id == 4 
-              | Tartak i magazyn
-            if id == 5 
-              | Magazyn i Hala produkcyjna konstrukcji stalowych
-            if id == 6 
-              | Magazyn i Hala produkcyjna nawozów
-          p.text.realization-text 
-            if id == 1
-              | Nowoczesny budynek wykonany z konstrukcji stalowej, posiada przestronny układ z dużymi bramami wjazdowymi, umożliwiającymi wygodny dostęp pojazdów do wnętrza. Hala przystosowana do wykonywania przeglądów technicznych pojazdów, spełniając wszystkie wymagania techniczne i bezpieczeństwa.
-            if id == 2
-              | Hala przeznaczona do naprawy oraz konserwacji maszyn. Budynek składa się z dużej, głównej części warsztatowej z wieloma bramami wjazdowymi, co umożliwia jednoczesne serwisowanie wielu maszyn.
-            if id == 3
-              | Hala recyklingowa opon wykonana z konstrukcji stalowej. Budynek jest duży, z szerokim dachem wyposażonym w liczne świetliki zapewniające naturalne oświetlenie wnętrza.
-            if id == 4
-              | Nowoczesna hala tartaku zbudowana z konstrukcji stalowej charakteryzuje się dużą wytrzymałością. Przestronne wnętrze umożliwia efektywną organizację procesów przetwarzania drewna, a solidne stalowe ramy zapewniają trwałość i bezpieczeństwo obiektu.
-            if id == 5
-              | Magazyn i hala produkcyjna wykonane z konstrukcji stalowej cechują się solidnością i elastycznością w użytkowaniu. Przestronne wnętrze oraz mocne stalowe ramy zapewniają trwałość i bezpieczeństwo, idealne dla efektywnej działalności magazynowej i produkcyjnej.
-            if id == 6
-              | Konstrukcja stalowa magazynu i hali produkcyjnej nawozów zapewnia niezbędną wytrzymałość i bezpieczeństwo dla przechowywanych materiałów oraz procesów produkcyjnych.
-        
+            span= realization.location
+          h3.third-header.realization-header= realization.title
+          p.text.realization-text= realization.description
         .realization-specifications 
           p.specification-title Specyfikacja
-          .specifications-element 
-            p.element-title Szerokość
-            p.element-value wkrótce
-          .specifications-element 
-            p.element-title Długość
-            p.element-value wkrótce
-          .specifications-element 
-            p.element-title Wysokość
-            p.element-value wkrótce
-          .specifications-element 
-            p.element-title Powierzchnia
-            p.element-value wkrótce
-              //- sup 2
+            each spec in realization.specifications
+              .specifications-element 
+                p.element-title= spec.title
+                p.element-value= spec.detail
 
         .realization-moreinfo 
           p.moreinfo-title Więcej Informacji? 
           a.link.btn.moreinfo-btn(href='/#kontakt') Skontaktuj się z nami 
 
       .realization--column-right#single-realizations
-        img.realization--img-main.realization-img(data-go-to=0 src=`../img/realization/realization${id}/realizacja-th-${id}-1.jpg`, alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        img.realization--img-main.realization-img(data-go-to=0 src=`/img/realization/realization-${realization._id}/realizacja-th-${realization._id}-1.jpg`, alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
         .realization-imgs
-          .realization--img-small.realization-img(data-go-to=1)
-            img(src=`../img/realization/realization${id}/realizacja-th-${id}-2.jpg`, alt='zdjęcie podglądowe realizacji wykonanej przez Zar-Stal')
-          .realization--img-small.realization-img(data-go-to=2) 
-            img(src=`../img/realization/realization${id}/realizacja-th-${id}-3.jpg`, alt='zdjęcie podglądowe realizacji wykonanej przez Zar-Stal')
-          .realization--img-small.realization-img(data-go-to=3) 
-            img(src=`../img/realization/realization${id}/realizacja-th-${id}-4.jpg`, alt='zdjęcie podglądowe realizacji wykonanej przez Zar-Stal')
-            //- .img-overlay
-            //-   p.img-count +2
+          each real, i in realization.imagesThumbnails
+            if i > 0
+              .realization--img-small.realization-img(data-go-to=i+1)
+                img(src=`/img/realization/realization-${realization._id}/realizacja-th-${realization._id}-${i+1}.jpg`, alt='zdjęcie podglądowe realizacji wykonanej przez Zar-Stal')
+                if i == 3 && realization.imagesThumbnails.length > 4
+                  .img-overlay
+                    p.img-count= `+${realization.imagesThumbnails.length - 3}`
+            if i == 3
+              - break
         
         .wide--screen-gallery.hidden
           .img--gallery-box
-            img.realization--gallery-img(data-realization-img=0 src=`../img/realization/realization${id}/realizacja-wide-${id}-1.jpg`, alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
-            img.realization--gallery-img(data-realization-img=1 src=`../img/realization/realization${id}/realizacja-wide-${id}-2.jpg` alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
-            img.realization--gallery-img(data-realization-img=2 src=`../img/realization/realization${id}/realizacja-wide-${id}-3.jpg`, alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
-            img.realization--gallery-img(data-realization-img=3 src=`../img/realization/realization${id}/realizacja-wide-${id}-4.jpg`, alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+            each _, i in realization.images
+              img.realization--gallery-img(data-realization-img=i src=`/img/realization/realization-${realization._id}/realizacja-wide-${realization._id}-${i+1}.jpg`, alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
             .gallery-counter 
-              .gallery-dot.gallery-active(data-go-to=0)
-              .gallery-dot(data-go-to=1)
-              .gallery-dot(data-go-to=2)
-              .gallery-dot(data-go-to=3)
-          .gallery--btn-prev.gallery-btns(data-go-to=3)
+              each _, i in realization.images
+                if i == 0
+                  .gallery-dot.gallery-active(data-go-to=i)
+                else
+                  .gallery-dot(data-go-to=i)
+          .gallery--btn-prev.gallery-btns(data-go-to=realization.images.length)
             span 
               i.ph.ph-caret-left
           .gallery--btn-next.gallery-btns(data-go-to=1) 
