@@ -1,3 +1,5 @@
+/*eslint-disable */
+
 export default class Gallery {
   constructor(id) {
     this.container = document.getElementById(id);
@@ -27,7 +29,7 @@ export default class Gallery {
     });
 
     this.closeGalleryBtn.addEventListener('click', () =>
-      this._closeGalleryHandler()
+      this._closeGalleryHandler(),
     );
 
     this.overlay.addEventListener('click', () => this._closeGalleryHandler());

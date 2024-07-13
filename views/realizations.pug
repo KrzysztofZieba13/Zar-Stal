@@ -66,12 +66,8 @@ block content
       p.subtitle konstrukcje
       h2.secondary-header Hale Stalowe
       .realizations-box 
-        +realizationCart('realization-66913d2d34f571f2fde33316/realizacja-th-66913d2d34f571f2fde33316-1.jpg', 'Przeworsk', 'Okręgowa stacja kontroli pojazdów', '/realizacje/realizacja/66913d2d34f571f2fde33316')
-        +realizationCart('realization-66913cea34f571f2fde33314/realizacja-th-66913cea34f571f2fde33314-1.jpg', 'Wierzbna', 'Hala naprawy maszyn', '/realizacje/realizacja/66913cea34f571f2fde33314')
-        +realizationCart('realization-66913d7634f571f2fde33318/realizacja-th-66913d7634f571f2fde33318-1.jpg', 'Wylewa', 'Hala recyklingowa opon', '/realizacje/realizacja/66913d7634f571f2fde33318')
-        +realizationCart('realization4/realizacja4.JPG', 'Wylewa', 'Tartak i magazyn', '/realizacja/4')
-        +realizationCart('realization6/realizacja6.JPG', 'Wylewa', 'Magazyn i hala produkcyjna konstrukcji stalowych', '/realizacja/5')
-        +realizationCart('realization7/realizacja7.JPG', 'Leżachów', 'Magazyn i hala produkcyjna nawozów', '/realizacja/6')
+        each real in realizations
+          +realizationCart(real.imagesThumbnails[0], real.location, real.title, `/realizacje/realizacja/${real._id}`)
 
   section.section.section--hidden.section--realizations-elements.realizations#steel-elements
     .container-realizations

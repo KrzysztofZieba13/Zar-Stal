@@ -29,24 +29,24 @@ block content
           a.link.btn.moreinfo-btn(href='/#kontakt') Skontaktuj się z nami 
 
       .realization--column-right#single-realizations
-        img.realization--img-main.realization-img(data-go-to=0 src=`/img/realization/realization-${realization._id}/realizacja-th-${realization._id}-1.jpg`, alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+        img.realization--img-main.realization-img(data-go-to=0 src=`/img/realization/${realization.primaryImageThumbnail}`, alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
         .realization-imgs
           each real, i in realization.imagesThumbnails
-            if i > 0
-              .realization--img-small.realization-img(data-go-to=i+1)
-                img(src=`/img/realization/realization-${realization._id}/realizacja-th-${realization._id}-${i+1}.jpg`, alt='zdjęcie podglądowe realizacji wykonanej przez Zar-Stal')
-                if i == 3 && realization.imagesThumbnails.length > 4
-                  .img-overlay
-                    p.img-count= `+${realization.imagesThumbnails.length - 3}`
-            if i == 3
+            .realization--img-small.realization-img(data-go-to=i+1)
+              img(src=`/img/realization/${real}`, data-img-th-id=real, data-img-wide-id=realization.images[i] alt='zdjęcie podglądowe realizacji wykonanej przez Zar-Stal')
+              if i == 2 && realization.imagesThumbnails.length > 3
+                .img-overlay
+                  p.img-count= `+${realization.imagesThumbnails.length - 2}`
+            if i == 2
               - break
         
         .wide--screen-gallery.hidden
           .img--gallery-box
-            each _, i in realization.images
-              img.realization--gallery-img(data-realization-img=i src=`/img/realization/realization-${realization._id}/realizacja-wide-${realization._id}-${i+1}.jpg`, alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+            img.realization--gallery-img(data-realization-img=0 src=`/img/realization/${realization.primaryImage}`, alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+            each image, i in realization.images
+              img.realization--gallery-img(data-realization-img=i+1 src=`/img/realization/${image}`, alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
             .gallery-counter 
-              each _, i in realization.images
+              each _, i in Array(realization.images.length+1)
                 if i == 0
                   .gallery-dot.gallery-active(data-go-to=i)
                 else

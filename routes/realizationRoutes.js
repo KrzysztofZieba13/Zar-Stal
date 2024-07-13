@@ -15,7 +15,16 @@ router
 router
   .route('/realization/:id')
   .get(realizationController.getRealization)
-  .patch(realizationController.updateRealization)
+  .patch(
+    realizationController.uploadRealizationImages,
+    realizationController.resizeRealizationImages,
+    realizationController.updateRealization,
+  )
   .delete(realizationController.deleteRealization);
+
+router.patch(
+  '/realization/:id/delete-images',
+  realizationController.deleteImages,
+);
 
 module.exports = router;

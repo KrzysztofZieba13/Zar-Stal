@@ -1,3 +1,4 @@
+/*eslint-disable */
 import Gallery from './gallery';
 
 export default class SingleGallery extends Gallery {

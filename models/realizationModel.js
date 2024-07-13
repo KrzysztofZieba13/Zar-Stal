@@ -35,18 +35,13 @@ const realizationSchema = new mongoose.Schema({
     type: [specificationSchema],
     default: {},
   },
+  primaryImage: {
+    type: String,
+    required: [true, 'Realizacja musi mieć wybrane zdjęcie główne'],
+  },
+  primaryImageThumbnail: String,
   images: [String],
   imagesThumbnails: [String],
-  category: [
-    {
-      type: String,
-      required: [true, 'Do realizacji musi być podana jej kategoria'],
-      enum: {
-        values: ['Hale', 'Elementy', 'Maszyny', 'Kontenery'],
-        message: 'Nie ma takiej kategorii: {VALUE}',
-      },
-    },
-  ],
   location: {
     type: String,
     trim: true,
