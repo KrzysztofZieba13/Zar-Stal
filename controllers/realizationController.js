@@ -20,7 +20,9 @@ exports.resizeRealizationImages = catchAsync(async (req, res, next) => {
   else {
     folderId = Math.round(Math.random() * 1e9);
     fs.mkdirSync(`public/img/realization/${folderId}`);
+    req.body.folderId = folderId;
   }
+
   const imagesCopy = req.files.images;
   req.body.images = [];
 
@@ -82,6 +84,7 @@ exports.createRealization = catchAsync(async (req, res, next) => {
 exports.deleteImages = catchAsync(async (req, res, next) => {
   const { thToRemove } = req.body;
   const { wideToRemove } = req.body;
+
   const deleteThPromises = thToRemove.map(async (el) => {
     return promisify(fs.unlink)(`public/img/realization/${el}`);
   });
@@ -133,14 +136,18 @@ exports.getRealization = catchAsync(async (req, res, next) => {
 });
 
 exports.updateRealization = catchAsync(async (req, res, next) => {
-  const update = !req.body.images
-    ? req.body
-    : {
-        $push: {
-          images: req.body.images,
-          imagesThumbnails: req.body.imagesThumbnails,
-        },
-      };
+  const update = {
+    title: req.body.title,
+    description: req.body.description,
+    primaryImage: req.body.primaryImage,
+    primaryImageThumbnail: req.body.primaryImageThumbnail,
+    location: req.body.location,
+    $push: {
+      images: req.body.images,
+      imagesThumbnails: req.body.imagesThumbnails,
+      specifications: req.body.specifications,
+    },
+  };
 
   const realization = await Realization.findByIdAndUpdate(
     req.params.id,
@@ -155,6 +162,21 @@ exports.updateRealization = catchAsync(async (req, res, next) => {
     return next(new AppError('Nie znaleziono realizacji.', 404));
 
   res.status(200).json({ status: 'success', data: realization });
+});
+
+exports.deleteSpecification = catchAsync(async (req, res, next) => {
+  const realization = await Realization.findById(req.params.id);
+
+  realization.specifications = realization.specifications.filter(
+    (spec) => spec._id.toHexString() !== req.body.deleteId,
+  );
+
+  await realization.save({ validateModifiedOnly: true });
+
+  res.status(200).json({
+    status: 'success',
+    data: null,
+  });
 });
 
 exports.deleteRealization = catchAsync(async (req, res, next) => {

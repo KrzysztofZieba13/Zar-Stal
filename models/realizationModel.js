@@ -1,20 +1,17 @@
 const mongoose = require('mongoose');
 
-const specificationSchema = new mongoose.Schema(
-  {
-    title: {
-      type: String,
-      required: [true, 'Podaj specyfikację'],
-      trim: true,
-    },
-    detail: {
-      type: String,
-      default: 'b/d',
-      trim: true,
-    },
+const specificationSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: [true, 'Podaj specyfikację'],
+    trim: true,
   },
-  { _id: false },
-);
+  detail: {
+    type: String,
+    default: 'b/d',
+    trim: true,
+  },
+});
 
 const realizationSchema = new mongoose.Schema({
   title: {

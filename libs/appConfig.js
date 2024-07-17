@@ -4,6 +4,7 @@ const path = require('path');
 const viewRouter = require('../routes/viewRoutes');
 const realizationRouter = require('../routes/realizationRoutes');
 const mainPageRouter = require('../routes/mainPageRoutes');
+const elementRouter = require('../routes/elementRoutes');
 const globalErrorHandler = require('../controllers/errorController');
 
 const app = express();
@@ -18,6 +19,7 @@ app.enable('trust proxy');
 
 app.use('/', viewRouter);
 app.use('/api/v1/realizations', realizationRouter);
+app.use('/api/v1/elements', elementRouter);
 app.use('/api/v1/mainPage', mainPageRouter);
 app.use(globalErrorHandler);
 

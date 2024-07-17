@@ -27,4 +27,9 @@ router.patch(
   realizationController.deleteImages,
 );
 
+router.patch(
+  '/realization/:id/delete-specification',
+  realizationController.deleteSpecification,
+);
+
 module.exports = router;

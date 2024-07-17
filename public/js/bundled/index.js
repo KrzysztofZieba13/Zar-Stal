@@ -720,7 +720,7 @@ class ImageGallery extends (0, _galleryDefault.default) {
 exports.default = ImageGallery;
 
 },{"./gallery":"4zUEh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"4zUEh":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class Gallery {
     constructor(id){
@@ -796,7 +796,7 @@ class Gallery {
 exports.default = Gallery;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"3MfQ3":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _gallery = require("./gallery");
 var _galleryDefault = parcelHelpers.interopDefault(_gallery);

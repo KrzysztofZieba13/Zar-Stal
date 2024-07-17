@@ -35,7 +35,7 @@ mixin realizationElementCart(imgSrc, title, id, imgArr)
     .wide--screen-gallery.hidden
       .img--gallery-box
         each val, i in imgArr
-          img.realization--gallery-img(data-realization-img=i src=`../img/realization/steel-elements/${val}`, alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
+          img.realization--gallery-img(data-realization-img=i src=`../img/realization/elements/${val}`, alt='Zdjęcie realizacji wykonanej przez Zar-Stal')
         .gallery-counter 
           each _, i in imgArr
             .gallery-dot(data-go-to=i)
@@ -74,9 +74,9 @@ block content
       p.subtitle elementy
       h2.secondary-header Elementy Stalowe
       .realizations-box 
-        +realizationElementCart('steel-elements/element-th-2-1.jpg', 'Wzmocnienia', 'element-two', ['element-wide-2-1.jpg'])
-        +realizationElementCart('steel-elements/element-th-3-1.jpg', 'Łyżka do koparki mini', 'element-three', ['element-wide-3-1.jpg'])
-        +realizationElementCart('steel-elements/element-th-5-1.jpg', 'Łyżka do koparki', 'element-five', ['element-wide-5-1.jpg'])
+        each element, i in elements.filter(el => el.category === 'Elementy')
+          +realizationElementCart(`elements/${element.imagesThumbnails[0]}`, `${element.title}`, `${element.title}-${(Math.random()*1000)%1000}`, [...element.images])
+
     
 
   section.section.section--hidden.section--realizations-machines.realizations#steel-machines 
@@ -84,11 +84,13 @@ block content
       p.subtitle maszyny
       h2.secondary-header Maszyny
       .realizations-box 
-        +realizationElementCart('steel-elements/element-th-4-1.jpg', 'Maszyna do euro-palet', 'element-four', ['element-wide-4-1.jpg', 'element-wide-4-2.jpg'])        
+        each element, i in elements.filter(el => el.category === 'Maszyny')
+          +realizationElementCart(`elements/${element.imagesThumbnails[0]}`, `${element.title}`, `${element.title}-${(Math.random()*1000)%1000}`, [...element.images])        
   
   section.section.section--hidden.section--realizations-containers.realizations#steel-containers
     .container-realizations
       p.subtitle kontenery
       h2.secondary-header Kontenery
       .realizations-box 
-        +realizationElementCart('steel-elements/element-th-1-1.jpg', 'Kontenery Białe', 'element-one', ['element-wide-1-1.jpg', 'element-wide-1-2.jpg'])
+        each element, i in elements.filter(el => el.category === 'Kontenery')
+          +realizationElementCart(`elements/${element.imagesThumbnails[0]}`, `${element.title}`, `${element.title}-${(Math.random()*1000)%1000}`, [...element.images])        

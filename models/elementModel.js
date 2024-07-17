@@ -7,9 +7,14 @@ const elementSchema = new mongoose.Schema({
     trim: true,
   },
   images: [String],
+  imagesThumbnails: [String],
   category: {
     type: String,
     required: [true, 'Element musi mieć przypisaną kategorię'],
+    enum: {
+      values: ['Kontenery', 'Maszyny', 'Elementy'],
+      message: `{VALUE} nie jest poprawną wartością`,
+    },
   },
 });
 

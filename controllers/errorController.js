@@ -1,4 +1,25 @@
+const fs = require('node:fs');
+const { promisify } = require('node:util');
 const AppError = require('../libs/utils/appError');
+
+const deleteImagesElement = async (req) => {
+  const { images, imagesThumbnails } = req.body;
+
+  const deleteThPromises = images.map(async (el) => {
+    return promisify(fs.unlink)(`public/img/realization/elements/${el}`);
+  });
+  const deleteWidePromises = imagesThumbnails.map(async (el) => {
+    return promisify(fs.unlink)(`public/img/realization/elements/${el}`);
+  });
+  await Promise.all(deleteThPromises);
+  await Promise.all(deleteWidePromises);
+};
+
+const deleteImagesRealization = async (req) => {
+  await promisify(fs.rm)(`public/img/realization/${req.body.folderId}`, {
+    recursive: true,
+  });
+};
 
 const handleValidationErrorDB = (err) => {
   const errors = Object.values(err.errors).map((el) => el.message);
@@ -6,7 +27,11 @@ const handleValidationErrorDB = (err) => {
   return new AppError(message, 400);
 };
 
-const sendErrorDev = (err, req, res) => {
+const sendErrorDev = async (err, req, res) => {
+  if (req.body.images) {
+    if (req.originalUrl.endsWith('elements')) deleteImagesElement(req);
+    if (req.originalUrl.endsWith('realizations')) deleteImagesRealization(req);
+  }
   // A) API
   if (req.originalUrl.startsWith('/api'))
     return res.status(err.statusCode).json({
@@ -41,8 +66,14 @@ module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
 
-  if (process.env.NODE_ENV === 'development') sendErrorDev(err, req, res);
-  else if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'development') {
+    let error = { ...err };
+    error.message = err.message;
+    error.name = err.name;
+    if (error.name === 'ValidationError')
+      error = handleValidationErrorDB(error);
+    sendErrorDev(err, req, res);
+  } else if (process.env.NODE_ENV === 'production') {
     let error = { ...err };
     error.message = err.message;
     error.name = err.name;
