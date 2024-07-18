@@ -5,6 +5,7 @@ import SingleGallery from './gallery/singleGallery';
 import * as mapLeaflet from './mapLeaflet';
 import * as interObserver from './interObserver';
 import { initSlider } from './heroSlideshow';
+import * as editMainPage from './admin/editMainPage';
 
 const sectionSingleRealization = document.querySelector(
   '.section--single-realization',
@@ -17,6 +18,7 @@ const intersectionHeader = document.querySelector('.intersection-header');
 const mapContainer = document.getElementById('map');
 const mainPage = document.querySelector('.overview-header');
 const manyRealizationsPage = document.querySelector('.realizations-header');
+const eMainPage = document.querySelector('.edit-mp');
 
 let navListener = false;
 
@@ -49,4 +51,9 @@ if (manyRealizationsPage || mainPage) {
 if (mainPage) {
   interObserver.initLoadLazyImg();
   initSlider(mainPage);
+}
+
+// Edit MP desc and title
+if (eMainPage) {
+  editMainPage.init();
 }

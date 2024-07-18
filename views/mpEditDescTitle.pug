@@ -14,7 +14,7 @@ block content
             i.ph.ph-minus-circle
         .edit--nav-panel-options 
           .option 
-            a.link.option-link(href="#") Edytuj tytuł i opis
+            a.link.option-link(href="#") Edytuj opis
           .option 
             a.link.option-link(href="#") Wybierz główne realizacje
           .option 
@@ -34,13 +34,11 @@ block content
           span.edit--nav-icon 
             i.ph.ph-plus-circle
 
-    .edit-content
+    .edit-content.edit-mp
       .edit--content-box
-        h1.primary-header.edit--primary-header Edytuj tytuł i opis
+        h1.primary-header.edit--primary-header Edytuj opis
         img.edit-instruction__img(src='/img/edit-pages/edit-LP.jpg', alt='instrukcja obsługi panelu admina')
         form.form.edit-form
-          label.label(for='title') Tytuł
-          input(type="text")#title.input
           label.label(for='description') Opis
           input(type="text")#description.input
-          input(type="submit" value="Aktualizuj wypełnione pola")#submit.submit-btn
+          input(type="submit" value="Aktualizuj pole")#submit.submit-btn
