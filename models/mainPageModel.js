@@ -1,6 +1,17 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
+const contactSchema = new mongoose.Schema({
+  telephoneNumber: {
+    type: String,
+    validate: [validator.isMobilePhone, 'Wprowadź poprawny numer telefonu'],
+  },
+  person: {
+    type: String,
+    required: [true, 'Numer telefonu musi mieć przypisaną osobę/stanowisko'],
+  },
+});
+
 const mainPageSchema = new mongoose.Schema({
   pageDescription: {
     type: String,
@@ -29,12 +40,10 @@ const mainPageSchema = new mongoose.Schema({
       minLength: [30, 'Opis oferty jest za krótki, minimum 30 znaków'],
     },
   ],
-  telephoneNumbers: [
-    {
-      type: String,
-      validate: [validator.isMobilePhone, 'Wprowadź poprawny numer telefonu'],
-    },
-  ],
+  telephoneNumbers: {
+    type: [contactSchema],
+    default: {},
+  },
   email: [
     {
       type: String,

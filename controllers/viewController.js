@@ -26,3 +26,7 @@ exports.getSingleRealization = catchAsync(async (req, res, next) => {
 
   res.status(200).render('singleRealization', { realization });
 });
+
+exports.getEditTitleDescPage = catchAsync(async (req, res, next) => {
+  res.status(200).render('mpEditDescTitle');
+});

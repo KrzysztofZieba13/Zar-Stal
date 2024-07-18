@@ -1,0 +1,106 @@
+.nav-container {
+  display: block;
+  position: relative;
+}
+
+.section-admin {
+  display: flex;
+}
+
+.edit-nav {
+  background-color: rgba(20, 28, 39, 0.6);
+  width: 25%;
+  padding-top: 2.4rem;
+}
+
+.edit-content {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 3.2rem 4.4rem;
+}
+
+.edit--nav-panel {
+  width: 80%;
+  margin: 2.4rem auto;
+  box-shadow: 0 0 5px 3px rgba(20, 28, 39, 0.6);
+}
+
+.edit--nav-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2.4rem;
+  cursor: pointer;
+  background-color: #141c27;
+  box-shadow: 0 7px 3px -2px rgba(20, 28, 39, 0.7);
+}
+
+.edit--nav-panel-options {
+  background-color: rgba(39, 55, 77, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  font-size: 1.6rem;
+  padding: 2.4rem 2.4rem 1.2rem 2.4rem;
+}
+
+.option {
+  margin-bottom: 1.2rem;
+}
+
+.edit--content-box {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.edit--header-text {
+  font-size: 2.4rem;
+}
+
+.edit--nav-icon {
+  font-size: 2.4rem;
+}
+
+.edit--primary-header {
+  margin-bottom: 3.2rem;
+}
+
+.edit-instruction__img {
+  width: 60%;
+  box-shadow: 0 0 5px 3px rgba(20, 28, 39, 0.3);
+  text-align: center;
+  margin-bottom: 3.2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 60%;
+}
+
+.label {
+  font-size: 1.6rem;
+}
+
+.input {
+  font-size: 2.4rem;
+  padding: 0.2em;
+  margin-bottom: 1.6rem;
+}
+
+.submit-btn {
+  background-color: #526d82;
+  color: #fff;
+  border: none;
+  padding: 1.2rem;
+  font-size: 1.6rem;
+  margin-top: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #141c27;
+}

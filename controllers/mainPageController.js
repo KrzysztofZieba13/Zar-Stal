@@ -2,7 +2,7 @@ const MainPage = require('../models/mainPageModel');
 const AppError = require('../libs/utils/appError');
 const catchAsync = require('../libs/utils/catchAsync');
 
-const MAIN_PAGE_ID = '668ff3674c72ae63d8cb2dd2';
+const MAIN_PAGE_ID = '6698e9d2918925dbf1202b0a';
 
 exports.getMainPage = catchAsync(async (req, res, next) => {
   const mainPage = await MainPage.findById(MAIN_PAGE_ID);
