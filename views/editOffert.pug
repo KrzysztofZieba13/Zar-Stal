@@ -1,0 +1,43 @@
+extends base
+
+block append head 
+  link(rel="stylesheet", href="/css/edit.css")
+  title Zar-Stal | Edytuj ofertę
+
+block content
+  section.section-admin 
+    include _editNav
+
+    .edit-content.edit-mp
+      .edit--content-box
+        h1.primary-header.edit--primary-header Edytuj ofertę
+        img.edit-instruction__img(src='/img/edit-pages/choose-realizations-LP.jpg', alt='instrukcja obsługi panelu admina')
+
+        h2.secondary--header-edit Wybierz ofertę, którą chcesz edytować (kliknij)
+        .offert-grid.offert-grid-edit
+          .offert-item 
+            img(src="/img/offert/oferta1.jpg", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
+            p Konstrukcje Stalowe
+          .offert-item 
+            img(src="/img/offert/oferta2.jpg", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
+            p Elementy Stalowe
+          .offert-item 
+            img(src="/img/offert/oferta3.jpg", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
+            p Kontenery
+          .offert-item 
+            img(src="/img/offert/oferta4.jpg", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
+            p Świetliki Kalenicowe
+          .offert-item 
+            img(src="/img/offert/oferta5.jpg", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
+            p Hale magazynowe <br> rolnicze <br> i produkcyjne
+          .offert-item 
+            img(src="/img/offert/oferta6.jpg", alt="Zdjęcie przedstawiające ofertę Zar-Stal") 
+            p Hale sportowe
+        
+        h2.secondary--header-edit Nowa treść oferty: Konstrukcje Stalowe
+        form.form.edit-form.edit--form-margin
+          label.label Nowa treść oferty 
+          textarea.textarea.textarea-edit
+          input(type="submit" value="Aktualizuj ofertę")#submit.submit-btn
+
+          

@@ -27,6 +27,18 @@ exports.getSingleRealization = catchAsync(async (req, res, next) => {
   res.status(200).render('singleRealization', { realization });
 });
 
-exports.getEditTitleDescPage = catchAsync(async (req, res, next) => {
-  res.status(200).render('mpEditDescTitle');
+exports.getEditDescPage = catchAsync(async (req, res, next) => {
+  res.status(200).render('mpEditDesc');
+});
+
+exports.getChooseRealizations = catchAsync(async (req, res, next) => {
+  res.status(200).render('chooseRealizations');
+});
+
+exports.getEditOffert = catchAsync(async (req, res, next) => {
+  res.status(200).render('editOffert');
+});
+
+exports.getEditContact = catchAsync(async (req, res, next) => {
+  res.status(200).render('editContact');
 });

@@ -1,0 +1,56 @@
+extends base
+
+block append head 
+  link(rel="stylesheet", href="/css/edit.css")
+  title Zar-Stal | Edytuj kontakt
+
+block content
+  section.section-admin 
+    include _editNav
+
+    .edit-content.edit-mp
+      .edit--content-box
+        h1.primary-header.edit--primary-header Edytuj kontakt
+        img.edit-instruction__img(src='/img/edit-pages/edit-contact-openhours.jpg', alt='instrukcja obsługi panelu admina')
+
+        h2.secondary--header-edit Dane kontaktowe
+        p.text Wypełnij tylko pola, które chcesz zaktualizować!
+        form.form.edit-form.edit--form-margin.form-contact
+          .form-fields
+            label.label Miejscowość 
+            input.input(type="text")
+          .form-fields
+            label.label Właściciel telefon 
+            input.input(type="tel")
+          .form-fields
+            label.label Kierownik prod. telefon 
+            input.input(type="tel")
+          .form-fields
+            label.label Sekretariat telefon
+            input.input(type="tel")
+          .form-fields
+            label.label Email kontaktowy
+            input.input(type="email")
+         
+          input(type="submit" value="Aktualizuj kontakt")#submit.submit-btn.submit--btn-contact
+        
+        h2.secondary--header-edit Godziny otwarcia
+        p.text Wypełnij tylko pola, które chcesz zaktualizować!
+        form.form.edit-form.edit--form-margin.form-contact
+          .openhours-fields 
+            label.label Godziny otwarcia pn-pt 
+            input(type='number').input
+          .openhours-fields 
+            label.label Godziny zamknięcia pn-pt 
+            input(type='number').input
+          .openhours-fields 
+            label.label Godziny otwarcia sb 
+            input(type='number').input
+          .openhours-fields 
+            label.label Godziny zamknięcia sb 
+            input(type='number').input
+          .openhours-isclosed 
+            label.label(for='sb-isclosed') Sobota nieczynne?
+            input.input.input-isclosed#sb-isclosed(type="checkbox")
+             
+          input(type="submit" value="Aktualizuj godziny")#submit.submit-btn.submit--btn-contact

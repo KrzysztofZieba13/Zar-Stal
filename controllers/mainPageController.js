@@ -2,7 +2,7 @@ const MainPage = require('../models/mainPageModel');
 const AppError = require('../libs/utils/appError');
 const catchAsync = require('../libs/utils/catchAsync');
 
-const MAIN_PAGE_ID = '6698e9d2918925dbf1202b0a';
+const MAIN_PAGE_ID = '669a606c03ec38e454e94414';
 
 exports.getMainPage = catchAsync(async (req, res, next) => {
   const mainPage = await MainPage.findById(MAIN_PAGE_ID);
@@ -17,7 +17,6 @@ exports.getMainPage = catchAsync(async (req, res, next) => {
 
 exports.createMainPage = catchAsync(async (req, res, next) => {
   const mainPage = await MainPage.create(req.body);
-
   if (!mainPage)
     return next(new AppError('Błąd przy tworzeniu strony głównej', 400));
 

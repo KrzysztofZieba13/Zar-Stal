@@ -219,7 +219,7 @@
   margin-top: 7.2rem;
   padding-top: 9.4rem;
 }
-
+/* 
 .offert-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -259,63 +259,7 @@
 .offert-item:hover img {
   box-shadow: 0 0 9px 9px rgba(3, 3, 3, 0.1);
   transform: scale(1.1);
-}
-
-.offert-item1 {
-  background-image: linear-gradient(
-      rgba(39, 55, 77, 0.75),
-      rgba(39, 55, 77, 0.75)
-    ),
-    url('../img/offert/oferta1.png');
-}
-
-.offert-item2 {
-  background-image: linear-gradient(
-      rgba(39, 55, 77, 0.75),
-      rgba(39, 55, 77, 0.75)
-    ),
-    url('../img/offert/oferta2.jpg');
-}
-
-.offert-item3 {
-  background-image: linear-gradient(
-      rgba(39, 55, 77, 0.75),
-      rgba(39, 55, 77, 0.75)
-    ),
-    url('../img/offert/oferta3.jpg');
-}
-
-.offert-item3 {
-  background-image: linear-gradient(
-      rgba(39, 55, 77, 0.75),
-      rgba(39, 55, 77, 0.75)
-    ),
-    url('../img/offert/oferta3.jpg');
-}
-
-.offert-item4 {
-  background-image: linear-gradient(
-      rgba(39, 55, 77, 0.75),
-      rgba(39, 55, 77, 0.75)
-    ),
-    url('../img/offert/oferta4.jpg');
-}
-
-.offert-item5 {
-  background-image: linear-gradient(
-      rgba(39, 55, 77, 0.75),
-      rgba(39, 55, 77, 0.75)
-    ),
-    url('../img/offert/oferta5.jpg');
-}
-
-.offert-item6 {
-  background-image: linear-gradient(
-      rgba(39, 55, 77, 0.75),
-      rgba(39, 55, 77, 0.75)
-    ),
-    url('../img/offert/oferta6.jpg');
-}
+} */
 
 /********************/
 /******CONTACT*******/

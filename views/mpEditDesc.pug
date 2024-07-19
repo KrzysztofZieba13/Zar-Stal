@@ -1,0 +1,18 @@
+extends base
+
+block append head 
+  link(rel="stylesheet", href="/css/edit.css")
+  title Zar-Stal | Edytuj Stronę Główną
+
+block content
+  section.section-admin 
+    include _editNav
+
+    .edit-content.edit-mp
+      .edit--content-box
+        h1.primary-header.edit--primary-header Edytuj opis
+        img.edit-instruction__img(src='/img/edit-pages/edit-LP.jpg', alt='instrukcja obsługi panelu admina')
+        form.form.edit-form.edit--form-margin
+          label.label(for='description') Opis
+          textarea.textarea.textarea-edit#description.input
+          input(type="submit" value="Aktualizuj pole")#submit.submit-btn

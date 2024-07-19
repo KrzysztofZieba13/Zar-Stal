@@ -6,6 +6,7 @@ import * as mapLeaflet from './mapLeaflet';
 import * as interObserver from './interObserver';
 import { initSlider } from './heroSlideshow';
 import * as editMainPage from './admin/editMainPage';
+import * as navInit from './admin/accordionNavEdit';
 
 const sectionSingleRealization = document.querySelector(
   '.section--single-realization',
@@ -19,6 +20,7 @@ const mapContainer = document.getElementById('map');
 const mainPage = document.querySelector('.overview-header');
 const manyRealizationsPage = document.querySelector('.realizations-header');
 const eMainPage = document.querySelector('.edit-mp');
+const editNav = document.querySelector('.edit-nav');
 
 let navListener = false;
 
@@ -56,4 +58,9 @@ if (mainPage) {
 // Edit MP desc and title
 if (eMainPage) {
   editMainPage.init();
+}
+
+// Edit page navigation
+if (editNav) {
+  navInit.init();
 }

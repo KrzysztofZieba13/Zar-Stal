@@ -1,5 +1,6 @@
 /*eslint-disable */
 import axios from 'axios';
+import { showAlert } from '../alert';
 
 export default class EditForm {
   constructor() {
@@ -14,9 +15,10 @@ export default class EditForm {
         data: { ...fields },
       });
 
-      console.log(res);
+      if (res.data.status === 'success')
+        showAlert('success', 'Opis został zakutalizowany pomyślnie');
     } catch (err) {
-      console.log(err.response.data.message);
+      showAlert('error', err.response.data.message);
     }
   }
 }

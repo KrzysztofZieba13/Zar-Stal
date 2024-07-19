@@ -26,12 +26,20 @@ const mainPageSchema = new mongoose.Schema({
     ],
     required: [true, 'Krótki opis firmy jest wymagany.'],
   },
-  mainRealizations: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Realization',
+  mainRealizations: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Realization',
+      },
+    ],
+    validate: {
+      validator: function (val) {
+        return val.length < 3;
+      },
+      message: 'Maksymalna liczba realizacji na stronie głównej to 2',
     },
-  ],
+  },
   offert: [
     {
       type: String,

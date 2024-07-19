@@ -594,6 +594,7 @@ var _mapLeaflet = require("./mapLeaflet");
 var _interObserver = require("./interObserver");
 var _heroSlideshow = require("./heroSlideshow");
 var _editMainPage = require("./admin/editMainPage");
+var _accordionNavEdit = require("./admin/accordionNavEdit");
 const sectionSingleRealization = document.querySelector(".section--single-realization");
 const navBar = document.querySelector(".nav-container");
 const realizationCartElements = document.querySelectorAll(".realization--cart-element");
@@ -602,6 +603,7 @@ const mapContainer = document.getElementById("map");
 const mainPage = document.querySelector(".overview-header");
 const manyRealizationsPage = document.querySelector(".realizations-header");
 const eMainPage = document.querySelector(".edit-mp");
+const editNav = document.querySelector(".edit-nav");
 let navListener = false;
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) new (0, _singleGalleryDefault.default)("single-realizations");
@@ -625,8 +627,10 @@ if (mainPage) {
 }
 // Edit MP desc and title
 if (eMainPage) _editMainPage.init();
+// Edit page navigation
+if (editNav) _accordionNavEdit.init();
 
-},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv"}],"il6Pq":[function(require,module,exports) {
+},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initNavHandlers", ()=>initNavHandlers);
@@ -11529,6 +11533,7 @@ const init = async ()=>{
 parcelHelpers.defineInteropFlag(exports);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _alert = require("../alert");
 class EditForm {
     constructor(){
         this.form = document.querySelector(".edit-form");
@@ -11542,15 +11547,15 @@ class EditForm {
                     ...fields
                 }
             });
-            console.log(res);
+            if (res.data.status === "success") (0, _alert.showAlert)("success", "Opis zosta\u0142 zakutalizowany pomy\u015Blnie");
         } catch (err) {
-            console.log(err.response.data.message);
+            (0, _alert.showAlert)("error", err.response.data.message);
         }
     }
 }
 exports.default = EditForm;
 
-},{"axios":"cHm60","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"cHm60":[function(require,module,exports) {
+},{"axios":"cHm60","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","../alert":"78jVh"}],"cHm60":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _axiosJsDefault.default));
@@ -16250,6 +16255,45 @@ Object.entries(HttpStatusCode).forEach(([key, value])=>{
     HttpStatusCode[value] = key;
 });
 exports.default = HttpStatusCode;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"78jVh":[function(require,module,exports) {
+/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "hideAlert", ()=>hideAlert);
+parcelHelpers.export(exports, "showAlert", ()=>showAlert);
+const hideAlert = ()=>{
+    const el = document.querySelector(".alert");
+    if (el) el.parentElement.removeChild(el);
+};
+const showAlert = (type, msg)=>{
+    hideAlert();
+    const markup = `<div class="alert alert--${type}">${msg}</div>`;
+    document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
+    window.setTimeout(hideAlert, 5000);
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"4macJ":[function(require,module,exports) {
+/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "init", ()=>init);
+const nav = document.querySelector(".edit-nav");
+const navLinks = document.querySelectorAll(".option-link");
+const init = ()=>{
+    document.addEventListener("DOMContentLoaded", ()=>{
+        navLinks.forEach((link)=>{
+            link.classList.remove("option-active");
+            if (link.href.endsWith(location.pathname)) link.classList.add("option-active");
+        });
+    });
+    nav.addEventListener("click", (e)=>{
+        const panel = e.target.closest(".edit--nav-panel-header");
+        console.log(location.pathname);
+        if (!panel) return;
+        panel.nextElementSibling.classList.toggle("hidden");
+        const icons = panel.querySelectorAll(".edit--nav-icon");
+        icons.forEach((el)=>el.classList.toggle("hidden"));
+    });
+};
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
 

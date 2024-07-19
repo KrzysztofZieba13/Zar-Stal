@@ -106,3 +106,70 @@ section {
 .lazy-img {
   filter: blur(5px);
 }
+
+.alert {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 9999;
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 1.6rem 15rem;
+  -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+}
+.alert--success {
+  background-color: #20bf6b;
+}
+.alert--error {
+  background-color: #eb4d4b;
+}
+
+/* OFERTA SIATKA */
+
+.offert-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.2rem;
+  margin-top: 5.2rem;
+}
+
+.offert-item {
+  height: 30rem;
+  font-size: 3.2rem;
+  text-align: center;
+  box-shadow: 0 0 9px 5px rgba(3, 3, 3, 0.1);
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  overflow: hidden;
+  position: relative;
+}
+
+.offert-item img {
+  width: 100%;
+  opacity: 0.9;
+  transition: all 0.3s;
+  height: 100%;
+  object-fit: cover;
+}
+
+.offert-item p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 111;
+  width: 100%;
+}
+
+.offert-item:hover img {
+  box-shadow: 0 0 9px 9px rgba(3, 3, 3, 0.1);
+  transform: scale(1.1);
+}

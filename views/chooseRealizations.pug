@@ -1,0 +1,53 @@
+extends base
+
+block append head 
+  link(rel="stylesheet", href="/css/edit.css")
+  title Zar-Stal | Wybierz główne realizacje
+
+block content
+  section.section-admin 
+    include _editNav
+
+    .edit-content.edit-mp
+      .edit--content-box
+        h1.primary-header.edit--primary-header Wybierz główne realizacje
+        img.edit-instruction__img(src='/img/edit-pages/choose-realizations-LP.jpg', alt='instrukcja obsługi panelu admina')
+        
+        p.text.edit-text Wybrane realizacje 
+          span 0/2
+        form.form
+          .choose-realizations 
+            .choose-cart
+              .img-box 
+                img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
+              .choose--realization-info
+                p.choose--realization-title Hala do produkcji konstrukcji stalowych 
+                .choose--realization-checkbox
+                  label(for='1234') Główna realizacja?
+                  input#1234(type="checkbox").choose__checkbox 
+            .choose-cart
+              .img-box 
+                img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
+              .choose--realization-info
+                p.choose--realization-title Hala do produkcji konstrukcji stalowych 
+                .choose--realization-checkbox
+                  label Główna realizacja?
+                  input(type="checkbox").choose__checkbox
+            .choose-cart
+              .img-box 
+                img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
+              .choose--realization-info
+                p.choose--realization-title Hala do produkcji konstrukcji stalowych 
+                .choose--realization-checkbox
+                  label Główna realizacja?
+                  input(type="checkbox").choose__checkbox
+            .choose-cart
+              .img-box 
+                img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
+              .choose--realization-info
+                p.choose--realization-title Hala do produkcji konstrukcji stalowych 
+                .choose--realization-checkbox
+                  label Główna realizacja?
+                  input(type="checkbox").choose__checkbox
+          .submit--realizations-choosen 
+            input(type="submit" value='Aktualizuj').submit-btn
