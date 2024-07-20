@@ -22,5 +22,9 @@ router.get(
   '/admin-zar-stal/edycja/strona-glowna-kontakt',
   viewController.getEditContact,
 );
+router.get(
+  '/admin-zar-stal/realizacje/utworz-realizacje',
+  viewController.getCreateRealization,
+);
 
 module.exports = router;

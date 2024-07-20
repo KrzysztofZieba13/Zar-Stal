@@ -226,3 +226,32 @@
   height: 20px;
   width: 20px;
 }
+
+.specification {
+  display: flex;
+  gap: 3.2rem;
+  align-items: center;
+}
+
+.specification-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.more-specs {
+  font-size: 3.2rem;
+  cursor: pointer;
+}
+
+.form--inside-title {
+  margin-top: 3.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.input-file {
+  font-size: 1.6rem;
+}
+
+.label-margintop {
+  margin-top: 1.2rem;
+}

@@ -14,7 +14,7 @@ block content
         img.edit-instruction__img(src='/img/edit-pages/edit-contact-openhours.jpg', alt='instrukcja obsługi panelu admina')
 
         h2.secondary--header-edit Dane kontaktowe
-        p.text Wypełnij tylko pola, które chcesz zaktualizować!
+        p.text.form--inside-title Wypełnij tylko pola, które chcesz zaktualizować!
         form.form.edit-form.edit--form-margin.form-contact
           .form-fields
             label.label Miejscowość 
@@ -35,19 +35,19 @@ block content
           input(type="submit" value="Aktualizuj kontakt")#submit.submit-btn.submit--btn-contact
         
         h2.secondary--header-edit Godziny otwarcia
-        p.text Wypełnij tylko pola, które chcesz zaktualizować!
+        p.text.form--inside-title Wypełnij tylko pola, które chcesz zaktualizować!
         form.form.edit-form.edit--form-margin.form-contact
           .openhours-fields 
-            label.label Godziny otwarcia pn-pt 
+            label.label Godzina otwarcia pn-pt 
             input(type='number').input
           .openhours-fields 
-            label.label Godziny zamknięcia pn-pt 
+            label.label Godzina zamknięcia pn-pt 
             input(type='number').input
           .openhours-fields 
-            label.label Godziny otwarcia sb 
+            label.label Godzina otwarcia sb 
             input(type='number').input
           .openhours-fields 
-            label.label Godziny zamknięcia sb 
+            label.label Godzina zamknięcia sb 
             input(type='number').input
           .openhours-isclosed 
             label.label(for='sb-isclosed') Sobota nieczynne?

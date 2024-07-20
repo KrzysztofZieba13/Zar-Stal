@@ -42,3 +42,7 @@ exports.getEditOffert = catchAsync(async (req, res, next) => {
 exports.getEditContact = catchAsync(async (req, res, next) => {
   res.status(200).render('editContact');
 });
+
+exports.getCreateRealization = catchAsync(async (req, res, next) => {
+  res.status(200).render('createRealization');
+});

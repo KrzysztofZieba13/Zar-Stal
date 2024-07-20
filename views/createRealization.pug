@@ -1,0 +1,43 @@
+extends base
+
+block append head 
+  link(rel="stylesheet", href="/css/edit.css")
+  title Zar-Stal | Utwórz realizację
+
+block content
+  section.section-admin 
+    include _editNav
+
+    .edit-content.edit-mp
+      .edit--content-box
+        h1.primary-header.edit--primary-header Utwórz realizację
+        img.edit-instruction__img(src='/img/edit-pages/create-realization.jpg', alt='instrukcja obsługi panelu admina')
+
+        h2.secondary--header-edit Dane realizacji
+        form.form.edit-form.edit--form-margin
+          p.text.form--inside-title Dane podstawowe
+          label.label(for='location') Lokalizacja 
+          input.input#location(type='text')
+          label.label(for='title') Tytuł 
+          input.input#title(type='text')
+          label.label(for='description') Opis 
+          textarea.textarea.textarea-edit#description(type='text')
+
+          p.text.form--inside-title Specyfikacje realizacji
+          .specfications-inputs
+            .specification
+              .specification-data
+                label.label(for='spec-1') Nazwa parametru 1
+                input.input#spec-1(type='text')
+              .specification-data
+                label.label(for='spec-1') Wartość parametru 1
+                input.input#spec-1(type='text')
+              i.ph.ph-plus-square.more-specs
+
+          p.text.form--inside-title Dodaj zdjęcia
+          label.label.label-margintop(for='primary-image') Wybierz jedno zdjęcie główne
+          input.input-file#primary-image(type='file')
+          label.label.label-margintop(for='images') Wybierz pozostałe zdjęcia
+          input.input-file#images(type='file')
+
+
