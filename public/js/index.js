@@ -7,6 +7,8 @@ import * as interObserver from './interObserver';
 import { initSlider } from './heroSlideshow';
 import * as editMainPage from './admin/editMainPage';
 import * as navInit from './admin/accordionNavEdit';
+import * as formAccordionEdit from './admin/accordionFormEdit';
+import * as realizationImages from './admin/realizationImages';
 
 const sectionSingleRealization = document.querySelector(
   '.section--single-realization',
@@ -21,6 +23,9 @@ const mainPage = document.querySelector('.overview-header');
 const manyRealizationsPage = document.querySelector('.realizations-header');
 const eMainPage = document.querySelector('.edit-mp');
 const editNav = document.querySelector('.edit-nav');
+const editFormAccordion = document.querySelector('.accordion--edit-panel');
+const editFormSpecs = document.querySelector('.accordion--edit-specs');
+const imagesToDelete = document.querySelector('.choose--images-delete');
 
 let navListener = false;
 
@@ -64,3 +69,12 @@ if (eMainPage) {
 if (editNav) {
   navInit.init();
 }
+
+// Edit form accordion
+if (editFormAccordion) formAccordionEdit.init();
+
+// Delete images from realization
+if (imagesToDelete) realizationImages.init();
+
+if (editFormSpecs) formAccordionEdit.specificationInput('add');
+if (editFormSpecs) formAccordionEdit.specificationInput('delete');

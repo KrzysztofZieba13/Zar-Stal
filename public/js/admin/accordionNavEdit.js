@@ -13,7 +13,6 @@ export const init = () => {
 
   nav.addEventListener('click', (e) => {
     const panel = e.target.closest('.edit--nav-panel-header');
-    console.log(location.pathname);
     if (!panel) return;
     panel.nextElementSibling.classList.toggle('hidden');
     const icons = panel.querySelectorAll('.edit--nav-icon');

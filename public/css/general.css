@@ -173,3 +173,7 @@ section {
   box-shadow: 0 0 9px 9px rgba(3, 3, 3, 0.1);
   transform: scale(1.1);
 }
+
+.visible {
+  visibility: visible !important;
+}

@@ -26,5 +26,9 @@ router.get(
   '/admin-zar-stal/realizacje/utworz-realizacje',
   viewController.getCreateRealization,
 );
+router.get(
+  '/admin-zar-stal/realizacje/edytuj-realizacje',
+  viewController.getEditRealization,
+);
 
 module.exports = router;

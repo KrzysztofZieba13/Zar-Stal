@@ -72,10 +72,6 @@
   width: 100%;
 }
 
-/* .edit-text {
-  margin-bottom: 3.2rem;
-} */
-
 .edit--nav-icon {
   font-size: 2.4rem;
 }
@@ -120,7 +116,7 @@
   background-color: #526d82;
   color: #fff;
   border: none;
-  padding: 1.2rem;
+  padding: 1.6rem 1.2rem;
   font-size: 1.6rem;
   margin-top: 1.2rem;
   cursor: pointer;
@@ -136,7 +132,6 @@
 }
 
 .edit-text {
-  margin-bottom: 3.2rem;
   margin-top: 4.4rem;
 }
 
@@ -145,6 +140,7 @@
   grid-template-columns: repeat(4, 1fr);
   color: #27374d;
   gap: 2.4rem;
+  margin-top: 3.2rem;
 }
 
 .choose-cart {
@@ -156,8 +152,13 @@
   font-size: 2rem;
 }
 
+.img-box {
+  position: relative;
+}
+
 .img-box img {
   width: 100%;
+  object-fit: cover;
 }
 
 .choose--realization-checkbox {
@@ -238,9 +239,16 @@
   flex-direction: column;
 }
 
-.more-specs {
+.specification--box-title {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+}
+
+.more-specs,
+.delete--spec-input {
   font-size: 3.2rem;
   cursor: pointer;
+  color: #9db2bf;
 }
 
 .form--inside-title {
@@ -250,8 +258,151 @@
 
 .input-file {
   font-size: 1.6rem;
+  margin-top: 1.2rem;
 }
 
 .label-margintop {
-  margin-top: 1.2rem;
+  margin-top: 1.6rem;
+}
+
+.choose--realization-edit {
+  font-size: 2.4rem;
+  text-align: center;
+  margin-top: 2.4rem;
+}
+
+.choose--realization-edit span {
+  border-bottom: 1px solid #27374d;
+  padding-bottom: 0.2rem;
+  cursor: pointer;
+}
+
+.choose--realization-info.choose--realization-info-edit {
+  padding-bottom: 1.6rem;
+}
+
+.edit--choose-cart {
+  opacity: 0.5;
+  transition: all 0.3s;
+}
+
+.edit--choose-cart:hover {
+  opacity: 1;
+}
+
+.choose--cart-active {
+  opacity: 1;
+}
+
+.choose--edit-add-specs {
+  display: flex;
+  gap: 2.4rem;
+  margin-bottom: 2.4rem;
+}
+
+.choose-btn {
+  background-color: #526d82;
+  color: #fff;
+  border: none;
+  padding: 1.6rem;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1.6rem;
+}
+
+.choose-btn:hover {
+  background-color: #141c27;
+  opacity: 1;
+}
+
+.choose--btn-active {
+  opacity: 1;
+}
+
+.delete--spec-title,
+.delete--spec-value {
+  font-size: 1.6rem;
+}
+
+.spec--delete-trash {
+  color: #fff;
+  font-size: 2.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+  background-color: #526d82;
+}
+
+.accordion--edit-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.choose--images-delete {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+
+.choose--images-delete .img-box img {
+  box-shadow: 0 0 5px 3px rgba(20, 28, 39, 0.3);
+  cursor: pointer;
+}
+
+.trash--on-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5.2rem;
+  z-index: 10;
+  background-color: #27374d9c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  cursor: pointer;
+  color: #dde6ed;
+  visibility: hidden;
+}
+
+.img-box:hover .trash--on-image {
+  visibility: visible;
+}
+
+.accordion--edit-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.4rem;
+  background-color: #141c27;
+  padding: 1.2rem 3.2rem;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.accordion-inputs {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(20, 28, 39, 0.5);
+  padding: 3.2rem;
+}
+
+.edit--realization-form {
+  gap: 0;
+}
+
+.submit--realization-edit {
+  margin-top: 4.4rem;
+}
+
+.specification.specification--delete-row {
+  width: 40rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
 }

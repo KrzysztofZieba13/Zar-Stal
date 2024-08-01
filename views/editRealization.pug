@@ -1,0 +1,133 @@
+extends base
+
+block append head 
+  link(rel="stylesheet", href="/css/edit.css")
+  title Zar-Stal | Utwórz realizację
+
+block content
+  section.section-admin 
+    include _editNav
+
+    .edit-content.edit-mp
+      .edit--content-box
+        h1.primary-header.edit--primary-header Edytuj realizację
+        img.edit-instruction__img(src='/img/edit-pages/create-realization.jpg', alt='instrukcja obsługi panelu admina')
+
+        h2.secondary--header-edit Wybierz realizację z listy
+        .choose-realizations 
+          .choose-cart.edit--choose-cart
+            .img-box 
+              img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
+            .choose--realization-info.choose--realization-info-edit
+              p.choose--realization-title Hala do produkcji konstrukcji stalowych 
+              .choose--realization-edit 
+                span Wybierz
+          .choose-cart.edit--choose-cart
+            .img-box 
+              img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
+            .choose--realization-info.choose--realization-info-edit
+              p.choose--realization-title Hala do produkcji konstrukcji stalowych 
+              .choose--realization-edit 
+                span Wybierz 
+          .choose-cart.edit--choose-cart
+            .img-box 
+              img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
+            .choose--realization-info.choose--realization-info-edit
+              p.choose--realization-title Hala do produkcji konstrukcji stalowych 
+              .choose--realization-edit 
+                span Wybierz
+          .choose-cart.edit--choose-cart
+            .img-box 
+              img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
+            .choose--realization-info.choose--realization-info-edit
+              p.choose--realization-title Hala do produkcji konstrukcji stalowych 
+              .choose--realization-edit 
+                span Wybierz
+          .choose-cart.edit--choose-cart
+            .img-box 
+              img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
+            .choose--realization-info.choose--realization-info-edit
+              p.choose--realization-title Hala do produkcji konstrukcji stalowych 
+              .choose--realization-edit 
+                span Wybierz
+        
+        .edit--realization-fields.hidden
+          h2.secondary--header-edit Edytuj dane 
+          p.text.form--inside-title Wypełnij tylko pola, które chcesz zaktualizować!
+          form.form.edit-form.edit--form-margin.edit--realization-form
+            p.text.form--inside-title.accordion--edit-panel Dane podstawowe
+              i.ph.ph-caret-down.accordion--edit-arrow
+              i.ph.ph-caret-up.accordion--edit-arrow.hidden
+            .accordion-inputs.hidden
+              label.label(for='location') Lokalizacja 
+              input.input#location(type='text')
+              label.label(for='title') Tytuł 
+              input.input#title(type='text')
+              label.label(for='description') Opis 
+              textarea.textarea.textarea-edit#description(type='text')
+
+            p.text.form--inside-title.accordion--edit-panel Dodaj zdjęcia
+              i.ph.ph-caret-down.accordion--edit-arrow
+              i.ph.ph-caret-up.accordion--edit-arrow.hidden
+            .accordion-inputs.hidden
+              label.label(for='primary-image') Zmień zdjęcie główne
+              input.input-file#primary-image(type='file')
+              label.label.label-margintop(for='images') Dodaj pozostałe zdjęcia zdjęcia
+              input.input-file#images(type='file')
+
+            p.text.form--inside-title.accordion--edit-panel Usuń zdjęcia (wybierz klikając)
+              i.ph.ph-caret-down.accordion--edit-arrow
+              i.ph.ph-caret-up.accordion--edit-arrow.hidden
+            .accordion-inputs.hidden
+              .choose--images-delete
+                .img-box 
+                  img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
+                  i.ph.ph-trash.trash--on-image
+                .img-box 
+                  img(src="/img/realization/realization5/realizacja-th-5-2.jpg", alt="realizacja do wybrania")
+                  i.ph.ph-trash.trash--on-image
+                .img-box 
+                  img(src="/img/realization/realization5/realizacja-th-5-3.jpg", alt="realizacja do wybrania")
+                  i.ph.ph-trash.trash--on-image
+                .img-box 
+                  img(src="/img/realization/realization5/realizacja-th-5-4.jpg", alt="realizacja do wybrania").image-selected
+                  i.ph.ph-trash.trash--on-image
+
+            p.text.form--inside-title.accordion--edit-panel Dodaj spectfikację 
+              i.ph.ph-caret-down.accordion--edit-arrow
+              i.ph.ph-caret-up.accordion--edit-arrow.hidden
+            .accordion-inputs.accordion--edit-specs.accordion--add-spec.hidden
+              .specification-box
+                p.specification--box-title Specyfikacja
+                .specification
+                  .specification-data
+                    label.label(for='spec-1-name') Nazwa parametru
+                    input.input#spec-1-name(type='text')
+                  .specification-data
+                    label.label(for='spec-1-value') Wartość parametru
+                    input.input#spec-1-value(type='text')
+                  .specification-data
+                    label.label(for='spec-1-unit') Jednostka
+                    select.input#spec-1-unit(type='text')
+                      option(value='none') brak 
+                      option(value='meter') m 
+                      option(value='meter-2') m&sup2
+                      option(value='meter-3') m&sup3
+                  i.ph.ph-plus-square.more-specs
+                  i.ph.ph-trash.delete--spec-input
+
+            p.text.form--inside-title.accordion--edit-panel Usuń spectfikację 
+              i.ph.ph-caret-down.accordion--edit-arrow
+              i.ph.ph-caret-up.accordion--edit-arrow.hidden
+            .accordion-inputs.accordion--edit-specs.accordion--delete-spec.hidden
+              .specification.specification--delete-row
+                p.delete--spec-title Powierzchnia
+                p.delete--spec-value 60 m
+                  sup 2
+                i.ph.ph-trash.spec--delete-trash
+              .specification.specification--delete-row
+                p.delete--spec-title Szerokość
+                p.delete--spec-value 60 m
+                i.ph.ph-trash.spec--delete-trash
+            input.btn.submit-btn.submit--realization-edit(type='submit' value='Aktualizuj realizację')
+
