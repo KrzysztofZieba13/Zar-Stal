@@ -76,5 +76,9 @@ if (editFormAccordion) formAccordionEdit.init();
 // Delete images from realization
 if (imagesToDelete) realizationImages.init();
 
-if (editFormSpecs) formAccordionEdit.specificationInput('add');
-if (editFormSpecs) formAccordionEdit.specificationInput('delete');
+// Add or Delete field inputs for adding specifications | Delete specifications
+if (editFormSpecs) {
+  formAccordionEdit.specificationInput('add');
+  formAccordionEdit.specificationInput('delete');
+  formAccordionEdit.selectSpecsToDeleteHandler();
+}

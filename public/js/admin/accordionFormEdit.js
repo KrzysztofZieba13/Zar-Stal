@@ -8,6 +8,17 @@ const editRealizationFields = document.querySelector(
 );
 const headers = document.querySelectorAll('.accordion--edit-panel');
 const addSpecBox = document.querySelector('.accordion--add-spec');
+const specsToDelete = document.querySelectorAll(
+  '.custom--checkbox-delete-spec',
+);
+
+export const selectSpecsToDeleteHandler = () => {
+  specsToDelete.forEach((el) => {
+    el.addEventListener('click', () => {
+      el.classList.toggle('delete--spec-checked');
+    });
+  });
+};
 
 const updateAddButtons = () => {
   const allSpecs = addSpecBox.querySelectorAll('.more-specs');

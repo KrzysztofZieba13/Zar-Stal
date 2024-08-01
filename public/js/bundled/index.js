@@ -638,8 +638,12 @@ if (editNav) _accordionNavEdit.init();
 if (editFormAccordion) _accordionFormEdit.init();
 // Delete images from realization
 if (imagesToDelete) _realizationImages.init();
-if (editFormSpecs) _accordionFormEdit.specificationInput("add");
-if (editFormSpecs) _accordionFormEdit.specificationInput("delete");
+// Add or Delete field inputs for adding specifications | Delete specifications
+if (editFormSpecs) {
+    _accordionFormEdit.specificationInput("add");
+    _accordionFormEdit.specificationInput("delete");
+    _accordionFormEdit.selectSpecsToDeleteHandler();
+}
 
 },{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -16308,12 +16312,21 @@ const init = ()=>{
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"7UVN2":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "selectSpecsToDeleteHandler", ()=>selectSpecsToDeleteHandler);
 parcelHelpers.export(exports, "specificationInput", ()=>specificationInput);
 parcelHelpers.export(exports, "init", ()=>init);
 const realizationsToSelect = document.querySelectorAll(".choose--realization-edit");
 const editRealizationFields = document.querySelector(".edit--realization-fields");
 const headers = document.querySelectorAll(".accordion--edit-panel");
 const addSpecBox = document.querySelector(".accordion--add-spec");
+const specsToDelete = document.querySelectorAll(".custom--checkbox-delete-spec");
+const selectSpecsToDeleteHandler = ()=>{
+    specsToDelete.forEach((el)=>{
+        el.addEventListener("click", ()=>{
+            el.classList.toggle("delete--spec-checked");
+        });
+    });
+};
 const updateAddButtons = ()=>{
     const allSpecs = addSpecBox.querySelectorAll(".more-specs");
     allSpecs.forEach((el, i)=>{

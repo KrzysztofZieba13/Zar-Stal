@@ -406,3 +406,36 @@
   display: grid;
   grid-template-columns: 2fr 1fr auto;
 }
+
+.delete--specification__checkbox {
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
+.custom--checkbox-delete-spec {
+  cursor: pointer;
+  /* background-color: #9db2bf; */
+  border: 1px solid #fff;
+  display: flex;
+  position: relative;
+  width: 4.4rem;
+  height: 4.4rem;
+  content: '';
+}
+
+.custom--checkbox-delete-spec.delete--spec-checked i {
+  display: block;
+}
+
+.custom--checkbox-delete-spec i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.4rem;
+  display: none;
+}
+
+.delete--specification__checkbox {
+  display: none;
+}
