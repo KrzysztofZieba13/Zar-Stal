@@ -32,6 +32,9 @@ exports.getEditDescPage = catchAsync(async (req, res, next) => {
 });
 
 exports.getChooseRealizations = catchAsync(async (req, res, next) => {
+  const realizations = await Realization.find();
+
+  // console.log(realizations);
   res.status(200).render('chooseRealizations');
 });
 

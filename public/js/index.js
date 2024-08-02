@@ -11,6 +11,7 @@ import * as formAccordionEdit from './admin/accordionFormEdit';
 import * as realizationImages from './admin/realizationImages';
 import { deleteRealization } from './admin/deleteRealization';
 import { deleteElement } from './admin/deleteElement';
+import * as realizationManage from './admin/realizationsManagement';
 
 const sectionSingleRealization = document.querySelector(
   '.section--single-realization',
@@ -24,6 +25,9 @@ const mapContainer = document.getElementById('map');
 const mainPage = document.querySelector('.overview-header');
 const manyRealizationsPage = document.querySelector('.realizations-header');
 const eMainPage = document.querySelector('.edit-mp');
+const eMainRealizations = document.querySelector(
+  '.edit-mp-choose-realizations',
+);
 const editNav = document.querySelector('.edit-nav');
 const editFormAccordion = document.querySelector('.accordion--edit-panel');
 const editFormSpecs = document.querySelector('.accordion--edit-specs');
@@ -32,6 +36,9 @@ const sectionDeleteRealization = document.querySelector(
   '.section--delete-realization',
 );
 const sectionDeleteElement = document.querySelector('.section--delete-element');
+const sectionCreateRealization = document.querySelector(
+  '.section--create-realization',
+);
 
 let navListener = false;
 
@@ -71,13 +78,22 @@ if (eMainPage) {
   editMainPage.init();
 }
 
-// Edit page navigation
+// Edit main realizations
+if (eMainRealizations) {
+  editMainPage.chooseMainRealizations();
+}
+
 if (editNav) {
+  // Edit page navigation
   navInit.init();
 }
 
-// Edit form accordion
-if (editFormAccordion) formAccordionEdit.init();
+// Create Realization
+if (sectionCreateRealization) realizationManage.createRealization();
+
+if (editFormAccordion)
+  // Edit form accordion
+  formAccordionEdit.init();
 
 // Delete images from realization
 if (imagesToDelete) realizationImages.init();
@@ -92,5 +108,5 @@ if (editFormSpecs) {
 // Delete Realization
 if (sectionDeleteRealization) deleteRealization();
 
-//Delete Element
+// Delete Element
 if (sectionDeleteElement) deleteElement();

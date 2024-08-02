@@ -113,7 +113,7 @@ section {
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
-  z-index: 9999;
+  z-index: 999999;
   color: #fff;
   font-size: 1.8rem;
   font-weight: 400;
