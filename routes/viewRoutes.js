@@ -30,5 +30,9 @@ router.get(
   '/admin-zar-stal/realizacje/edytuj-realizacje',
   viewController.getEditRealization,
 );
+router.get(
+  '/admin-zar-stal/realizacje/usun-realizacje',
+  viewController.getDeleteRealization,
+);
 
 module.exports = router;

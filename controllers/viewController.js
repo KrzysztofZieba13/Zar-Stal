@@ -50,3 +50,7 @@ exports.getCreateRealization = catchAsync(async (req, res, next) => {
 exports.getEditRealization = catchAsync(async (req, res, next) => {
   res.status(200).render('editRealization');
 });
+
+exports.getDeleteRealization = catchAsync(async (req, res, next) => {
+  res.status(200).render('deleteRealization');
+});

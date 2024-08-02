@@ -9,6 +9,7 @@ import * as editMainPage from './admin/editMainPage';
 import * as navInit from './admin/accordionNavEdit';
 import * as formAccordionEdit from './admin/accordionFormEdit';
 import * as realizationImages from './admin/realizationImages';
+import { deleteRealization } from './admin/deleteRealization';
 
 const sectionSingleRealization = document.querySelector(
   '.section--single-realization',
@@ -26,6 +27,9 @@ const editNav = document.querySelector('.edit-nav');
 const editFormAccordion = document.querySelector('.accordion--edit-panel');
 const editFormSpecs = document.querySelector('.accordion--edit-specs');
 const imagesToDelete = document.querySelector('.choose--images-delete');
+const sectionDeleteRealization = document.querySelector(
+  '.section--delete-realization',
+);
 
 let navListener = false;
 
@@ -82,3 +86,6 @@ if (editFormSpecs) {
   formAccordionEdit.specificationInput('delete');
   formAccordionEdit.selectSpecsToDeleteHandler();
 }
+
+// Delete Realization
+if (sectionDeleteRealization) deleteRealization();

@@ -597,6 +597,7 @@ var _editMainPage = require("./admin/editMainPage");
 var _accordionNavEdit = require("./admin/accordionNavEdit");
 var _accordionFormEdit = require("./admin/accordionFormEdit");
 var _realizationImages = require("./admin/realizationImages");
+var _deleteRealization = require("./admin/deleteRealization");
 const sectionSingleRealization = document.querySelector(".section--single-realization");
 const navBar = document.querySelector(".nav-container");
 const realizationCartElements = document.querySelectorAll(".realization--cart-element");
@@ -609,6 +610,7 @@ const editNav = document.querySelector(".edit-nav");
 const editFormAccordion = document.querySelector(".accordion--edit-panel");
 const editFormSpecs = document.querySelector(".accordion--edit-specs");
 const imagesToDelete = document.querySelector(".choose--images-delete");
+const sectionDeleteRealization = document.querySelector(".section--delete-realization");
 let navListener = false;
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) new (0, _singleGalleryDefault.default)("single-realizations");
@@ -644,8 +646,10 @@ if (editFormSpecs) {
     _accordionFormEdit.specificationInput("delete");
     _accordionFormEdit.selectSpecsToDeleteHandler();
 }
+// Delete Realization
+if (sectionDeleteRealization) (0, _deleteRealization.deleteRealization)();
 
-},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn"}],"il6Pq":[function(require,module,exports) {
+},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initNavHandlers", ()=>initNavHandlers);
@@ -16410,6 +16414,38 @@ const init = ()=>{
     currentImages.addEventListener("click", (e)=>{
         const imageSelected = e.target.closest(".img-box");
         imageSelected.querySelector(".trash--on-image").classList.toggle("visible");
+    });
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"xpmqd":[function(require,module,exports) {
+/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "deleteRealization", ()=>deleteRealization);
+const realizationsToChoose = document.querySelector(".choose-realizations");
+const confirmDeleteBtn = document.querySelector(".sure--confirm-btn");
+const discardDeleteBtn = document.querySelector(".sure--discard-btn");
+const overlayDelete = document.querySelector(".overlay--delete-realization");
+const modalDelete = document.querySelector(".modal--delete-realization ");
+const hideModal = ()=>{
+    overlayDelete.classList.add("hidden");
+    modalDelete.classList.add("hidden");
+};
+const deleteRealization = ()=>{
+    realizationsToChoose.addEventListener("click", (e)=>{
+        const deleteRealizationBtn = e.target.closest(".delete--realization-btn");
+        if (!deleteRealizationBtn) return;
+        overlayDelete.classList.remove("hidden");
+        modalDelete.classList.remove("hidden");
+    });
+    confirmDeleteBtn.addEventListener("click", ()=>{
+        hideModal();
+        console.log("USUWANIE \u274C");
+    });
+    discardDeleteBtn.addEventListener("click", ()=>{
+        hideModal();
+    });
+    overlayDelete.addEventListener("click", ()=>{
+        hideModal();
     });
 };
 
