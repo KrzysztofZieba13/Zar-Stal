@@ -1,0 +1,93 @@
+extends base
+
+block append head 
+  link(rel="stylesheet", href="/css/edit.css")
+  title Zar-Stal | Edytuj element
+
+block content
+  section.section-admin
+    include _editNav
+
+    .edit-content
+      .edit--content-box
+        h1.primary-header.edit--primary-header Edytuj element
+        img.edit-instruction__img(src='/img/edit-pages/create-element.jpg', alt='instrukcja obsługi panelu admina')
+
+        h2.secondary--header-edit Wybierz element z listy
+        .choose-elements 
+          .choose-cart.edit--choose-cart
+            .img-box 
+              img(src="/img/realization/steel-elements/element-th-1-1.jpg", alt="element do wybrania")
+            .choose--realization-info.choose--realization-info-edit
+              p.choose--realization-title Kontener 
+              .choose--realization-edit 
+                span Wybierz
+          .choose-cart.edit--choose-cart
+            .img-box 
+              img(src="/img/realization/steel-elements/element-th-1-1.jpg", alt="element do wybrania")
+            .choose--realization-info.choose--realization-info-edit
+              p.choose--realization-title Kontener 
+              .choose--realization-edit 
+                span Wybierz
+          .choose-cart.edit--choose-cart
+            .img-box 
+              img(src="/img/realization/steel-elements/element-th-1-1.jpg", alt="element do wybrania")
+            .choose--realization-info.choose--realization-info-edit
+              p.choose--realization-title Kontener 
+              .choose--realization-edit 
+                span Wybierz
+          .choose-cart.edit--choose-cart
+            .img-box 
+              img(src="/img/realization/steel-elements/element-th-1-1.jpg", alt="element do wybrania")
+            .choose--realization-info.choose--realization-info-edit
+              p.choose--realization-title Kontener 
+              .choose--realization-edit 
+                span Wybierz
+          .choose-cart.edit--choose-cart
+            .img-box 
+              img(src="/img/realization/steel-elements/element-th-1-1.jpg", alt="element do wybrania")
+            .choose--realization-info.choose--realization-info-edit
+              p.choose--realization-title Kontener 
+              .choose--realization-edit 
+                span Wybierz
+
+        .edit--realization-fields.hidden
+          h2.secondary--header-edit Edytuj dane 
+          p.text.form--inside-title Wypełnij tylko pola, które chcesz zaktualizować!
+          form.form.edit-form.edit--form-margin.edit--realization-form
+            p.text.form--inside-title.accordion--edit-panel Dane podstawowe
+              i.ph.ph-caret-down.accordion--edit-arrow
+              i.ph.ph-caret-up.accordion--edit-arrow.hidden
+            .accordion-inputs.hidden
+              label.label(for='category') Kategoria 
+              select.input#category-select(type='text')
+                option(value='none') brak 
+                option(value='meter') Elementy stalowe 
+                option(value='meter-2') Maszyny
+                option(value='meter-3') Kontenery
+              label.label(for='title') Tytuł elementu 
+              input.input#title(type='text')
+
+            p.text.form--inside-title.accordion--edit-panel Dodaj zdjęcia
+              i.ph.ph-caret-down.accordion--edit-arrow
+              i.ph.ph-caret-up.accordion--edit-arrow.hidden
+            .accordion-inputs.hidden
+              label.label(for='primary-image') Zmień zdjęcie główne
+              input.input-file#primary-image(type='file')
+              label.label.label-margintop(for='images') Dodaj pozostałe zdjęcia zdjęcia
+              input.input-file#images(type='file')
+
+            p.text.form--inside-title.accordion--edit-panel Usuń zdjęcia (wybierz klikając)
+              i.ph.ph-caret-down.accordion--edit-arrow
+              i.ph.ph-caret-up.accordion--edit-arrow.hidden
+            .accordion-inputs.hidden
+              .choose--images-delete
+                .img-box 
+                  img(src="/img/realization/steel-elements/element-wide-1-1.jpg", alt="realizacja do wybrania")
+                  i.ph.ph-trash.trash--on-image
+                .img-box 
+                  img(src="/img/realization/steel-elements/element-wide-1-2.jpg", alt="realizacja do wybrania")
+                  i.ph.ph-trash.trash--on-image
+
+            input.btn.submit-btn.submit--realization-edit(type='submit' value='Aktualizuj element')
+

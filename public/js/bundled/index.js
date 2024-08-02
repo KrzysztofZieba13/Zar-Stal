@@ -598,6 +598,7 @@ var _accordionNavEdit = require("./admin/accordionNavEdit");
 var _accordionFormEdit = require("./admin/accordionFormEdit");
 var _realizationImages = require("./admin/realizationImages");
 var _deleteRealization = require("./admin/deleteRealization");
+var _deleteElement = require("./admin/deleteElement");
 const sectionSingleRealization = document.querySelector(".section--single-realization");
 const navBar = document.querySelector(".nav-container");
 const realizationCartElements = document.querySelectorAll(".realization--cart-element");
@@ -611,6 +612,7 @@ const editFormAccordion = document.querySelector(".accordion--edit-panel");
 const editFormSpecs = document.querySelector(".accordion--edit-specs");
 const imagesToDelete = document.querySelector(".choose--images-delete");
 const sectionDeleteRealization = document.querySelector(".section--delete-realization");
+const sectionDeleteElement = document.querySelector(".section--delete-element");
 let navListener = false;
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) new (0, _singleGalleryDefault.default)("single-realizations");
@@ -648,8 +650,10 @@ if (editFormSpecs) {
 }
 // Delete Realization
 if (sectionDeleteRealization) (0, _deleteRealization.deleteRealization)();
+//Delete Element
+if (sectionDeleteElement) (0, _deleteElement.deleteElement)();
 
-},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd"}],"il6Pq":[function(require,module,exports) {
+},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initNavHandlers", ()=>initNavHandlers);
@@ -16298,10 +16302,13 @@ parcelHelpers.export(exports, "init", ()=>init);
 const nav = document.querySelector(".edit-nav");
 const navLinks = document.querySelectorAll(".option-link");
 const init = ()=>{
-    document.addEventListener("DOMContentLoaded", ()=>{
+    document.addEventListener("DOMContentLoaded", (e)=>{
         navLinks.forEach((link)=>{
             link.classList.remove("option-active");
-            if (link.href.endsWith(location.pathname)) link.classList.add("option-active");
+            if (link.href.endsWith(location.pathname)) {
+                link.classList.add("option-active");
+                link.parentElement.parentElement.classList.remove("hidden");
+            }
         });
     });
     nav.addEventListener("click", (e)=>{
@@ -16434,6 +16441,38 @@ const deleteRealization = ()=>{
     realizationsToChoose.addEventListener("click", (e)=>{
         const deleteRealizationBtn = e.target.closest(".delete--realization-btn");
         if (!deleteRealizationBtn) return;
+        overlayDelete.classList.remove("hidden");
+        modalDelete.classList.remove("hidden");
+    });
+    confirmDeleteBtn.addEventListener("click", ()=>{
+        hideModal();
+        console.log("USUWANIE \u274C");
+    });
+    discardDeleteBtn.addEventListener("click", ()=>{
+        hideModal();
+    });
+    overlayDelete.addEventListener("click", ()=>{
+        hideModal();
+    });
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"3n93A":[function(require,module,exports) {
+/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "deleteElement", ()=>deleteElement);
+const elementsToChoose = document.querySelector(".choose-elements");
+const confirmDeleteBtn = document.querySelector(".sure--confirm-btn");
+const discardDeleteBtn = document.querySelector(".sure--discard-btn");
+const overlayDelete = document.querySelector(".overlay--delete-element");
+const modalDelete = document.querySelector(".modal--delete-element ");
+const hideModal = ()=>{
+    overlayDelete.classList.add("hidden");
+    modalDelete.classList.add("hidden");
+};
+const deleteElement = ()=>{
+    elementsToChoose.addEventListener("click", (e)=>{
+        const deleteElementBtn = e.target.closest(".delete--element-btn");
+        if (!deleteElementBtn) return;
         overlayDelete.classList.remove("hidden");
         modalDelete.classList.remove("hidden");
     });

@@ -54,3 +54,15 @@ exports.getEditRealization = catchAsync(async (req, res, next) => {
 exports.getDeleteRealization = catchAsync(async (req, res, next) => {
   res.status(200).render('deleteRealization');
 });
+
+exports.getCreateElement = catchAsync(async (req, res, next) => {
+  res.status(200).render('createElement');
+});
+
+exports.getEditElement = catchAsync(async (req, res, next) => {
+  res.status(200).render('editElement');
+});
+
+exports.getDeleteElement = catchAsync(async (req, res, next) => {
+  res.status(200).render('deleteElement');
+});

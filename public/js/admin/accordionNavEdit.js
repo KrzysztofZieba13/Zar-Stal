@@ -3,11 +3,13 @@ const nav = document.querySelector('.edit-nav');
 const navLinks = document.querySelectorAll('.option-link');
 
 export const init = () => {
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', (e) => {
     navLinks.forEach((link) => {
       link.classList.remove('option-active');
-      if (link.href.endsWith(location.pathname))
+      if (link.href.endsWith(location.pathname)) {
         link.classList.add('option-active');
+        link.parentElement.parentElement.classList.remove('hidden');
+      }
     });
   });
 

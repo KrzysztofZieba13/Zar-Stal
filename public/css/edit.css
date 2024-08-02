@@ -135,12 +135,17 @@
   margin-top: 4.4rem;
 }
 
-.choose-realizations {
+.choose-realizations,
+.choose-elements {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   color: #27374d;
   gap: 2.4rem;
   margin-top: 3.2rem;
+}
+
+.choose-elements {
+  grid-template-columns: repeat(6, 1fr);
 }
 
 .choose-cart {
@@ -440,7 +445,8 @@
   display: none;
 }
 
-.delete--realization-btn {
+.delete--realization-btn,
+.delete--element-btn {
   transition: all 0.3s;
   border: none;
   border-bottom: 1px solid #27374d;
@@ -450,7 +456,8 @@
   color: #27374d;
 }
 
-.modal--delete-realization {
+.modal--delete-realization,
+.modal--delete-element {
   background-color: #526d82;
   width: 100%;
   position: fixed;
@@ -463,10 +470,12 @@
   align-items: center;
   gap: 3.2rem;
   z-index: 9999;
+  z-index: 99999;
   padding: 8rem 2.4rem;
 }
 
-.delete--realization-btn:hover {
+.delete--realization-btn:hover,
+.delete--element-btn:hover {
   background-color: #9db2bf;
 }
 
@@ -496,4 +505,9 @@
 
 .sure--discard-btn {
   background-color: #27374d;
+}
+
+.overlay--delete-element,
+.overlay--delete-realization {
+  z-index: 99990;
 }

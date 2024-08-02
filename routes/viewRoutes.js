@@ -34,5 +34,17 @@ router.get(
   '/admin-zar-stal/realizacje/usun-realizacje',
   viewController.getDeleteRealization,
 );
+router.get(
+  '/admin-zar-stal/elementy/utworz-element',
+  viewController.getCreateElement,
+);
+router.get(
+  '/admin-zar-stal/elementy/edytuj-element',
+  viewController.getEditElement,
+);
+router.get(
+  '/admin-zar-stal/elementy/usun-element',
+  viewController.getDeleteElement,
+);
 
 module.exports = router;
