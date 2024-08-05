@@ -14,22 +14,21 @@ export const init = async () => {
 };
 
 export const chooseMainRealizations = async () => {
-  try {
-    const ChooseRealizationsForm = new Form(
-      'http://127.0.0.1:3000/api/v1/mainPage',
-    );
-
-    ChooseRealizationsForm.form.addEventListener('submit', (e) => {
+  const ChooseRealizationsForm = new Form(
+    'http://127.0.0.1:3000/api/v1/mainPage',
+  );
+  ChooseRealizationsForm.form.addEventListener('submit', (e) => {
+    try {
       e.preventDefault();
       const fields = {};
       fields.mainRealizations = [
         ...document.querySelectorAll('input[name="realizations"]:checked'),
       ].map((el) => el.value);
       if (fields.mainRealizations.length !== 2)
-        showAlert('error', 'Wybierz dwie główne realizacje');
+        throw new Error('Wybierz dwie główne realizacje');
       ChooseRealizationsForm.sendUpdate(fields);
-    });
-  } catch (err) {
-    console.log(err);
-  }
+    } catch (err) {
+      showAlert('error', err.message);
+    }
+  });
 };

@@ -32,10 +32,11 @@ exports.getEditDescPage = catchAsync(async (req, res, next) => {
 });
 
 exports.getChooseRealizations = catchAsync(async (req, res, next) => {
-  const realizations = await Realization.find();
+  const realizations = await Realization.find().select(
+    'title primaryImageThumbnail _id',
+  );
 
-  // console.log(realizations);
-  res.status(200).render('chooseRealizations');
+  res.status(200).render('chooseRealizations', { realizations });
 });
 
 exports.getEditOffert = catchAsync(async (req, res, next) => {

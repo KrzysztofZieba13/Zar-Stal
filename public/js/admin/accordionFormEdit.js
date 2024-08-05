@@ -55,15 +55,15 @@ const addSpecificationInputs = (e) => {
         <div class="specification">
           <div class="specification-data">
           <label class="label" for="spec-1-name">Nazwa parametru</label>
-          <input class="input" id="spec-1-name" type="text">
+          <input class="input spec-name" id="spec-1-name" type="text">
           </div>
           <div class="specification-data">
           <label class="label" for="spec-1-value">Wartość parametru</label>
-          <input class="input" id="spec-1-value" type="text">
+          <input class="input spec-value" id="spec-1-value" type="text">
           </div>
           <div class="specification-data">
             <label class="label" for="spec-1-unit">Jednostka</label>
-            <select class="input" id="spec-1-unit">
+            <select class="input spec-unit" id="spec-1-unit">
               <option value="none">brak</option>
               <option value="meter">m</option>
               <option value="meter-2">m&sup2;</option>

@@ -8,7 +8,7 @@ block content
   section.section-admin.section--create-realization
     include _editNav
 
-    .edit-content.edit-mp
+    .edit-content
       .edit--content-box
         h1.primary-header.edit--primary-header Utwórz realizację
         img.edit-instruction__img(src='/img/edit-pages/create-realization.jpg', alt='instrukcja obsługi panelu admina')
@@ -24,28 +24,31 @@ block content
           textarea.textarea.textarea-edit#description(type='text')
 
           p.text.form--inside-title Specyfikacje realizacji
-          .specfications-inputs
-            .specification
-              .specification-data
-                label.label(for='spec-1-name') Nazwa parametru 1
-                input.input#spec-1-name(type='text')
-              .specification-data
-                label.label(for='spec-1-value') Wartość parametru 1
-                input.input#spec-1-value(type='text')
-              .specification-data
-                label.label(for='spec-1-unit') Jednostka 1
-                select.input#spec-1-unit(type='text')
-                  option(value='none') brak 
-                  option(value='meter') m 
-                  option(value='meter-2') m&sup2
-                  option(value='meter-3') m&sup3
-              i.ph.ph-plus-square.more-specs
+          .specfications-inputs.accordion--add-spec
+            .specification-box
+              p.specification--box-title Specyfikacja
+              .specification
+                .specification-data
+                  label.label(for='spec-1-name') Nazwa parametru
+                  input.input#spec-1-name.spec-name(type='text')
+                .specification-data
+                  label.label(for='spec-1-value') Wartość parametru
+                  input.input#spec-1-value.spec-value(type='text')
+                .specification-data
+                  label.label(for='spec-1-unit') Jednostka
+                  select.input#spec-1-unit.spec-unit(type='text')
+                    option(value='none') brak 
+                    option(value='meter') m 
+                    option(value='meter-2') m&sup2
+                    option(value='meter-3') m&sup3
+                i.ph.ph-plus-square.more-specs
+                i.ph.ph-trash.delete--spec-input
 
           p.text.form--inside-title Dodaj zdjęcia
           label.label(for='primary-image') Wybierz jedno zdjęcie główne
           input.input-file#primary-image(type='file')
           label.label.label-margintop(for='images') Wybierz pozostałe zdjęcia
-          input.input-file#images(type='file')
+          input.input-file#images(type='file' multiple)
 
           p.text.form--inside-title Utwórz realizację
           input.submit-btn(type='submit' value='Utwórz realizację')

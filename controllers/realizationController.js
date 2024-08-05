@@ -5,6 +5,7 @@ const { promisify } = require('node:util');
 const Realization = require('../models/realizationModel');
 const AppError = require('../libs/utils/appError');
 const catchAsync = require('../libs/utils/catchAsync');
+const { json } = require('express');
 
 const multerStorage = multer.memoryStorage();
 const upload = multer({ storage: multerStorage });
@@ -73,7 +74,13 @@ exports.resizeRealizationImages = catchAsync(async (req, res, next) => {
 });
 
 exports.createRealization = catchAsync(async (req, res, next) => {
-  const realization = await Realization.create(req.body);
+  const specifications = JSON.parse(req.body.specifications);
+  const { specifications: _, ...restBody } = req.body;
+  const realizationObj = {
+    specifications,
+    ...restBody,
+  };
+  const realization = await Realization.create(realizationObj);
 
   res.status(200).json({
     status: 'success',

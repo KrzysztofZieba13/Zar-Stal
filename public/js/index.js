@@ -89,7 +89,11 @@ if (editNav) {
 }
 
 // Create Realization
-if (sectionCreateRealization) realizationManage.createRealization();
+if (sectionCreateRealization) {
+  realizationManage.createRealization();
+  formAccordionEdit.specificationInput('add');
+  formAccordionEdit.specificationInput('delete');
+}
 
 if (editFormAccordion)
   // Edit form accordion

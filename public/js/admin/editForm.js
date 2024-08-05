@@ -23,17 +23,18 @@ export default class EditForm {
     }
   }
 
-  async sendCreate(fields) {
+  async sendCreate(inputs) {
     try {
       const res = await axios({
         method: 'post',
         url: this.url,
-        data: { ...fields },
+        data: inputs,
       });
 
       if (res.data.status === 'success')
         showAlert('success', 'Utworzono pomyślnie');
     } catch (err) {
+      console.log(err.response.data.message);
       showAlert('error', err.response.data.message);
     }
   }

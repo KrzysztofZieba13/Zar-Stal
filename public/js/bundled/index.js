@@ -644,7 +644,11 @@ if (eMainRealizations) _editMainPage.chooseMainRealizations();
 if (editNav) // Edit page navigation
 _accordionNavEdit.init();
 // Create Realization
-if (sectionCreateRealization) _realizationsManagement.createRealization();
+if (sectionCreateRealization) {
+    _realizationsManagement.createRealization();
+    _accordionFormEdit.specificationInput("add");
+    _accordionFormEdit.specificationInput("delete");
+}
 if (editFormAccordion) // Edit form accordion
 _accordionFormEdit.init();
 // Delete images from realization
@@ -11560,20 +11564,20 @@ const init = async ()=>{
     });
 };
 const chooseMainRealizations = async ()=>{
-    try {
-        const ChooseRealizationsForm = new (0, _editFormDefault.default)("http://127.0.0.1:3000/api/v1/mainPage");
-        ChooseRealizationsForm.form.addEventListener("submit", (e)=>{
+    const ChooseRealizationsForm = new (0, _editFormDefault.default)("http://127.0.0.1:3000/api/v1/mainPage");
+    ChooseRealizationsForm.form.addEventListener("submit", (e)=>{
+        try {
             e.preventDefault();
             const fields = {};
             fields.mainRealizations = [
                 ...document.querySelectorAll('input[name="realizations"]:checked')
             ].map((el)=>el.value);
-            if (fields.mainRealizations.length !== 2) (0, _alert.showAlert)("error", "Wybierz dwie g\u0142\xf3wne realizacje");
+            if (fields.mainRealizations.length !== 2) throw new Error("Wybierz dwie g\u0142\xf3wne realizacje");
             ChooseRealizationsForm.sendUpdate(fields);
-        });
-    } catch (err) {
-        console.log(err);
-    }
+        } catch (err) {
+            (0, _alert.showAlert)("error", err.message);
+        }
+    });
 };
 
 },{"../admin/editForm":"egkCs","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","../alert":"78jVh"}],"egkCs":[function(require,module,exports) {
@@ -11601,17 +11605,16 @@ class EditForm {
             (0, _alert.showAlert)("error", err.response.data.message);
         }
     }
-    async sendCreate(fields) {
+    async sendCreate(inputs) {
         try {
             const res = await (0, _axiosDefault.default)({
                 method: "post",
                 url: this.url,
-                data: {
-                    ...fields
-                }
+                data: inputs
             });
             if (res.data.status === "success") (0, _alert.showAlert)("success", "Utworzono pomy\u015Blnie");
         } catch (err) {
+            console.log(err.response.data.message);
             (0, _alert.showAlert)("error", err.response.data.message);
         }
     }
@@ -16410,15 +16413,15 @@ const addSpecificationInputs = (e)=>{
         <div class="specification">
           <div class="specification-data">
           <label class="label" for="spec-1-name">Nazwa parametru</label>
-          <input class="input" id="spec-1-name" type="text">
+          <input class="input spec-name" id="spec-1-name" type="text">
           </div>
           <div class="specification-data">
           <label class="label" for="spec-1-value">Warto\u{15B}\u{107} parametru</label>
-          <input class="input" id="spec-1-value" type="text">
+          <input class="input spec-value" id="spec-1-value" type="text">
           </div>
           <div class="specification-data">
             <label class="label" for="spec-1-unit">Jednostka</label>
-            <select class="input" id="spec-1-unit">
+            <select class="input spec-unit" id="spec-1-unit">
               <option value="none">brak</option>
               <option value="meter">m</option>
               <option value="meter-2">m&sup2;</option>
@@ -16532,6 +16535,8 @@ const deleteElement = ()=>{
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "createRealization", ()=>createRealization);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _editForm = require("../admin/editForm");
 var _editFormDefault = parcelHelpers.interopDefault(_editForm);
 var _alert = require("../alert");
@@ -16540,13 +16545,35 @@ const createRealization = async ()=>{
         const createForm = new (0, _editFormDefault.default)(`${window.location.origin}/api/v1/realizations`);
         createForm.form.addEventListener("submit", (e)=>{
             e.preventDefault();
-            console.log(window.location.origin);
+            const form = new FormData();
+            const specificationObj = Array.from(document.querySelectorAll(".specification")).map((spec)=>{
+                const nameElement = spec.querySelector(".spec-name");
+                const valueElement = spec.querySelector(".spec-value");
+                const unitElement = spec.querySelector(".spec-unit");
+                const specObj = {
+                    name: nameElement ? nameElement.value : null,
+                    value: valueElement ? valueElement.value : null,
+                    unit: unitElement ? unitElement.value : "b/d"
+                };
+                return specObj;
+            });
+            form.append("location", document.getElementById("location").value);
+            form.append("title", document.getElementById("title").value);
+            form.append("description", document.getElementById("description").value);
+            form.append("name", document.getElementById("spec-1-name").value);
+            form.append("specifications", JSON.stringify(specificationObj));
+            Array.from(document.getElementById("images").files).forEach((img)=>{
+                form.append("images", img);
+            });
+            form.append("primaryImage", document.getElementById("primary-image").files[0]);
+            createForm.sendCreate(form);
         });
     } catch (err) {
-        (0, _alert.showAlert)("error", err.message);
+        console.log(err.message);
+        (0, _alert.showAlert)("error", `error!!! ${err.message}`);
     }
 };
 
-},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
+},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","axios":"cHm60"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
 
 //# sourceMappingURL=index.js.map
