@@ -13,8 +13,7 @@ block content
         h1.primary-header.edit--primary-header Wybierz główne realizacje
         img.edit-instruction__img(src='/img/edit-pages/choose-realizations-LP.jpg', alt='instrukcja obsługi panelu admina')
         
-        p.text.edit-text Wybrane realizacje 
-          span 0/2
+        p.text.edit-text.number--choosen-realizations Wybrane realizacje 0/2
         form.form
           .choose-realizations 
             each realization in realizations
@@ -24,7 +23,7 @@ block content
                 .choose--realization-info
                   p.choose--realization-title= realization.title
                   .choose--realization-checkbox
-                    label(for='1234') Główna realizacja?
-                    input#1234(type="checkbox" name='realizations' value=realization._id).choose__checkbox 
+                    label(for=realization._id) Główna realizacja?
+                    input(type="checkbox" id=realization._id name='realizations' value=realization._id).choose__checkbox 
           .submit--realizations-choosen 
             input(type="submit" value='Aktualizuj').submit-btn

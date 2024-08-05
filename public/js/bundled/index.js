@@ -616,6 +616,7 @@ const imagesToDelete = document.querySelector(".choose--images-delete");
 const sectionDeleteRealization = document.querySelector(".section--delete-realization");
 const sectionDeleteElement = document.querySelector(".section--delete-element");
 const sectionCreateRealization = document.querySelector(".section--create-realization");
+const sectionEditOffert = document.querySelector(".section--edit-offert");
 let navListener = false;
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) new (0, _singleGalleryDefault.default)("single-realizations");
@@ -663,6 +664,8 @@ if (editFormSpecs) {
 if (sectionDeleteRealization) (0, _deleteRealization.deleteRealization)();
 // Delete Element
 if (sectionDeleteElement) (0, _deleteElement.deleteElement)();
+// Edit Offert
+if (sectionEditOffert) _editMainPage.editOffert();
 
 },{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -11550,6 +11553,7 @@ const initSlider = (heroElement)=>{
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "init", ()=>init);
 parcelHelpers.export(exports, "chooseMainRealizations", ()=>chooseMainRealizations);
+parcelHelpers.export(exports, "editOffert", ()=>editOffert);
 var _editForm = require("../admin/editForm");
 var _editFormDefault = parcelHelpers.interopDefault(_editForm);
 var _alert = require("../alert");
@@ -11563,24 +11567,69 @@ const init = async ()=>{
         document.getElementById("description").value = "";
     });
 };
-const chooseMainRealizations = async ()=>{
+const chooseMainRealizations = ()=>{
     const ChooseRealizationsForm = new (0, _editFormDefault.default)("http://127.0.0.1:3000/api/v1/mainPage");
-    ChooseRealizationsForm.form.addEventListener("submit", (e)=>{
+    const numOfChoosenRealizations = document.querySelector(".number--choosen-realizations");
+    let selectedRealizations = 0;
+    document.querySelectorAll('input[name="realizations"]').forEach((el)=>{
+        el.addEventListener("change", ()=>{
+            if (!el.checked) selectedRealizations--;
+            if (el.checked && selectedRealizations !== 2) selectedRealizations++;
+            else el.checked = false;
+            numOfChoosenRealizations.textContent = `Wybrane realizacje ${selectedRealizations}/2`;
+        });
+    });
+    ChooseRealizationsForm.form.addEventListener("submit", async (e)=>{
         try {
             e.preventDefault();
             const fields = {};
+            const checkedInputs = document.querySelectorAll('input[name="realizations"]:checked');
             fields.mainRealizations = [
-                ...document.querySelectorAll('input[name="realizations"]:checked')
+                ...checkedInputs
             ].map((el)=>el.value);
             if (fields.mainRealizations.length !== 2) throw new Error("Wybierz dwie g\u0142\xf3wne realizacje");
             ChooseRealizationsForm.sendUpdate(fields);
+            [
+                ...checkedInputs
+            ].forEach((el)=>el.checked = false);
+            selectedRealizations = 0;
+            numOfChoosenRealizations.textContent = `Wybrane realizacje ${selectedRealizations}/2`;
+        } catch (err) {
+            (0, _alert.showAlert)("error", err.message);
+        }
+    });
+};
+const editOffert = ()=>{
+    const ChooseRealizationsForm = new (0, _editFormDefault.default)("http://127.0.0.1:3000/api/v1/mainPage");
+    let currentOffertIndex;
+    const currentOffert = document.querySelector(".current--edit-offert");
+    const offertItems = [
+        ...document.querySelectorAll(".offert-item")
+    ];
+    offertItems.forEach((el)=>{
+        el.addEventListener("click", ()=>{
+            currentOffertIndex = +el.id.split("-")[1];
+            offertItems.forEach((el)=>el.classList.remove("offert--item-edit"));
+            el.classList.add("offert--item-edit");
+            currentOffert.textContent = `Nowa tre\u{15B}\u{107} oferty: ${el.textContent.trim()}`;
+        });
+    });
+    ChooseRealizationsForm.form.addEventListener("submit", (e)=>{
+        try {
+            e.preventDefault();
+            if (!currentOffertIndex) throw new Error("Wybierz ofert\u0119 do aktualizacji!");
+            const field = {};
+            field[`offert.${currentOffertIndex}`] = document.getElementById("offert-value").value;
+            console.log(field);
+            ChooseRealizationsForm.sendUpdate(field);
+            document.getElementById("offert-value").value = "";
         } catch (err) {
             (0, _alert.showAlert)("error", err.message);
         }
     });
 };
 
-},{"../admin/editForm":"egkCs","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","../alert":"78jVh"}],"egkCs":[function(require,module,exports) {
+},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"egkCs":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _axios = require("axios");

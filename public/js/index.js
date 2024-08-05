@@ -39,6 +39,7 @@ const sectionDeleteElement = document.querySelector('.section--delete-element');
 const sectionCreateRealization = document.querySelector(
   '.section--create-realization',
 );
+const sectionEditOffert = document.querySelector('.section--edit-offert');
 
 let navListener = false;
 
@@ -114,3 +115,6 @@ if (sectionDeleteRealization) deleteRealization();
 
 // Delete Element
 if (sectionDeleteElement) deleteElement();
+
+// Edit Offert
+if (sectionEditOffert) editMainPage.editOffert();

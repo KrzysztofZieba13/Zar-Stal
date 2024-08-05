@@ -515,3 +515,7 @@
 .overlay--delete-realization {
   z-index: 99990;
 }
+
+.offert-item.offert--item-edit {
+  box-shadow: 0 0 9px 5px rgba(3, 3, 3, 0.5);
+}
