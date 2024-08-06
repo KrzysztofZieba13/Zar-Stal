@@ -3,8 +3,9 @@ import axios from 'axios';
 import { showAlert } from '../alert';
 
 export default class EditForm {
-  constructor(url) {
-    this.form = document.querySelector('.form');
+  constructor(url, formId) {
+    this.form =
+      document.getElementById(formId) || document.querySelector('.form');
     this.url = url;
   }
 

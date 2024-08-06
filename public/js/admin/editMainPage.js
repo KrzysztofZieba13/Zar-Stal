@@ -53,9 +53,7 @@ export const chooseMainRealizations = () => {
 };
 
 export const editOffert = () => {
-  const ChooseRealizationsForm = new Form(
-    'http://127.0.0.1:3000/api/v1/mainPage',
-  );
+  const EditOffertForm = new Form('http://127.0.0.1:3000/api/v1/mainPage');
   let currentOffertIndex;
   const currentOffert = document.querySelector('.current--edit-offert');
 
@@ -69,7 +67,7 @@ export const editOffert = () => {
     });
   });
 
-  ChooseRealizationsForm.form.addEventListener('submit', (e) => {
+  EditOffertForm.form.addEventListener('submit', (e) => {
     try {
       e.preventDefault();
       if (!currentOffertIndex)

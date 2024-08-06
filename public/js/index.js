@@ -12,6 +12,7 @@ import * as realizationImages from './admin/realizationImages';
 import { deleteRealization } from './admin/deleteRealization';
 import { deleteElement } from './admin/deleteElement';
 import * as realizationManage from './admin/realizationsManagement';
+import * as editContact from './admin/editContact';
 
 const sectionSingleRealization = document.querySelector(
   '.section--single-realization',
@@ -40,6 +41,7 @@ const sectionCreateRealization = document.querySelector(
   '.section--create-realization',
 );
 const sectionEditOffert = document.querySelector('.section--edit-offert');
+const sectionEditContact = document.querySelector('.section-contact');
 
 let navListener = false;
 
@@ -118,3 +120,6 @@ if (sectionDeleteElement) deleteElement();
 
 // Edit Offert
 if (sectionEditOffert) editMainPage.editOffert();
+
+// Edit Contact
+if (sectionEditContact) editContact.editContact();

@@ -600,6 +600,7 @@ var _realizationImages = require("./admin/realizationImages");
 var _deleteRealization = require("./admin/deleteRealization");
 var _deleteElement = require("./admin/deleteElement");
 var _realizationsManagement = require("./admin/realizationsManagement");
+var _editContact = require("./admin/editContact");
 const sectionSingleRealization = document.querySelector(".section--single-realization");
 const navBar = document.querySelector(".nav-container");
 const realizationCartElements = document.querySelectorAll(".realization--cart-element");
@@ -617,6 +618,7 @@ const sectionDeleteRealization = document.querySelector(".section--delete-realiz
 const sectionDeleteElement = document.querySelector(".section--delete-element");
 const sectionCreateRealization = document.querySelector(".section--create-realization");
 const sectionEditOffert = document.querySelector(".section--edit-offert");
+const sectionEditContact = document.querySelector(".section-contact");
 let navListener = false;
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) new (0, _singleGalleryDefault.default)("single-realizations");
@@ -666,8 +668,10 @@ if (sectionDeleteRealization) (0, _deleteRealization.deleteRealization)();
 if (sectionDeleteElement) (0, _deleteElement.deleteElement)();
 // Edit Offert
 if (sectionEditOffert) _editMainPage.editOffert();
+// Edit Contact
+if (sectionEditContact) _editContact.editContact();
 
-},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR"}],"il6Pq":[function(require,module,exports) {
+},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR","./admin/editContact":"VKbKo"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initNavHandlers", ()=>initNavHandlers);
@@ -11568,7 +11572,7 @@ const init = async ()=>{
     });
 };
 const chooseMainRealizations = ()=>{
-    const ChooseRealizationsForm = new (0, _editFormDefault.default)("http://127.0.0.1:3000/api/v1/mainPage");
+    const ChooseRealizationsForm1 = new (0, _editFormDefault.default)("http://127.0.0.1:3000/api/v1/mainPage");
     const numOfChoosenRealizations = document.querySelector(".number--choosen-realizations");
     let selectedRealizations = 0;
     document.querySelectorAll('input[name="realizations"]').forEach((el)=>{
@@ -11579,7 +11583,7 @@ const chooseMainRealizations = ()=>{
             numOfChoosenRealizations.textContent = `Wybrane realizacje ${selectedRealizations}/2`;
         });
     });
-    ChooseRealizationsForm.form.addEventListener("submit", async (e)=>{
+    ChooseRealizationsForm1.form.addEventListener("submit", async (e)=>{
         try {
             e.preventDefault();
             const fields = {};
@@ -11588,7 +11592,7 @@ const chooseMainRealizations = ()=>{
                 ...checkedInputs
             ].map((el)=>el.value);
             if (fields.mainRealizations.length !== 2) throw new Error("Wybierz dwie g\u0142\xf3wne realizacje");
-            ChooseRealizationsForm.sendUpdate(fields);
+            ChooseRealizationsForm1.sendUpdate(fields);
             [
                 ...checkedInputs
             ].forEach((el)=>el.checked = false);
@@ -11600,7 +11604,7 @@ const chooseMainRealizations = ()=>{
     });
 };
 const editOffert = ()=>{
-    const ChooseRealizationsForm = new (0, _editFormDefault.default)("http://127.0.0.1:3000/api/v1/mainPage");
+    const EditOffertForm = new (0, _editFormDefault.default)("http://127.0.0.1:3000/api/v1/mainPage");
     let currentOffertIndex;
     const currentOffert = document.querySelector(".current--edit-offert");
     const offertItems = [
@@ -11614,7 +11618,7 @@ const editOffert = ()=>{
             currentOffert.textContent = `Nowa tre\u{15B}\u{107} oferty: ${el.textContent.trim()}`;
         });
     });
-    ChooseRealizationsForm.form.addEventListener("submit", (e)=>{
+    EditOffertForm.form.addEventListener("submit", (e)=>{
         try {
             e.preventDefault();
             if (!currentOffertIndex) throw new Error("Wybierz ofert\u0119 do aktualizacji!");
@@ -11636,8 +11640,8 @@ var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _alert = require("../alert");
 class EditForm {
-    constructor(url){
-        this.form = document.querySelector(".form");
+    constructor(url, formId){
+        this.form = document.getElementById(formId) || document.querySelector(".form");
         this.url = url;
     }
     async sendUpdate(fields) {
@@ -16623,6 +16627,46 @@ const createRealization = async ()=>{
     }
 };
 
-},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","axios":"cHm60"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
+},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","axios":"cHm60"}],"VKbKo":[function(require,module,exports) {
+/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "editContact", ()=>editContact);
+parcelHelpers.export(exports, "editOpenHours", ()=>editOpenHours);
+var _editForm = require("../admin/editForm");
+var _editFormDefault = parcelHelpers.interopDefault(_editForm);
+var _alert = require("../alert");
+const editContact = ()=>{
+    const EditContactForm = new (0, _editFormDefault.default)("http://127.0.0.1:3000/api/v1/contacts", "form--edit-contact");
+    EditContactForm.form.addEventListener("submit", (e)=>{
+        try {
+            e.preventDefault();
+            const ownerNumber = document.getElementById("owner-number").value;
+            const productionNumber = document.getElementById("production-number").value;
+            const secretariatNumber = document.getElementById("secretariat-number").value;
+            const emailContact = document.getElementById("email-contact").value;
+            const fields = {};
+            if (ownerNumber) fields.ownerNumber = ownerNumber;
+            if (productionNumber) fields.productionNumber = productionNumber;
+            if (secretariatNumber) fields.secretariatNumber = secretariatNumber;
+            if (emailContact) fields.email = emailContact;
+            if (Object.keys(fields).length === 0) throw new Error("Uzupe\u0142nij przynajmniej jedno pole");
+            EditContactForm.sendUpdate(fields);
+            document.getElementById("owner-number").value = "";
+            document.getElementById("production-number").value = "";
+            document.getElementById("secretariat-number").value = "";
+            document.getElementById("email-contact").value = "";
+        } catch (err) {
+            (0, _alert.showAlert)("error", err.message);
+        }
+    });
+};
+const editOpenHours = ()=>{
+    const EditOpenHoursForm = new (0, _editFormDefault.default)("http://127.0.0.1:3000/api/v1/mainPage", "form--id-edit-openhours");
+    EditOpenHoursForm.form.addEventListener("submit", (e)=>{
+        e.preventDefault();
+    });
+};
+
+},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
 
 //# sourceMappingURL=index.js.map

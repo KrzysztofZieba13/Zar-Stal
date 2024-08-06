@@ -1,16 +1,6 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-
-const contactSchema = new mongoose.Schema({
-  telephoneNumber: {
-    type: String,
-    validate: [validator.isMobilePhone, 'Wprowadź poprawny numer telefonu'],
-  },
-  person: {
-    type: String,
-    required: [true, 'Numer telefonu musi mieć przypisaną osobę/stanowisko'],
-  },
-});
+const Contact = require('./contactModel');
 
 const mainPageSchema = new mongoose.Schema({
   pageDescription: {
@@ -48,24 +38,40 @@ const mainPageSchema = new mongoose.Schema({
       minLength: [30, 'Opis oferty jest za krótki, minimum 30 znaków'],
     },
   ],
-  telephoneNumbers: {
-    type: [contactSchema],
-    default: {},
-  },
-  email: [
-    {
-      type: String,
-      validate: [validator.isEmail, 'Wprowadź poprawny adress Email'],
-    },
-  ],
+  contact: Array,
   openHours: [
     {
       dayId: Number,
-      open: Number,
-      close: Number,
+      open: {
+        type: String,
+        trim: true,
+        validate: {
+          validator: function (val) {
+            return validator.isTime(val, { mode: 'default' });
+          },
+          message: 'Podana godzina musi być w formacie hh:mm (12:30)',
+        },
+      },
+      close: {
+        type: String,
+        trim: true,
+        validate: {
+          validator: function (val) {
+            return validator.isTime(val, { mode: 'default' });
+          },
+          message: 'Podana godzina musi być w formacie hh:mm (12:30)',
+        },
+      },
       isClosed: Boolean,
     },
   ],
+});
+
+mainPageSchema.pre('save', async function (next) {
+  const contactPromise = this.contact.map((id) => Contact.findById(id).exec());
+  this.contact = await Promise.all(contactPromise);
+
+  next();
 });
 
 const MainPage = mongoose.model('MainPage', mainPageSchema);
