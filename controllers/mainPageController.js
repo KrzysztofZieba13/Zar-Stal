@@ -35,6 +35,31 @@ exports.updateMainPage = catchAsync(async (req, res, next) => {
   if (!mainPage)
     return next(new AppError('Nie znaleziono strony głównej', 404));
 
+  if (req.body.openhours) {
+    const weekOpenhourToEdit = mainPage.openHours.id(
+      req.body.openhours['openhourId-1'],
+    );
+    weekOpenhourToEdit.open = req.body['open-1'] || weekOpenhourToEdit.open;
+    weekOpenhourToEdit.close = req.body['close-1'] || weekOpenhourToEdit.close;
+
+    const weekendOpenhourToEdit = mainPage.openHours.id(
+      req.body.openhours['openhourId-2'],
+    );
+    weekendOpenhourToEdit.open =
+      req.body['open-2'] || weekendOpenhourToEdit.open;
+    weekendOpenhourToEdit.close =
+      req.body['close-2'] || weekendOpenhourToEdit.close;
+
+    if (req.body['open-2'] || req.body['close-2']) {
+      weekendOpenhourToEdit.isClosed = false;
+    }
+
+    weekendOpenhourToEdit.isClosed =
+      req.body.saturdayClosed || weekendOpenhourToEdit.isClosed;
+  }
+
+  await mainPage.save({ validateModifiedOnly: true });
+
   res.status(200).json({
     status: 'success',
     data: mainPage,

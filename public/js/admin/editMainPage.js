@@ -76,7 +76,6 @@ export const editOffert = () => {
       field[`offert.${currentOffertIndex}`] =
         document.getElementById('offert-value').value;
 
-      console.log(field);
       ChooseRealizationsForm.sendUpdate(field);
       document.getElementById('offert-value').value = '';
     } catch (err) {

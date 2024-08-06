@@ -668,8 +668,11 @@ if (sectionDeleteRealization) (0, _deleteRealization.deleteRealization)();
 if (sectionDeleteElement) (0, _deleteElement.deleteElement)();
 // Edit Offert
 if (sectionEditOffert) _editMainPage.editOffert();
-// Edit Contact
-if (sectionEditContact) _editContact.editContact();
+// Edit Contact && Openhours
+if (sectionEditContact) {
+    _editContact.editContact();
+    _editContact.editOpenHours();
+}
 
 },{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR","./admin/editContact":"VKbKo"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -11624,7 +11627,6 @@ const editOffert = ()=>{
             if (!currentOffertIndex) throw new Error("Wybierz ofert\u0119 do aktualizacji!");
             const field = {};
             field[`offert.${currentOffertIndex}`] = document.getElementById("offert-value").value;
-            console.log(field);
             ChooseRealizationsForm.sendUpdate(field);
             document.getElementById("offert-value").value = "";
         } catch (err) {
@@ -16664,6 +16666,28 @@ const editOpenHours = ()=>{
     const EditOpenHoursForm = new (0, _editFormDefault.default)("http://127.0.0.1:3000/api/v1/mainPage", "form--id-edit-openhours");
     EditOpenHoursForm.form.addEventListener("submit", (e)=>{
         e.preventDefault();
+        const openhourWeek = document.getElementById("openhour-1").value;
+        const closehourWeek = document.getElementById("closehour-1").value;
+        const openhourSat = document.getElementById("openhour-2").value;
+        const closehourSat = document.getElementById("closehour-2").value;
+        const saturdayClosed = document.getElementById("saturday-isclosed");
+        const fields = {};
+        const openhours = {
+            ["openhourId-1"]: "66b220ea071c24c77932dfa1",
+            ["openhourId-2"]: "66b220ea071c24c77932dfa2"
+        };
+        if (openhourWeek) fields["open-1"] = openhourWeek;
+        if (closehourWeek) fields["close-1"] = closehourWeek;
+        if (openhourSat) fields["open-2"] = openhourSat;
+        if (closehourSat) fields["close-2"] = closehourSat;
+        if (saturdayClosed) fields.saturdayClosed = saturdayClosed.checked;
+        fields.openhours = openhours;
+        EditOpenHoursForm.sendUpdate(fields);
+        document.getElementById("openhour-1").value = "";
+        document.getElementById("closehour-1").value = "";
+        document.getElementById("openhour-2").value = "";
+        document.getElementById("closehour-2").value = "";
+        document.getElementById("saturday-isclosed").checked = false;
     });
 };
 

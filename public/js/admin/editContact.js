@@ -44,5 +44,30 @@ export const editOpenHours = () => {
   );
   EditOpenHoursForm.form.addEventListener('submit', (e) => {
     e.preventDefault();
+    const openhourWeek = document.getElementById('openhour-1').value;
+    const closehourWeek = document.getElementById('closehour-1').value;
+    const openhourSat = document.getElementById('openhour-2').value;
+    const closehourSat = document.getElementById('closehour-2').value;
+    const saturdayClosed = document.getElementById('saturday-isclosed');
+
+    const fields = {};
+    const openhours = {
+      ['openhourId-1']: '66b220ea071c24c77932dfa1',
+      ['openhourId-2']: '66b220ea071c24c77932dfa2',
+    };
+
+    if (openhourWeek) fields['open-1'] = openhourWeek;
+    if (closehourWeek) fields['close-1'] = closehourWeek;
+    if (openhourSat) fields['open-2'] = openhourSat;
+    if (closehourSat) fields['close-2'] = closehourSat;
+    if (saturdayClosed) fields.saturdayClosed = saturdayClosed.checked;
+    fields.openhours = openhours;
+    EditOpenHoursForm.sendUpdate(fields);
+
+    document.getElementById('openhour-1').value = '';
+    document.getElementById('closehour-1').value = '';
+    document.getElementById('openhour-2').value = '';
+    document.getElementById('closehour-2').value = '';
+    document.getElementById('saturday-isclosed').checked = false;
   });
 };

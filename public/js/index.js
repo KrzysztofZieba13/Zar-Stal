@@ -121,5 +121,8 @@ if (sectionDeleteElement) deleteElement();
 // Edit Offert
 if (sectionEditOffert) editMainPage.editOffert();
 
-// Edit Contact
-if (sectionEditContact) editContact.editContact();
+// Edit Contact && Openhours
+if (sectionEditContact) {
+  editContact.editContact();
+  editContact.editOpenHours();
+}
