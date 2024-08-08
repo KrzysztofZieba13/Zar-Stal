@@ -5,7 +5,6 @@ const { promisify } = require('node:util');
 const Realization = require('../models/realizationModel');
 const AppError = require('../libs/utils/appError');
 const catchAsync = require('../libs/utils/catchAsync');
-const { json } = require('express');
 
 const multerStorage = multer.memoryStorage();
 const upload = multer({ storage: multerStorage });
@@ -89,6 +88,7 @@ exports.createRealization = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteImages = catchAsync(async (req, res, next) => {
+  console.log(req.body);
   const { thToRemove } = req.body;
   const { wideToRemove } = req.body;
 
@@ -131,7 +131,11 @@ exports.getAllRealizatons = catchAsync(async (req, res, next) => {
 });
 
 exports.getRealization = catchAsync(async (req, res, next) => {
-  const realization = await Realization.findById(req.params.id);
+  let fields = '';
+  if (Object.keys(req.query).length) {
+    fields = req.query.fields.split(',').join(' ');
+  }
+  const realization = await Realization.findById(req.params.id, fields);
 
   if (!realization)
     return next(new AppError('Nie znaleziono takiej realizacji', 404));
@@ -143,18 +147,30 @@ exports.getRealization = catchAsync(async (req, res, next) => {
 });
 
 exports.updateRealization = catchAsync(async (req, res, next) => {
-  const update = {
-    title: req.body.title,
-    description: req.body.description,
-    primaryImage: req.body.primaryImage,
-    primaryImageThumbnail: req.body.primaryImageThumbnail,
-    location: req.body.location,
-    $push: {
-      images: req.body.images,
-      imagesThumbnails: req.body.imagesThumbnails,
-      specifications: req.body.specifications,
-    },
+  const specifications = JSON.parse(req.body.specifications);
+  const { specifications: _, ...restBody } = req.body;
+  const realizationObj = {
+    specifications,
+    ...restBody,
   };
+
+  const update = {};
+  if (realizationObj.title) update.title = realizationObj.title;
+  if (realizationObj.description)
+    update.description = realizationObj.description;
+  if (realizationObj.primaryImage)
+    update.primaryImage = realizationObj.primaryImage;
+  if (realizationObj.primaryImageThumbnail)
+    update.primaryImageThumbnail = realizationObj.primaryImageThumbnail;
+  if (realizationObj.location) update.location = realizationObj.location;
+  if (realizationObj.images) {
+    update.$push = {
+      images: realizationObj.images,
+      imagesThumbnails: realizationObj.imagesThumbnails,
+    };
+    if (realizationObj.specifications[0].name)
+      update.specifications = realizationObj.specifications;
+  }
 
   const realization = await Realization.findByIdAndUpdate(
     req.params.id,

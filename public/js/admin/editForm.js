@@ -9,12 +9,13 @@ export default class EditForm {
     this.url = url;
   }
 
-  async sendUpdate(fields) {
+  async sendUpdate(inputs) {
+    console.log('update');
     try {
       const res = await axios({
         method: 'patch',
         url: this.url,
-        data: { ...fields },
+        data: inputs,
       });
 
       if (res.data.status === 'success')

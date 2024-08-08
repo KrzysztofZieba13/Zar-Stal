@@ -21,8 +21,16 @@ block content
           p.specification-title Specyfikacja
             each spec in realization.specifications
               .specifications-element 
-                p.element-title= spec.title
-                p.element-value= spec.detail
+                p.element-title= spec.name
+                p.element-value= spec.value
+                  if spec.unit === 'meter'
+                    span.element-unit  m 
+                  if spec.unit === 'meter-2'
+                    span.element-unit  m 
+                      sup 2
+                  if spec.unit === 'meter-3'
+                    span.element-unit  m 
+                      sup 3
 
         .realization-moreinfo 
           p.moreinfo-title Więcej Informacji? 

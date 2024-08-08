@@ -52,7 +52,12 @@ exports.getCreateRealization = catchAsync(async (req, res, next) => {
 });
 
 exports.getEditRealization = catchAsync(async (req, res, next) => {
-  res.status(200).render('editRealization');
+  const realizations = await Realization.find();
+
+  if (!realizations)
+    return next(new AppError('Nie znaleziono realizacji ', 404));
+
+  res.status(200).render('editRealization', { realizations });
 });
 
 exports.getDeleteRealization = catchAsync(async (req, res, next) => {

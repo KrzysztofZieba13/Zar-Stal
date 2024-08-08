@@ -40,7 +40,7 @@
 
 .realization-imgs {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
   flex: 0;
   gap: 0.4rem;

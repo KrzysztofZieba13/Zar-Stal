@@ -42,6 +42,9 @@ const sectionCreateRealization = document.querySelector(
 );
 const sectionEditOffert = document.querySelector('.section--edit-offert');
 const sectionEditContact = document.querySelector('.section-contact');
+const sectionUpdateRealization = document.querySelector(
+  '.section--update-realization',
+);
 
 let navListener = false;
 
@@ -125,4 +128,9 @@ if (sectionEditOffert) editMainPage.editOffert();
 if (sectionEditContact) {
   editContact.editContact();
   editContact.editOpenHours();
+}
+
+// Update Realization
+if (sectionUpdateRealization) {
+  realizationManage.updateRealization();
 }

@@ -67,7 +67,7 @@ block content
       h2.secondary-header Hale Stalowe
       .realizations-box 
         each real in realizations
-          +realizationCart(real.imagesThumbnails[0], real.location, real.title, `/realizacje/realizacja/${real._id}`)
+          +realizationCart(real.primaryImageThumbnail, real.location, real.title, `/realizacje/realizacja/${real._id}`)
 
   section.section.section--hidden.section--realizations-elements.realizations#steel-elements
     .container-realizations

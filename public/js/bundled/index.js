@@ -142,10 +142,10 @@
       this[globalName] = mainExports;
     }
   }
-})({"18Qvj":[function(require,module,exports) {
+})({"lKtZv":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
-var HMR_PORT = 1234;
+var HMR_PORT = 38429;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "5dd330bdbb659557";
 var HMR_USE_SSE = false;
@@ -619,6 +619,7 @@ const sectionDeleteElement = document.querySelector(".section--delete-element");
 const sectionCreateRealization = document.querySelector(".section--create-realization");
 const sectionEditOffert = document.querySelector(".section--edit-offert");
 const sectionEditContact = document.querySelector(".section-contact");
+const sectionUpdateRealization = document.querySelector(".section--update-realization");
 let navListener = false;
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) new (0, _singleGalleryDefault.default)("single-realizations");
@@ -673,6 +674,8 @@ if (sectionEditContact) {
     _editContact.editContact();
     _editContact.editOpenHours();
 }
+// Update Realization
+if (sectionUpdateRealization) _realizationsManagement.updateRealization();
 
 },{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR","./admin/editContact":"VKbKo"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -11646,14 +11649,13 @@ class EditForm {
         this.form = document.getElementById(formId) || document.querySelector(".form");
         this.url = url;
     }
-    async sendUpdate(fields) {
+    async sendUpdate(inputs) {
+        console.log("update");
         try {
             const res = await (0, _axiosDefault.default)({
                 method: "patch",
                 url: this.url,
-                data: {
-                    ...fields
-                }
+                data: inputs
             });
             if (res.data.status === "success") (0, _alert.showAlert)("success", "Aktualizacja przebieg\u0142a pomy\u015Blnie");
         } catch (err) {
@@ -16589,39 +16591,116 @@ const deleteElement = ()=>{
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"3qRhR":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "updateRealization", ()=>updateRealization);
 parcelHelpers.export(exports, "createRealization", ()=>createRealization);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _editForm = require("../admin/editForm");
 var _editFormDefault = parcelHelpers.interopDefault(_editForm);
 var _alert = require("../alert");
+const getBasicInputs = (createForm)=>{
+    const form = new FormData();
+    const specificationObj = Array.from(document.querySelectorAll(".specification")).map((spec)=>{
+        const nameElement = spec.querySelector(".spec-name");
+        const valueElement = spec.querySelector(".spec-value");
+        const unitElement = spec.querySelector(".spec-unit");
+        const specObj = {
+            name: nameElement ? nameElement.value : null,
+            value: valueElement ? valueElement.value : null,
+            unit: unitElement ? unitElement.value : "b/d"
+        };
+        return specObj;
+    });
+    form.append("location", document.getElementById("location").value);
+    form.append("title", document.getElementById("title").value);
+    form.append("description", document.getElementById("description").value);
+    form.append("specifications", JSON.stringify(specificationObj));
+    Array.from(document.getElementById("images").files).forEach((img)=>{
+        form.append("images", img);
+    });
+    if (document.getElementById("primary-image").files[0]) form.append("primaryImage", document.getElementById("primary-image").files[0]);
+    return form;
+};
+const updateRealization = async ()=>{
+    const realizationsContainer = document.querySelector(".choose-realizations");
+    let updateForm = "";
+    const imagesToDeleteContainer = document.querySelector(".choose--images-delete");
+    let thImagesToDelete = new Set();
+    let wideImagesToDelete = new Set();
+    realizationsContainer.addEventListener("click", async (e)=>{
+        thImagesToDelete.clear();
+        wideImagesToDelete.clear();
+        const realizationID = e.target.closest(".choose--realization-edit").dataset.realizationId;
+        imagesToDeleteContainer.innerHTML = "";
+        const request = await (0, _axiosDefault.default)(`${window.location.origin}/api/v1/realizations/realization/${realizationID}?fields=images,imagesThumbnails`);
+        const imagesArray = request.data.data.imagesThumbnails;
+        const images = [
+            ...request.data.data.images
+        ];
+        imagesArray.forEach((image, i)=>{
+            imagesToDeleteContainer.insertAdjacentHTML("beforeend", `
+        <div class='img-box' data-img-link="${image}" data-img-wide-link="${images[i]}">
+          <img src="/img/realization/${image}" alt="realizacja do wybrania" />
+          <i class='ph ph-trash trash--on-image'></i>
+        </div>
+        `);
+        });
+        updateForm = new (0, _editFormDefault.default)(`${window.location.origin}/api/v1/realizations/realization/${realizationID}`, "edit--realization-form");
+        updateForm.form.addEventListener("submit", (e)=>{
+            try {
+                e.preventDefault();
+                const form = getBasicInputs(updateForm);
+                updateForm.sendUpdate(form);
+            } catch (err) {
+                (0, _alert.showAlert)("error", err.message);
+            }
+        });
+        deleteForm = new (0, _editFormDefault.default)(`${window.location.origin}/api/v1/realizations/realization/${realizationID}/delete-images`, "form--delete-images");
+        deleteForm.form.addEventListener("submit", (e)=>{
+            try {
+                e.preventDefault();
+                console.log("usuwanie");
+                const thToRemoveArray = Array.from(thImagesToDelete);
+                const wideToRemoveArray = Array.from(wideImagesToDelete);
+                const fields = {
+                    thToRemove: thToRemoveArray,
+                    wideToRemove: wideToRemoveArray
+                };
+                deleteForm.sendUpdate(fields);
+            } catch (err) {
+                (0, _alert.showAlert)("error", err.message);
+            }
+        });
+    });
+    imagesToDeleteContainer.addEventListener("click", (e)=>{
+        const imgBox = e.target.closest(".img-box");
+        if (imgBox.querySelector(".trash--on-image").classList.contains("visible")) {
+            thImagesToDelete.add(imgBox.dataset.imgLink);
+            wideImagesToDelete.add(imgBox.dataset.imgWideLink);
+        } else {
+            thImagesToDelete.delete(imgBox.dataset.imgLink);
+            wideImagesToDelete.delete(imgBox.dataset.imgWideLink);
+        }
+        console.log(imgBox);
+    });
+};
 const createRealization = async ()=>{
     try {
         const createForm = new (0, _editFormDefault.default)(`${window.location.origin}/api/v1/realizations`);
         createForm.form.addEventListener("submit", (e)=>{
             e.preventDefault();
-            const form = new FormData();
-            const specificationObj = Array.from(document.querySelectorAll(".specification")).map((spec)=>{
-                const nameElement = spec.querySelector(".spec-name");
-                const valueElement = spec.querySelector(".spec-value");
-                const unitElement = spec.querySelector(".spec-unit");
-                const specObj = {
-                    name: nameElement ? nameElement.value : null,
-                    value: valueElement ? valueElement.value : null,
-                    unit: unitElement ? unitElement.value : "b/d"
-                };
-                return specObj;
-            });
-            form.append("location", document.getElementById("location").value);
-            form.append("title", document.getElementById("title").value);
-            form.append("description", document.getElementById("description").value);
-            form.append("name", document.getElementById("spec-1-name").value);
-            form.append("specifications", JSON.stringify(specificationObj));
-            Array.from(document.getElementById("images").files).forEach((img)=>{
-                form.append("images", img);
-            });
-            form.append("primaryImage", document.getElementById("primary-image").files[0]);
+            const form = getBasicInputs(createForm);
             createForm.sendCreate(form);
+            document.getElementById("location").value = "";
+            document.getElementById("title").value = "";
+            document.getElementById("description").value = "";
+            Array.from(document.querySelectorAll(".specification")).forEach((spec)=>{
+                spec.querySelector(".spec-name").value = "";
+                spec.querySelector(".spec-value").value = "";
+                spec.querySelector(".spec-unit").value = "";
+            });
+            document.getElementById("primary-image").value = "";
+            document.getElementById("images").value = "";
         });
     } catch (err) {
         console.log(err.message);
@@ -16691,6 +16770,6 @@ const editOpenHours = ()=>{
     });
 };
 
-},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
+},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["lKtZv","3LR9W"], "3LR9W", "parcelRequire2a96")
 
 //# sourceMappingURL=index.js.map
