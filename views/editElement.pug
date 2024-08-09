@@ -5,7 +5,7 @@ block append head
   title Zar-Stal | Edytuj element
 
 block content
-  section.section-admin
+  section.section-admin.section--update-element
     include _editNav
 
     .edit-content
@@ -15,41 +15,15 @@ block content
 
         h2.secondary--header-edit Wybierz element z listy
         .choose-elements 
-          .choose-cart.edit--choose-cart
-            .img-box 
-              img(src="/img/realization/steel-elements/element-th-1-1.jpg", alt="element do wybrania")
-            .choose--realization-info.choose--realization-info-edit
-              p.choose--realization-title Kontener 
-              .choose--realization-edit 
-                span Wybierz
-          .choose-cart.edit--choose-cart
-            .img-box 
-              img(src="/img/realization/steel-elements/element-th-1-1.jpg", alt="element do wybrania")
-            .choose--realization-info.choose--realization-info-edit
-              p.choose--realization-title Kontener 
-              .choose--realization-edit 
-                span Wybierz
-          .choose-cart.edit--choose-cart
-            .img-box 
-              img(src="/img/realization/steel-elements/element-th-1-1.jpg", alt="element do wybrania")
-            .choose--realization-info.choose--realization-info-edit
-              p.choose--realization-title Kontener 
-              .choose--realization-edit 
-                span Wybierz
-          .choose-cart.edit--choose-cart
-            .img-box 
-              img(src="/img/realization/steel-elements/element-th-1-1.jpg", alt="element do wybrania")
-            .choose--realization-info.choose--realization-info-edit
-              p.choose--realization-title Kontener 
-              .choose--realization-edit 
-                span Wybierz
-          .choose-cart.edit--choose-cart
-            .img-box 
-              img(src="/img/realization/steel-elements/element-th-1-1.jpg", alt="element do wybrania")
-            .choose--realization-info.choose--realization-info-edit
-              p.choose--realization-title Kontener 
-              .choose--realization-edit 
-                span Wybierz
+          each element in elements
+            .choose-cart.edit--choose-cart
+              .img-box 
+                img(src=`/img/realization/steel-elements/${element.images[0]}`, alt="element do wybrania")
+              .choose--realization-info.choose--realization-info-edit
+                p.choose--realization-title Kontener 
+                .choose--realization-edit(data-element-id=element._id)
+                  span Wybierz
+          
 
         .edit--realization-fields.hidden
           h2.secondary--header-edit Edytuj dane 
@@ -60,7 +34,7 @@ block content
               i.ph.ph-caret-up.accordion--edit-arrow.hidden
             .accordion-inputs.hidden
               label.label(for='category') Kategoria 
-              select.input#category-select(type='text')
+              select.input#category(type='text')
                 option(value='none') brak 
                 option(value='meter') Elementy stalowe 
                 option(value='meter-2') Maszyny
@@ -72,10 +46,8 @@ block content
               i.ph.ph-caret-down.accordion--edit-arrow
               i.ph.ph-caret-up.accordion--edit-arrow.hidden
             .accordion-inputs.hidden
-              label.label(for='primary-image') Zmień zdjęcie główne
-              input.input-file#primary-image(type='file')
-              label.label.label-margintop(for='images') Dodaj pozostałe zdjęcia zdjęcia
-              input.input-file#images(type='file')
+              label.label.label-margintop(for='images') Dodaj zdjęcia
+              input.input-file#images(type='file' multiple)
 
             p.text.form--inside-title.accordion--edit-panel Usuń zdjęcia (wybierz klikając)
               i.ph.ph-caret-down.accordion--edit-arrow

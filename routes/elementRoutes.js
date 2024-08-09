@@ -18,6 +18,7 @@ router
     elementController.resizeElementImages,
     elementController.updateElement,
   )
+  .get(elementController.getElement)
   .delete(elementController.deleteElement);
 
 module.exports = router;

@@ -20,7 +20,7 @@ exports.resizeElementImages = catchAsync(async (req, res, next) => {
       await sharp(file.buffer)
         .resize(1524, 857)
         .toFormat('jpeg')
-        .toFile(`public/img/realization/elements/${filename}`);
+        .toFile(`public/img/realization/steel-elements/${filename}`);
       req.body.images.push(filename);
     }),
   );
@@ -33,7 +33,7 @@ exports.resizeElementImages = catchAsync(async (req, res, next) => {
       await sharp(file.buffer)
         .resize(335, 206)
         .toFormat('jpeg')
-        .toFile(`public/img/realization/elements/${filename}`);
+        .toFile(`public/img/realization/steel-elements/${filename}`);
       req.body.imagesThumbnails.push(filename);
     }),
   );
@@ -42,8 +42,16 @@ exports.resizeElementImages = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.createElement = catchAsync(async (req, res, next) => {
-  const element = await Element.create(req.body);
+exports.getElement = catchAsync(async (req, res, next) => {
+  const element = await Element.findById(req.params.id);
+
+  if (!element)
+    return next(
+      new AppError(
+        'Nie znaleziono elementu stalowego o podanym identyfikatorze',
+        404,
+      ),
+    );
 
   res.status(200).json({
     status: 'success',
@@ -51,13 +59,29 @@ exports.createElement = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.updateElement = catchAsync(async (req, res, next) => {
-  let update = {
-    title: req.body.title,
-    category: req.body.category,
-  };
+exports.createElement = catchAsync(async (req, res, next) => {
+  const element = await Element.create(req.body);
 
+  res.status(201).json({
+    status: 'success',
+    data: element,
+  });
+});
+
+exports.updateElement = catchAsync(async (req, res, next) => {
+  let update = {};
+  if (req.body.title) update.title = req.body.title;
+  if (req.body.category && req.body.category !== 'none')
+    update.category = req.body.category;
+
+  if (!Array.isArray(req.body.imagesRemove) && req.body.imagesRemove) {
+    req.body.imagesRemove = [req.body.imagesRemove];
+    req.body.imagesThumbnailsRemove = [req.body.imagesThumbnailsRemove];
+  }
+
+  console.log(req.body);
   if (req.body.imagesRemove) {
+    console.log('images remove');
     update = {
       ...update,
       $pull: {
@@ -65,7 +89,8 @@ exports.updateElement = catchAsync(async (req, res, next) => {
         imagesThumbnails: { $in: req.body.imagesThumbnailsRemove },
       },
     };
-  } else if (req.body.images) {
+  } else if (req.body.images.length > 0) {
+    console.log('images add');
     update = {
       ...update,
       $push: {
@@ -90,11 +115,15 @@ exports.updateElement = catchAsync(async (req, res, next) => {
 
   if (req.body.imagesRemove && req.body.imagesThumbnailsRemove) {
     const deleteThPromises = req.body.imagesRemove.map(async (el) => {
-      return promisify(fs.unlink)(`public/img/realization/elements/${el}`);
+      return promisify(fs.unlink)(
+        `public/img/realization/steel-elements/${el}`,
+      );
     });
     const deleteWidePromises = req.body.imagesThumbnailsRemove.map(
       async (el) => {
-        return promisify(fs.unlink)(`public/img/realization/elements/${el}`);
+        return promisify(fs.unlink)(
+          `public/img/realization/steel-elements/${el}`,
+        );
       },
     );
 
@@ -109,7 +138,6 @@ exports.updateElement = catchAsync(async (req, res, next) => {
 
 exports.deleteElement = catchAsync(async (req, res, next) => {
   const element = await Element.findByIdAndDelete(req.params.id);
-
   if (!element)
     return next(
       new AppError(

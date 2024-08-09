@@ -13,6 +13,7 @@ import * as realizationManage from './admin/realizationsManagement';
 import * as editContact from './admin/editContact';
 import * as navInit from './admin/accordionNavEdit';
 import * as formAccordionEdit from './admin/accordionFormEdit';
+import * as elementManage from './admin/elementsManagement';
 
 const sectionSingleRealization = document.querySelector(
   '.section--single-realization',
@@ -45,6 +46,8 @@ const sectionEditContact = document.querySelector('.section-contact');
 const sectionUpdateRealization = document.querySelector(
   '.section--update-realization',
 );
+const sectionCreateElement = document.querySelector('.section--create-element');
+const sectionUpdateElement = document.querySelector('.section--update-element');
 
 let navListener = false;
 
@@ -133,4 +136,14 @@ if (editFormSpecs) {
   formAccordionEdit.specificationInput('add');
   formAccordionEdit.specificationInput('delete');
   // formAccordionEdit.selectSpecsToDeleteHandler();
+}
+
+// Create Element
+if (sectionCreateElement) {
+  elementManage.createElement();
+}
+
+// Update Element
+if (sectionUpdateElement) {
+  elementManage.updateElement();
 }

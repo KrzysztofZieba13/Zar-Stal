@@ -601,6 +601,7 @@ var _realizationsManagement = require("./admin/realizationsManagement");
 var _editContact = require("./admin/editContact");
 var _accordionNavEdit = require("./admin/accordionNavEdit");
 var _accordionFormEdit = require("./admin/accordionFormEdit");
+var _elementsManagement = require("./admin/elementsManagement");
 const sectionSingleRealization = document.querySelector(".section--single-realization");
 const navBar = document.querySelector(".nav-container");
 const realizationCartElements = document.querySelectorAll(".realization--cart-element");
@@ -620,6 +621,8 @@ const sectionCreateRealization = document.querySelector(".section--create-realiz
 const sectionEditOffert = document.querySelector(".section--edit-offert");
 const sectionEditContact = document.querySelector(".section-contact");
 const sectionUpdateRealization = document.querySelector(".section--update-realization");
+const sectionCreateElement = document.querySelector(".section--create-element");
+const sectionUpdateElement = document.querySelector(".section--update-element");
 let navListener = false;
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) new (0, _singleGalleryDefault.default)("single-realizations");
@@ -676,8 +679,12 @@ if (editFormSpecs) {
     _accordionFormEdit.specificationInput("delete");
 // formAccordionEdit.selectSpecsToDeleteHandler();
 }
+// Create Element
+if (sectionCreateElement) _elementsManagement.createElement();
+// Update Element
+if (sectionUpdateElement) _elementsManagement.updateElement();
 
-},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR","./admin/editContact":"VKbKo"}],"il6Pq":[function(require,module,exports) {
+},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR","./admin/editContact":"VKbKo","./admin/elementsManagement":"hrjAz"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initNavHandlers", ()=>initNavHandlers);
@@ -16752,7 +16759,7 @@ const createRealization = async ()=>{
             Array.from(document.querySelectorAll(".specification")).forEach((spec)=>{
                 spec.querySelector(".spec-name").value = "";
                 spec.querySelector(".spec-value").value = "";
-                spec.querySelector(".spec-unit").value = "";
+                spec.querySelector(".spec-unit").value = "brak";
             });
             document.getElementById("primary-image").value = "";
             document.getElementById("images").value = "";
@@ -16824,6 +16831,89 @@ const editOpenHours = ()=>{
     });
 };
 
-},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
+},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"hrjAz":[function(require,module,exports) {
+/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "createElement", ()=>createElement);
+parcelHelpers.export(exports, "updateElement", ()=>updateElement);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _editForm = require("../admin/editForm");
+var _editFormDefault = parcelHelpers.interopDefault(_editForm);
+var _alert = require("../alert");
+const createElement = ()=>{
+    const formCreateElement = new (0, _editFormDefault.default)(`${window.location.origin}/api/v1/elements`);
+    formCreateElement.form.addEventListener("submit", async (e)=>{
+        try {
+            e.preventDefault();
+            const form = new FormData();
+            form.append("category", document.getElementById("category").value);
+            form.append("title", document.getElementById("title").value);
+            Array.from(document.getElementById("images").files).forEach((img)=>form.append("images", img));
+            await formCreateElement.sendCreate(form);
+            document.getElementById("category").value = "";
+            document.getElementById("title").value = "";
+            document.getElementById("images").value = "";
+        } catch (err) {
+            console.log(err.message);
+            (0, _alert.showAlert)("error", err.message);
+        }
+    });
+};
+const updateElement = ()=>{
+    const elementsToChoose = document.querySelector(".choose-elements");
+    const elementImagesContainer = document.querySelector(".choose--images-delete");
+    let thImagesToDelete = new Set();
+    let wideImagesToDelete = new Set();
+    elementsToChoose.addEventListener("click", async (e)=>{
+        const element = e.target.closest(".choose--realization-edit");
+        if (!element) return;
+        const elementID = element.dataset.elementId;
+        thImagesToDelete.clear();
+        wideImagesToDelete.clear();
+        elementImagesContainer.innerHTML = "";
+        const formUpdateElement = new (0, _editFormDefault.default)(`${window.location.origin}/api/v1/elements/element/${elementID}`);
+        const response = await (0, _axiosDefault.default)(`${window.location.origin}/api/v1/elements/element/${elementID}?fields=images,imagesThumbnails`);
+        const imagesArray = response.data.data.imagesThumbnails;
+        const images = [
+            ...response.data.data.images
+        ];
+        imagesArray.forEach((image, i)=>{
+            elementImagesContainer.insertAdjacentHTML("beforeend", `
+        <div class="img-box" data-img-link='${image}' data-img-wide-link='${images[i]}'>
+          <img src="/img/realization/steel-elements/${image}"  alt="realizacja do wybrania">
+          <i class="ph ph-trash trash--on-image"></i>
+        </div>
+        `);
+        });
+        formUpdateElement.form.addEventListener("submit", async (e)=>{
+            e.preventDefault();
+            const form = new FormData();
+            form.append("category", document.getElementById("category").value);
+            form.append("title", document.getElementById("title").value);
+            Array.from(document.getElementById("images").files).forEach((img)=>form.append("images", img));
+            Array.from(thImagesToDelete).forEach((thImg)=>form.append("imagesThumbnailsRemove", thImg));
+            Array.from(wideImagesToDelete).forEach((img)=>form.append("imagesRemove", img));
+            console.log(form);
+            await formUpdateElement.sendUpdate(form);
+            document.getElementById("category").value = "";
+            document.getElementById("title").value = "";
+            document.getElementById("images").value = "";
+        });
+    });
+    elementImagesContainer.addEventListener("click", (e)=>{
+        //TODO: THE SAME FUNCTION IS IN 'realizationsManagement.js' REFACTORE
+        const imgBox = e.target.closest(".img-box");
+        if (imgBox.querySelector(".trash--on-image").classList.contains("visible")) {
+            thImagesToDelete.add(imgBox.dataset.imgLink);
+            wideImagesToDelete.add(imgBox.dataset.imgWideLink);
+        } else {
+            thImagesToDelete.delete(imgBox.dataset.imgLink);
+            wideImagesToDelete.delete(imgBox.dataset.imgWideLink);
+        }
+    });
+};
+
+},{"axios":"cHm60","../admin/editForm":"egkCs","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","../alert":"78jVh"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
 
 //# sourceMappingURL=index.js.map

@@ -5,7 +5,7 @@ block append head
   title Zar-Stal | Utwórz element
 
 block content
-  section.section-admin
+  section.section-admin.section--create-element
     include _editNav
 
     .edit-content
@@ -22,10 +22,8 @@ block content
           input.input#title(type='text')
 
           p.text.form--inside-title Dodaj zdjęcia
-          label.label(for='primary-image') Wybierz jedno zdjęcie główne
-          input.input-file#primary-image(type='file')
-          label.label.label-margintop(for='images') Wybierz pozostałe zdjęcia
-          input.input-file#images(type='file')
+          label.label.label-margintop(for='images') Wybierz zdjęcia
+          input.input-file#images(type='file' multiple)
 
           p.text.form--inside-title Utwórz element
           input.submit-btn(type='submit' value='Utwórz element')
