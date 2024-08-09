@@ -1,4 +1,6 @@
 /*eslint-disable */
+import axios from 'axios';
+import { showAlert } from '../alert';
 
 const realizationsToChoose = document.querySelector('.choose-realizations');
 const confirmDeleteBtn = document.querySelector('.sure--confirm-btn');
@@ -12,15 +14,31 @@ const hideModal = () => {
 };
 
 export const deleteRealization = () => {
+  let realizationId = '';
   realizationsToChoose.addEventListener('click', (e) => {
     const deleteRealizationBtn = e.target.closest('.delete--realization-btn');
     if (!deleteRealizationBtn) return;
+    realizationId = deleteRealizationBtn.dataset.realizationId;
+    console.log(realizationId);
     overlayDelete.classList.remove('hidden');
     modalDelete.classList.remove('hidden');
   });
 
-  confirmDeleteBtn.addEventListener('click', () => {
-    hideModal();
+  confirmDeleteBtn.addEventListener('click', async () => {
+    try {
+      const res = await axios({
+        method: 'delete',
+        url: `${window.location.origin}/api/v1/realizations/realization/${realizationId}`,
+      });
+
+      showAlert('success', 'Realizacja usunięta');
+      hideModal();
+      setTimeout(function () {
+        location.reload();
+      }, 2000);
+    } catch (err) {
+      showAlert('error', err.message);
+    }
   });
 
   discardDeleteBtn.addEventListener('click', () => {

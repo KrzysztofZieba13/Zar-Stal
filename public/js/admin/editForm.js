@@ -10,7 +10,6 @@ export default class EditForm {
   }
 
   async sendUpdate(inputs) {
-    console.log('update');
     try {
       const res = await axios({
         method: 'patch',
@@ -20,6 +19,9 @@ export default class EditForm {
 
       if (res.data.status === 'success')
         showAlert('success', 'Aktualizacja przebiegła pomyślnie');
+      setTimeout(function () {
+        location.reload();
+      }, 5000);
     } catch (err) {
       showAlert('error', err.response.data.message);
     }
@@ -36,7 +38,6 @@ export default class EditForm {
       if (res.data.status === 'success')
         showAlert('success', 'Utworzono pomyślnie');
     } catch (err) {
-      console.log(err.response.data.message);
       showAlert('error', err.response.data.message);
     }
   }

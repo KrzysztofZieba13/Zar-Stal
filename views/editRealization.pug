@@ -71,24 +71,24 @@ block content
                   i.ph.ph-plus-square.more-specs
                   i.ph.ph-trash.delete--spec-input
 
-            p.text.form--inside-title.accordion--edit-panel Usuń spectfikację  (zaznacz do usunięcia)
-              i.ph.ph-caret-down.accordion--edit-arrow
-              i.ph.ph-caret-up.accordion--edit-arrow.hidden
-            .accordion-inputs.accordion--edit-specs.accordion--delete-spec.hidden
-              .specification--delete-row
-                p.delete--spec-title Powierzchnia
-                p.delete--spec-value 60 m
-                  sup 2
-                label(for='delete--spec__checkbox-01').custom--checkbox-delete-spec
-                  i.ph.ph-trash
-                input(type='checkbox')#delete--spec__checkbox-01.delete--specification__checkbox
+            //- p.text.form--inside-title.accordion--edit-panel Usuń spectfikację  (zaznacz do usunięcia)
+            //-   i.ph.ph-caret-down.accordion--edit-arrow
+            //-   i.ph.ph-caret-up.accordion--edit-arrow.hidden
+            //- .accordion-inputs.accordion--edit-specs.accordion--delete-spec.hidden
+            //-   .specification--delete-row
+            //-     p.delete--spec-title Powierzchnia
+            //-     p.delete--spec-value 60 m
+            //-       sup 2
+            //-     label(for='delete--spec__checkbox-01').custom--checkbox-delete-spec
+            //-       i.ph.ph-trash
+            //-     input(type='checkbox')#delete--spec__checkbox-01.delete--specification__checkbox
 
-              .specification--delete-row
-                p.delete--spec-title Szerokość
-                p.delete--spec-value 60 m
-                label(for='delete--spec__checkbox-02').custom--checkbox-delete-spec
-                  i.ph.ph-trash
-                input(type='checkbox')#delete--spec__checkbox-02.delete--specification__checkbox
+            //-   .specification--delete-row
+            //-     p.delete--spec-title Szerokość
+            //-     p.delete--spec-value 60 m
+            //-     label(for='delete--spec__checkbox-02').custom--checkbox-delete-spec
+            //-       i.ph.ph-trash
+            //-     input(type='checkbox')#delete--spec__checkbox-02.delete--specification__checkbox
             input.btn.submit-btn.submit--realization-edit(type='submit' value='Aktualizuj realizację')
           
           h2.secondary--header-edit Usuń wybrane zdjęcia 
@@ -99,4 +99,12 @@ block content
               .accordion-inputs.hidden
                 .choose--images-delete
             input.btn.submit-btn.submit--realization-edit(type='submit' value='Usuń wybrane zdjęcia')
+          
+          h2.secondary--header-edit Usuń wybrane specyfikacje 
+          form.form.edit-form.edit--form-margin#form--delete-specs
+            p.text.form--inside-title.accordion--edit-panel Usuń spectfikację  (zaznacz do usunięcia)
+              i.ph.ph-caret-down.accordion--edit-arrow
+              i.ph.ph-caret-up.accordion--edit-arrow.hidden
+            .accordion-inputs.accordion--edit-specs.accordion--delete-spec.hidden
+            input.btn.submit-btn.submit--realization-edit(type='submit' value='Usuń wybrane specyfikacje')
 

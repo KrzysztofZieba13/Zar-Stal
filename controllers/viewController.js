@@ -1,10 +1,15 @@
 const catchAsync = require('../libs/utils/catchAsync');
 const AppError = require('../libs/utils/appError');
 const Realization = require('../models/realizationModel');
+const MainPage = require('../models/mainPageModel');
 const Element = require('../models/elementModel');
 
 exports.getOverview = catchAsync(async (req, res, next) => {
-  res.status(200).render('index');
+  const mainPage = await MainPage.find().populate('mainRealizations');
+  if (!mainPage)
+    return next(new AppError('Nie znaleziono strony głównej ', 404));
+
+  res.status(200).render('index', { mainPage: mainPage[0] });
 });
 
 exports.getRealizations = catchAsync(async (req, res, next) => {
@@ -61,7 +66,12 @@ exports.getEditRealization = catchAsync(async (req, res, next) => {
 });
 
 exports.getDeleteRealization = catchAsync(async (req, res, next) => {
-  res.status(200).render('deleteRealization');
+  const realizations = await Realization.find();
+
+  if (!realizations)
+    return next(new AppError('Nie znaleziono realizacji ', 404));
+
+  res.status(200).render('deleteRealization', { realizations });
 });
 
 exports.getCreateElement = catchAsync(async (req, res, next) => {

@@ -113,7 +113,7 @@ exports.deleteImages = catchAsync(async (req, res, next) => {
 
   if (!realization) return next(new AppError('Nie znaleziono realizacji', 404));
 
-  res.status(204).json({ status: 'success', data: null });
+  res.status(200).json({ status: 'success', data: realization });
 });
 
 exports.getAllRealizatons = catchAsync(async (req, res, next) => {
@@ -192,7 +192,7 @@ exports.deleteSpecification = catchAsync(async (req, res, next) => {
   const realization = await Realization.findById(req.params.id);
 
   realization.specifications = realization.specifications.filter(
-    (spec) => spec._id.toHexString() !== req.body.deleteId,
+    (spec) => !req.body.deleteId.includes(spec._id.toHexString()),
   );
 
   await realization.save({ validateModifiedOnly: true });

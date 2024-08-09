@@ -53,8 +53,9 @@ export const updateRealization = async () => {
     thImagesToDelete.clear();
     wideImagesToDelete.clear();
 
-    const realizationID = e.target.closest('.choose--realization-edit').dataset
-      .realizationId;
+    const realizationChoosen = e.target.closest('.choose--realization-edit');
+    if (!realizationChoosen) return;
+    const realizationID = realizationChoosen.dataset.realizationId;
 
     imagesToDeleteContainer.innerHTML = '';
     specsToDelete.innerHTML = '';
@@ -100,18 +101,22 @@ export const updateRealization = async () => {
     const specsToDeleteInputs = document.querySelectorAll(
       '.custom--checkbox-delete-spec',
     );
-    formAccordionEdit.selectSpecsToDeleteHandler(specsToDeleteInputs);
+
+    formAccordionEdit.selectSpecsToDeleteHandler(
+      specsToDeleteInputs,
+      specsIdToDelete,
+    );
 
     updateForm = new Form(
       `${window.location.origin}/api/v1/realizations/realization/${realizationID}`,
       'edit--realization-form',
     );
 
-    updateForm.form.addEventListener('submit', (e) => {
+    updateForm.form.addEventListener('submit', async (e) => {
       try {
         e.preventDefault();
         const form = getBasicInputs();
-        updateForm.sendUpdate(form);
+        await updateForm.sendUpdate(form);
       } catch (err) {
         showAlert('error', err.message);
       }
@@ -122,17 +127,34 @@ export const updateRealization = async () => {
       'form--delete-images',
     );
 
-    deleteForm.form.addEventListener('submit', (e) => {
+    deleteForm.form.addEventListener('submit', async (e) => {
       try {
         e.preventDefault();
-        console.log('usuwanie');
         const thToRemoveArray = Array.from(thImagesToDelete);
         const wideToRemoveArray = Array.from(wideImagesToDelete);
         const fields = {
           thToRemove: thToRemoveArray,
           wideToRemove: wideToRemoveArray,
         };
-        deleteForm.sendUpdate(fields);
+        await deleteForm.sendUpdate(fields);
+      } catch (err) {
+        showAlert('error', err.message);
+      }
+    });
+
+    formDeleteSpecs = new Form(
+      `${window.location.origin}/api/v1/realizations/realization/${realizationID}/delete-specification`,
+      'form--delete-specs',
+    );
+
+    formDeleteSpecs.form.addEventListener('submit', async (e) => {
+      try {
+        e.preventDefault();
+        const specsToDeleteArray = Array.from(specsIdToDelete);
+        const fields = {
+          deleteId: specsToDeleteArray,
+        };
+        await formDeleteSpecs.sendUpdate(fields);
       } catch (err) {
         showAlert('error', err.message);
       }
@@ -150,7 +172,6 @@ export const updateRealization = async () => {
       thImagesToDelete.delete(imgBox.dataset.imgLink);
       wideImagesToDelete.delete(imgBox.dataset.imgWideLink);
     }
-    console.log(imgBox);
   });
 };
 
@@ -172,14 +193,13 @@ export const createRealization = async () => {
         (spec) => {
           spec.querySelector('.spec-name').value = '';
           spec.querySelector('.spec-value').value = '';
-          spec.querySelector('.spec-unit').value = '';
+          spec.querySelector('.spec-unit').value = 'brak';
         },
       );
       document.getElementById('primary-image').value = '';
       document.getElementById('images').value = '';
     });
   } catch (err) {
-    console.log(err.message);
     showAlert('error', `error!!! ${err.message}`);
   }
 };

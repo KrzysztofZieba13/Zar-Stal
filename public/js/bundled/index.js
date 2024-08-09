@@ -11650,7 +11650,6 @@ class EditForm {
         this.url = url;
     }
     async sendUpdate(inputs) {
-        console.log("update");
         try {
             const res = await (0, _axiosDefault.default)({
                 method: "patch",
@@ -11658,6 +11657,9 @@ class EditForm {
                 data: inputs
             });
             if (res.data.status === "success") (0, _alert.showAlert)("success", "Aktualizacja przebieg\u0142a pomy\u015Blnie");
+            setTimeout(function() {
+                location.reload();
+            }, 5000);
         } catch (err) {
             (0, _alert.showAlert)("error", err.response.data.message);
         }
@@ -11671,7 +11673,6 @@ class EditForm {
             });
             if (res.data.status === "success") (0, _alert.showAlert)("success", "Utworzono pomy\u015Blnie");
         } catch (err) {
-            console.log(err.response.data.message);
             (0, _alert.showAlert)("error", err.response.data.message);
         }
     }
@@ -16431,13 +16432,13 @@ const editRealizationFields = document.querySelector(".edit--realization-fields"
 const headers = document.querySelectorAll(".accordion--edit-panel");
 const addSpecBox = document.querySelector(".accordion--add-spec");
 const specsToDelete = document.querySelectorAll(".custom--checkbox-delete-spec");
-const selectSpecsToDeleteHandler = (specs = specsToDelete)=>{
-    const specsToDelete1 = new Set();
+const selectSpecsToDeleteHandler = (specs = specsToDelete, specsIdToDelete)=>{
+    specsIdToDelete.clear();
     specs.forEach((el)=>{
         el.addEventListener("click", ()=>{
             el.classList.toggle("delete--spec-checked");
-            if (el.classList.contains("delete--spec-checked")) specsToDelete1.add(el.dataset.specId);
-            else specsToDelete1.delete(el.dataset.specId);
+            if (el.classList.contains("delete--spec-checked")) specsIdToDelete.add(el.dataset.specId);
+            else specsIdToDelete.delete(el.dataset.specId);
         });
     });
 };
@@ -16531,6 +16532,9 @@ const init = ()=>{
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "deleteRealization", ()=>deleteRealization);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _alert = require("../alert");
 const realizationsToChoose = document.querySelector(".choose-realizations");
 const confirmDeleteBtn = document.querySelector(".sure--confirm-btn");
 const discardDeleteBtn = document.querySelector(".sure--discard-btn");
@@ -16541,14 +16545,29 @@ const hideModal = ()=>{
     modalDelete.classList.add("hidden");
 };
 const deleteRealization = ()=>{
+    let realizationId = "";
     realizationsToChoose.addEventListener("click", (e)=>{
         const deleteRealizationBtn = e.target.closest(".delete--realization-btn");
         if (!deleteRealizationBtn) return;
+        realizationId = deleteRealizationBtn.dataset.realizationId;
+        console.log(realizationId);
         overlayDelete.classList.remove("hidden");
         modalDelete.classList.remove("hidden");
     });
-    confirmDeleteBtn.addEventListener("click", ()=>{
-        hideModal();
+    confirmDeleteBtn.addEventListener("click", async ()=>{
+        try {
+            const res = await (0, _axiosDefault.default)({
+                method: "delete",
+                url: `${window.location.origin}/api/v1/realizations/realization/${realizationId}`
+            });
+            (0, _alert.showAlert)("success", "Realizacja usuni\u0119ta");
+            hideModal();
+            setTimeout(function() {
+                location.reload();
+            }, 2000);
+        } catch (err) {
+            (0, _alert.showAlert)("error", err.message);
+        }
     });
     discardDeleteBtn.addEventListener("click", ()=>{
         hideModal();
@@ -16558,7 +16577,7 @@ const deleteRealization = ()=>{
     });
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"3n93A":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","axios":"cHm60","../alert":"78jVh"}],"3n93A":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "deleteElement", ()=>deleteElement);
@@ -16634,7 +16653,9 @@ const updateRealization = async ()=>{
     realizationsContainer.addEventListener("click", async (e)=>{
         thImagesToDelete.clear();
         wideImagesToDelete.clear();
-        const realizationID = e.target.closest(".choose--realization-edit").dataset.realizationId;
+        const realizationChoosen = e.target.closest(".choose--realization-edit");
+        if (!realizationChoosen) return;
+        const realizationID = realizationChoosen.dataset.realizationId;
         imagesToDeleteContainer.innerHTML = "";
         specsToDelete.innerHTML = "";
         const request = await (0, _axiosDefault.default)(`${window.location.origin}/api/v1/realizations/realization/${realizationID}?fields=images,imagesThumbnails,specifications`);
@@ -16667,29 +16688,41 @@ const updateRealization = async ()=>{
         `);
         });
         const specsToDeleteInputs = document.querySelectorAll(".custom--checkbox-delete-spec");
-        _accordionFormEdit.selectSpecsToDeleteHandler(specsToDeleteInputs);
+        _accordionFormEdit.selectSpecsToDeleteHandler(specsToDeleteInputs, specsIdToDelete);
         updateForm = new (0, _editFormDefault.default)(`${window.location.origin}/api/v1/realizations/realization/${realizationID}`, "edit--realization-form");
-        updateForm.form.addEventListener("submit", (e)=>{
+        updateForm.form.addEventListener("submit", async (e)=>{
             try {
                 e.preventDefault();
                 const form = getBasicInputs();
-                updateForm.sendUpdate(form);
+                await updateForm.sendUpdate(form);
             } catch (err) {
                 (0, _alert.showAlert)("error", err.message);
             }
         });
         deleteForm = new (0, _editFormDefault.default)(`${window.location.origin}/api/v1/realizations/realization/${realizationID}/delete-images`, "form--delete-images");
-        deleteForm.form.addEventListener("submit", (e)=>{
+        deleteForm.form.addEventListener("submit", async (e)=>{
             try {
                 e.preventDefault();
-                console.log("usuwanie");
                 const thToRemoveArray = Array.from(thImagesToDelete);
                 const wideToRemoveArray = Array.from(wideImagesToDelete);
                 const fields = {
                     thToRemove: thToRemoveArray,
                     wideToRemove: wideToRemoveArray
                 };
-                deleteForm.sendUpdate(fields);
+                await deleteForm.sendUpdate(fields);
+            } catch (err) {
+                (0, _alert.showAlert)("error", err.message);
+            }
+        });
+        formDeleteSpecs = new (0, _editFormDefault.default)(`${window.location.origin}/api/v1/realizations/realization/${realizationID}/delete-specification`, "form--delete-specs");
+        formDeleteSpecs.form.addEventListener("submit", async (e)=>{
+            try {
+                e.preventDefault();
+                const specsToDeleteArray = Array.from(specsIdToDelete);
+                const fields = {
+                    deleteId: specsToDeleteArray
+                };
+                await formDeleteSpecs.sendUpdate(fields);
             } catch (err) {
                 (0, _alert.showAlert)("error", err.message);
             }
@@ -16704,7 +16737,6 @@ const updateRealization = async ()=>{
             thImagesToDelete.delete(imgBox.dataset.imgLink);
             wideImagesToDelete.delete(imgBox.dataset.imgWideLink);
         }
-        console.log(imgBox);
     });
 };
 const createRealization = async ()=>{
@@ -16726,7 +16758,6 @@ const createRealization = async ()=>{
             document.getElementById("images").value = "";
         });
     } catch (err) {
-        console.log(err.message);
         (0, _alert.showAlert)("error", `error!!! ${err.message}`);
     }
 };

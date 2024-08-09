@@ -13,41 +13,42 @@ block content
         h1.primary-header.edit--primary-header Usuń realizację
         
         .choose-realizations
-          .choose-cart
-            .img-box 
-              img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
-            .choose--realization-info.choose--realization-info-edit
-              p.choose--realization-title Hala do produkcji konstrukcji stalowych 
-              .choose--realization-edit
-                button.btn.delete--realization-btn Usuń
-          .choose-cart
-            .img-box 
-              img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
-            .choose--realization-info.choose--realization-info-edit
-              p.choose--realization-title Hala do produkcji konstrukcji stalowych 
-              .choose--realization-edit
-                button.btn.delete--realization-btn Usuń
-          .choose-cart
-            .img-box 
-              img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
-            .choose--realization-info.choose--realization-info-edit
-              p.choose--realization-title Hala do produkcji konstrukcji stalowych 
-              .choose--realization-edit
-                button.btn.delete--realization-btn Usuń
-          .choose-cart
-            .img-box 
-              img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
-            .choose--realization-info.choose--realization-info-edit
-              p.choose--realization-title Hala do produkcji konstrukcji stalowych 
-              .choose--realization-edit
-                button.btn.delete--realization-btn Usuń
-          .choose-cart
-            .img-box 
-              img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
-            .choose--realization-info.choose--realization-info-edit
-              p.choose--realization-title Hala do produkcji konstrukcji stalowych 
-              .choose--realization-edit 
-                button.btn.delete--realization-btn Usuń
+          each realization in realizations
+            .choose-cart
+              .img-box 
+                img(src=`/img/realization/${realization.primaryImageThumbnail}`, alt="realizacja do wybrania")
+              .choose--realization-info.choose--realization-info-edit
+                p.choose--realization-title= realization.title 
+                .choose--realization-edit
+                  button.btn.delete--realization-btn(data-realization-id=realization._id) Usuń
+          //- .choose-cart
+          //-   .img-box 
+          //-     img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
+          //-   .choose--realization-info.choose--realization-info-edit
+          //-     p.choose--realization-title Hala do produkcji konstrukcji stalowych 
+          //-     .choose--realization-edit
+          //-       button.btn.delete--realization-btn Usuń
+          //- .choose-cart
+          //-   .img-box 
+          //-     img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
+          //-   .choose--realization-info.choose--realization-info-edit
+          //-     p.choose--realization-title Hala do produkcji konstrukcji stalowych 
+          //-     .choose--realization-edit
+          //-       button.btn.delete--realization-btn Usuń
+          //- .choose-cart
+          //-   .img-box 
+          //-     img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
+          //-   .choose--realization-info.choose--realization-info-edit
+          //-     p.choose--realization-title Hala do produkcji konstrukcji stalowych 
+          //-     .choose--realization-edit
+          //-       button.btn.delete--realization-btn Usuń
+          //- .choose-cart
+          //-   .img-box 
+          //-     img(src="/img/realization/realization5/realizacja-th-5-1.jpg", alt="realizacja do wybrania")
+          //-   .choose--realization-info.choose--realization-info-edit
+          //-     p.choose--realization-title Hala do produkcji konstrukcji stalowych 
+          //-     .choose--realization-edit 
+          //-       button.btn.delete--realization-btn Usuń
 
         .overlay.overlay--delete-realization.hidden
         .modal--delete-realization.hidden

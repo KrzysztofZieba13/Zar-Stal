@@ -75,7 +75,7 @@ block content
       span.subtitle realizacje
       h2.secondary-header Nasze Realizacje
       .realizations-box 
-        img.realization-img.lazy-img(src='../img/realization/realization1/realizacja-lazy-1-1.jpg' data-src='../img/realization/realization1/realizacja1-overview.jpg' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
+        img.realization-img.lazy-img(src=`../img/realization/${mainPage.mainRealizations[0].primaryImageThumbnail}` data-src=`../img/realization/${mainPage.mainRealizations[0].primaryImageThumbnail}` alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
         .realization-desc
           h3.third-header Okręgowa Stacja Kontroli Pojazdów
           p.text Nowoczesny budynek wykonany z konstrukcji stalowej, posiada przestronny układ z dużymi bramami wjazdowymi, umożliwiającymi wygodny dostęp pojazdów do wnętrza. Hala przystosowana do wykonywania przeglądów technicznych pojazdów, spełniając wszystkie wymagania techniczne i bezpieczeństwa.
@@ -84,7 +84,7 @@ block content
           h3.third-header Hala Naprawy <br> i konserwacji maszyn
           p.text Hala przeznaczona do naprawy oraz konserwacji maszyn. Budynek składa się z dużej, głównej części warsztatowej z wieloma bramami wjazdowymi, co umożliwia jednoczesne serwisowanie wielu maszyn.
           a(href='/realizacja/2').btn.link.btn--see-realization Zobacz Realizację
-        img.realization-img.lazy-img(src='../img/realization/realization2/realizacja-lazy-2-1.jpg' data-src='../img/realization/realization2/realizacja2-overview.JPG' alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
+        img.realization-img.lazy-img(src=`../img/realization/${mainPage.mainRealizations[1].primaryImageThumbnail}` data-src=`../img/realization/${mainPage.mainRealizations[1].primaryImageThumbnail}` alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
       a(href='/realizacje').btn.link.btn--see-morerealizations Zobacz Więcej Realizacji
     img(src='../img/crane-bg.png' alt='dźwig w tle').crane-bg
   ////////////////////////////////
