@@ -12,10 +12,15 @@ const specsToDelete = document.querySelectorAll(
   '.custom--checkbox-delete-spec',
 );
 
-export const selectSpecsToDeleteHandler = () => {
-  specsToDelete.forEach((el) => {
+export const selectSpecsToDeleteHandler = (specs = specsToDelete) => {
+  const specsToDelete = new Set();
+
+  specs.forEach((el) => {
     el.addEventListener('click', () => {
       el.classList.toggle('delete--spec-checked');
+      if (el.classList.contains('delete--spec-checked'))
+        specsToDelete.add(el.dataset.specId);
+      else specsToDelete.delete(el.dataset.specId);
     });
   });
 };

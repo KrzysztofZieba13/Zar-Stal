@@ -88,7 +88,6 @@ exports.createRealization = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteImages = catchAsync(async (req, res, next) => {
-  console.log(req.body);
   const { thToRemove } = req.body;
   const { wideToRemove } = req.body;
 
@@ -169,7 +168,9 @@ exports.updateRealization = catchAsync(async (req, res, next) => {
       imagesThumbnails: realizationObj.imagesThumbnails,
     };
     if (realizationObj.specifications[0].name)
-      update.specifications = realizationObj.specifications;
+      update.$push = {
+        specifications: realizationObj.specifications,
+      };
   }
 
   const realization = await Realization.findByIdAndUpdate(

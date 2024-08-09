@@ -21,7 +21,6 @@ export const deleteElement = () => {
 
   confirmDeleteBtn.addEventListener('click', () => {
     hideModal();
-    console.log('USUWANIE ❌');
   });
 
   discardDeleteBtn.addEventListener('click', () => {

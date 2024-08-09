@@ -420,10 +420,12 @@
   margin-top: 4.4rem;
 }
 
-.specification.specification--delete-row {
+.specification--delete-row {
   width: 40rem;
   display: grid;
   grid-template-columns: 2fr 1fr auto;
+  gap: 3.2rem;
+  align-items: center;
 }
 
 .delete--specification__checkbox {

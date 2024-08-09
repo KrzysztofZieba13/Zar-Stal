@@ -142,10 +142,10 @@
       this[globalName] = mainExports;
     }
   }
-})({"lKtZv":[function(require,module,exports) {
+})({"18Qvj":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
-var HMR_PORT = 38429;
+var HMR_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "5dd330bdbb659557";
 var HMR_USE_SSE = false;
@@ -594,13 +594,13 @@ var _mapLeaflet = require("./mapLeaflet");
 var _interObserver = require("./interObserver");
 var _heroSlideshow = require("./heroSlideshow");
 var _editMainPage = require("./admin/editMainPage");
-var _accordionNavEdit = require("./admin/accordionNavEdit");
-var _accordionFormEdit = require("./admin/accordionFormEdit");
 var _realizationImages = require("./admin/realizationImages");
 var _deleteRealization = require("./admin/deleteRealization");
 var _deleteElement = require("./admin/deleteElement");
 var _realizationsManagement = require("./admin/realizationsManagement");
 var _editContact = require("./admin/editContact");
+var _accordionNavEdit = require("./admin/accordionNavEdit");
+var _accordionFormEdit = require("./admin/accordionFormEdit");
 const sectionSingleRealization = document.querySelector(".section--single-realization");
 const navBar = document.querySelector(".nav-container");
 const realizationCartElements = document.querySelectorAll(".realization--cart-element");
@@ -657,12 +657,6 @@ if (editFormAccordion) // Edit form accordion
 _accordionFormEdit.init();
 // Delete images from realization
 if (imagesToDelete) _realizationImages.init();
-// Add or Delete field inputs for adding specifications | Delete specifications
-if (editFormSpecs) {
-    _accordionFormEdit.specificationInput("add");
-    _accordionFormEdit.specificationInput("delete");
-    _accordionFormEdit.selectSpecsToDeleteHandler();
-}
 // Delete Realization
 if (sectionDeleteRealization) (0, _deleteRealization.deleteRealization)();
 // Delete Element
@@ -676,6 +670,12 @@ if (sectionEditContact) {
 }
 // Update Realization
 if (sectionUpdateRealization) _realizationsManagement.updateRealization();
+// Add or Delete field inputs for adding specifications | Delete specifications
+if (editFormSpecs) {
+    _accordionFormEdit.specificationInput("add");
+    _accordionFormEdit.specificationInput("delete");
+// formAccordionEdit.selectSpecsToDeleteHandler();
+}
 
 },{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR","./admin/editContact":"VKbKo"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -16431,10 +16431,13 @@ const editRealizationFields = document.querySelector(".edit--realization-fields"
 const headers = document.querySelectorAll(".accordion--edit-panel");
 const addSpecBox = document.querySelector(".accordion--add-spec");
 const specsToDelete = document.querySelectorAll(".custom--checkbox-delete-spec");
-const selectSpecsToDeleteHandler = ()=>{
-    specsToDelete.forEach((el)=>{
+const selectSpecsToDeleteHandler = (specs = specsToDelete)=>{
+    const specsToDelete1 = new Set();
+    specs.forEach((el)=>{
         el.addEventListener("click", ()=>{
             el.classList.toggle("delete--spec-checked");
+            if (el.classList.contains("delete--spec-checked")) specsToDelete1.add(el.dataset.specId);
+            else specsToDelete1.delete(el.dataset.specId);
         });
     });
 };
@@ -16546,7 +16549,6 @@ const deleteRealization = ()=>{
     });
     confirmDeleteBtn.addEventListener("click", ()=>{
         hideModal();
-        console.log("USUWANIE \u274C");
     });
     discardDeleteBtn.addEventListener("click", ()=>{
         hideModal();
@@ -16578,7 +16580,6 @@ const deleteElement = ()=>{
     });
     confirmDeleteBtn.addEventListener("click", ()=>{
         hideModal();
-        console.log("USUWANIE \u274C");
     });
     discardDeleteBtn.addEventListener("click", ()=>{
         hideModal();
@@ -16598,7 +16599,8 @@ var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _editForm = require("../admin/editForm");
 var _editFormDefault = parcelHelpers.interopDefault(_editForm);
 var _alert = require("../alert");
-const getBasicInputs = (createForm)=>{
+var _accordionFormEdit = require("./accordionFormEdit");
+const getBasicInputs = ()=>{
     const form = new FormData();
     const specificationObj = Array.from(document.querySelectorAll(".specification")).map((spec)=>{
         const nameElement = spec.querySelector(".spec-name");
@@ -16625,18 +16627,22 @@ const updateRealization = async ()=>{
     const realizationsContainer = document.querySelector(".choose-realizations");
     let updateForm = "";
     const imagesToDeleteContainer = document.querySelector(".choose--images-delete");
+    const specsToDelete = document.querySelector(".accordion--delete-spec");
     let thImagesToDelete = new Set();
     let wideImagesToDelete = new Set();
+    let specsIdToDelete = new Set();
     realizationsContainer.addEventListener("click", async (e)=>{
         thImagesToDelete.clear();
         wideImagesToDelete.clear();
         const realizationID = e.target.closest(".choose--realization-edit").dataset.realizationId;
         imagesToDeleteContainer.innerHTML = "";
-        const request = await (0, _axiosDefault.default)(`${window.location.origin}/api/v1/realizations/realization/${realizationID}?fields=images,imagesThumbnails`);
+        specsToDelete.innerHTML = "";
+        const request = await (0, _axiosDefault.default)(`${window.location.origin}/api/v1/realizations/realization/${realizationID}?fields=images,imagesThumbnails,specifications`);
         const imagesArray = request.data.data.imagesThumbnails;
         const images = [
             ...request.data.data.images
         ];
+        const specificationsArray = request.data.data.specifications;
         imagesArray.forEach((image, i)=>{
             imagesToDeleteContainer.insertAdjacentHTML("beforeend", `
         <div class='img-box' data-img-link="${image}" data-img-wide-link="${images[i]}">
@@ -16645,11 +16651,28 @@ const updateRealization = async ()=>{
         </div>
         `);
         });
+        specificationsArray.forEach((spec)=>{
+            specsToDelete.insertAdjacentHTML("beforeend", `
+        <div class="specification--delete-row">
+          <p class="delete--spec-title">${spec.name}</p>
+          <p class="delete--spec-value">${spec.value} 
+          ${spec.unit === "meter" ? "m" : ""}
+          ${spec.unit === "meter-2" ? "m<sup>2</sup>" : ""}
+          ${spec.unit === "meter-3" ? "m<sup>3</sup>" : ""}</p>
+          <label for="delete--spec__checkbox-${spec._id}" data-spec-id=${spec._id} class="custom--checkbox-delete-spec">
+              <i class="ph ph-trash"></i>
+          </label>
+          <input type="checkbox" id="delete--spec__checkbox-${spec._id}" class="delete--specification__checkbox">
+        </div>
+        `);
+        });
+        const specsToDeleteInputs = document.querySelectorAll(".custom--checkbox-delete-spec");
+        _accordionFormEdit.selectSpecsToDeleteHandler(specsToDeleteInputs);
         updateForm = new (0, _editFormDefault.default)(`${window.location.origin}/api/v1/realizations/realization/${realizationID}`, "edit--realization-form");
         updateForm.form.addEventListener("submit", (e)=>{
             try {
                 e.preventDefault();
-                const form = getBasicInputs(updateForm);
+                const form = getBasicInputs();
                 updateForm.sendUpdate(form);
             } catch (err) {
                 (0, _alert.showAlert)("error", err.message);
@@ -16689,7 +16712,7 @@ const createRealization = async ()=>{
         const createForm = new (0, _editFormDefault.default)(`${window.location.origin}/api/v1/realizations`);
         createForm.form.addEventListener("submit", (e)=>{
             e.preventDefault();
-            const form = getBasicInputs(createForm);
+            const form = getBasicInputs();
             createForm.sendCreate(form);
             document.getElementById("location").value = "";
             document.getElementById("title").value = "";
@@ -16708,7 +16731,7 @@ const createRealization = async ()=>{
     }
 };
 
-},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","axios":"cHm60"}],"VKbKo":[function(require,module,exports) {
+},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","axios":"cHm60","./accordionFormEdit":"7UVN2"}],"VKbKo":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "editContact", ()=>editContact);
@@ -16770,6 +16793,6 @@ const editOpenHours = ()=>{
     });
 };
 
-},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["lKtZv","3LR9W"], "3LR9W", "parcelRequire2a96")
+},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
 
 //# sourceMappingURL=index.js.map

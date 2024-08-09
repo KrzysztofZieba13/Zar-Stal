@@ -6,13 +6,13 @@ import * as mapLeaflet from './mapLeaflet';
 import * as interObserver from './interObserver';
 import { initSlider } from './heroSlideshow';
 import * as editMainPage from './admin/editMainPage';
-import * as navInit from './admin/accordionNavEdit';
-import * as formAccordionEdit from './admin/accordionFormEdit';
 import * as realizationImages from './admin/realizationImages';
 import { deleteRealization } from './admin/deleteRealization';
 import { deleteElement } from './admin/deleteElement';
 import * as realizationManage from './admin/realizationsManagement';
 import * as editContact from './admin/editContact';
+import * as navInit from './admin/accordionNavEdit';
+import * as formAccordionEdit from './admin/accordionFormEdit';
 
 const sectionSingleRealization = document.querySelector(
   '.section--single-realization',
@@ -108,13 +108,6 @@ if (editFormAccordion)
 // Delete images from realization
 if (imagesToDelete) realizationImages.init();
 
-// Add or Delete field inputs for adding specifications | Delete specifications
-if (editFormSpecs) {
-  formAccordionEdit.specificationInput('add');
-  formAccordionEdit.specificationInput('delete');
-  formAccordionEdit.selectSpecsToDeleteHandler();
-}
-
 // Delete Realization
 if (sectionDeleteRealization) deleteRealization();
 
@@ -133,4 +126,11 @@ if (sectionEditContact) {
 // Update Realization
 if (sectionUpdateRealization) {
   realizationManage.updateRealization();
+}
+
+// Add or Delete field inputs for adding specifications | Delete specifications
+if (editFormSpecs) {
+  formAccordionEdit.specificationInput('add');
+  formAccordionEdit.specificationInput('delete');
+  // formAccordionEdit.selectSpecsToDeleteHandler();
 }

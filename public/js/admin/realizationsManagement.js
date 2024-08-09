@@ -2,8 +2,9 @@
 import axios from 'axios';
 import Form from '../admin/editForm';
 import { showAlert } from '../alert';
+import * as formAccordionEdit from './accordionFormEdit';
 
-const getBasicInputs = (createForm) => {
+const getBasicInputs = () => {
   const form = new FormData();
   const specificationObj = Array.from(
     document.querySelectorAll('.specification'),
@@ -42,8 +43,11 @@ export const updateRealization = async () => {
   const imagesToDeleteContainer = document.querySelector(
     '.choose--images-delete',
   );
+  const specsToDelete = document.querySelector('.accordion--delete-spec');
+
   let thImagesToDelete = new Set();
   let wideImagesToDelete = new Set();
+  let specsIdToDelete = new Set();
 
   realizationsContainer.addEventListener('click', async (e) => {
     thImagesToDelete.clear();
@@ -53,12 +57,14 @@ export const updateRealization = async () => {
       .realizationId;
 
     imagesToDeleteContainer.innerHTML = '';
+    specsToDelete.innerHTML = '';
 
     const request = await axios(
-      `${window.location.origin}/api/v1/realizations/realization/${realizationID}?fields=images,imagesThumbnails`,
+      `${window.location.origin}/api/v1/realizations/realization/${realizationID}?fields=images,imagesThumbnails,specifications`,
     );
     const imagesArray = request.data.data.imagesThumbnails;
     const images = [...request.data.data.images];
+    const specificationsArray = request.data.data.specifications;
 
     imagesArray.forEach((image, i) => {
       imagesToDeleteContainer.insertAdjacentHTML(
@@ -72,6 +78,30 @@ export const updateRealization = async () => {
       );
     });
 
+    specificationsArray.forEach((spec) => {
+      specsToDelete.insertAdjacentHTML(
+        'beforeend',
+        `
+        <div class="specification--delete-row">
+          <p class="delete--spec-title">${spec.name}</p>
+          <p class="delete--spec-value">${spec.value} 
+          ${spec.unit === 'meter' ? 'm' : ''}
+          ${spec.unit === 'meter-2' ? 'm<sup>2</sup>' : ''}
+          ${spec.unit === 'meter-3' ? 'm<sup>3</sup>' : ''}</p>
+          <label for="delete--spec__checkbox-${spec._id}" data-spec-id=${spec._id} class="custom--checkbox-delete-spec">
+              <i class="ph ph-trash"></i>
+          </label>
+          <input type="checkbox" id="delete--spec__checkbox-${spec._id}" class="delete--specification__checkbox">
+        </div>
+        `,
+      );
+    });
+
+    const specsToDeleteInputs = document.querySelectorAll(
+      '.custom--checkbox-delete-spec',
+    );
+    formAccordionEdit.selectSpecsToDeleteHandler(specsToDeleteInputs);
+
     updateForm = new Form(
       `${window.location.origin}/api/v1/realizations/realization/${realizationID}`,
       'edit--realization-form',
@@ -80,7 +110,7 @@ export const updateRealization = async () => {
     updateForm.form.addEventListener('submit', (e) => {
       try {
         e.preventDefault();
-        const form = getBasicInputs(updateForm);
+        const form = getBasicInputs();
         updateForm.sendUpdate(form);
       } catch (err) {
         showAlert('error', err.message);
@@ -132,7 +162,7 @@ export const createRealization = async () => {
     createForm.form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const form = getBasicInputs(createForm);
+      const form = getBasicInputs();
 
       createForm.sendCreate(form);
       document.getElementById('location').value = '';
