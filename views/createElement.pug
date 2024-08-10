@@ -17,7 +17,11 @@ block content
         form.form.edit-form.edit--form-margin
           p.text.form--inside-title Dane podstawowe
           label.label(for='category') Kategoria elementu
-          input.input#category(type='text')
+          select.input#category(type='text')
+            option(value='none') brak 
+            option(value='Elementy') Elementy stalowe 
+            option(value='Maszyny') Maszyny
+            option(value='Kontenery') Kontenery
           label.label(for='title') Tytuł elementu
           input.input#title(type='text')
 

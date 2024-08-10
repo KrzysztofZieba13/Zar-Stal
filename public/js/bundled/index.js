@@ -11666,7 +11666,7 @@ class EditForm {
             if (res.data.status === "success") (0, _alert.showAlert)("success", "Aktualizacja przebieg\u0142a pomy\u015Blnie");
             setTimeout(function() {
                 location.reload();
-            }, 5000);
+            }, 3000);
         } catch (err) {
             (0, _alert.showAlert)("error", err.response.data.message);
         }
@@ -16557,7 +16557,6 @@ const deleteRealization = ()=>{
         const deleteRealizationBtn = e.target.closest(".delete--realization-btn");
         if (!deleteRealizationBtn) return;
         realizationId = deleteRealizationBtn.dataset.realizationId;
-        console.log(realizationId);
         overlayDelete.classList.remove("hidden");
         modalDelete.classList.remove("hidden");
     });
@@ -16588,6 +16587,9 @@ const deleteRealization = ()=>{
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "deleteElement", ()=>deleteElement);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _alert = require("../alert");
 const elementsToChoose = document.querySelector(".choose-elements");
 const confirmDeleteBtn = document.querySelector(".sure--confirm-btn");
 const discardDeleteBtn = document.querySelector(".sure--discard-btn");
@@ -16598,14 +16600,28 @@ const hideModal = ()=>{
     modalDelete.classList.add("hidden");
 };
 const deleteElement = ()=>{
+    let elementID = "";
     elementsToChoose.addEventListener("click", (e)=>{
         const deleteElementBtn = e.target.closest(".delete--element-btn");
         if (!deleteElementBtn) return;
+        elementID = deleteElementBtn.dataset.elementId;
         overlayDelete.classList.remove("hidden");
         modalDelete.classList.remove("hidden");
     });
-    confirmDeleteBtn.addEventListener("click", ()=>{
-        hideModal();
+    confirmDeleteBtn.addEventListener("click", async ()=>{
+        try {
+            const res = await (0, _axiosDefault.default)({
+                method: "delete",
+                url: `${window.location.origin}/api/v1/elements/element/${elementID}`
+            });
+            (0, _alert.showAlert)("success", "Element usuni\u0119ty");
+            hideModal();
+            setTimeout(function() {
+                location.reload();
+            }, 2000);
+        } catch (err) {
+            (0, _alert.showAlert)("error", err.message);
+        }
     });
     discardDeleteBtn.addEventListener("click", ()=>{
         hideModal();
@@ -16615,7 +16631,7 @@ const deleteElement = ()=>{
     });
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"3qRhR":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","../alert":"78jVh","axios":"cHm60"}],"3qRhR":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "updateRealization", ()=>updateRealization);

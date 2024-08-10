@@ -21,7 +21,7 @@ export default class EditForm {
         showAlert('success', 'Aktualizacja przebiegła pomyślnie');
       setTimeout(function () {
         location.reload();
-      }, 5000);
+      }, 3000);
     } catch (err) {
       showAlert('error', err.response.data.message);
     }

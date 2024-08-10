@@ -13,27 +13,14 @@ block content
         h1.primary-header.edit--primary-header Usuń element
         
         .choose-elements
-          .choose-cart
-            .img-box 
-              img(src="/img/realization/steel-elements/element-th-1-1.jpg", alt="element do wybrania")
-            .choose--realization-info.choose--realization-info-edit
-              p.choose--realization-title Kontener
-              .choose--realization-edit
-                button.btn.delete--element-btn Usuń
-          .choose-cart
-            .img-box 
-              img(src="/img/realization/steel-elements/element-th-1-1.jpg", alt="element do wybrania")
-            .choose--realization-info.choose--realization-info-edit
-              p.choose--realization-title Kontener
-              .choose--realization-edit
-                button.btn.delete--element-btn Usuń
-          .choose-cart
-            .img-box 
-              img(src="/img/realization/steel-elements/element-th-1-1.jpg", alt="element do wybrania")
-            .choose--realization-info.choose--realization-info-edit
-              p.choose--realization-title Kontener
-              .choose--realization-edit
-                button.btn.delete--element-btn Usuń
+          each element in elements
+            .choose-cart
+              .img-box 
+                img(src=`/img/realization/steel-elements/${element.imagesThumbnails[0]}`, alt="element do wybrania")
+              .choose--realization-info.choose--realization-info-edit
+                p.choose--realization-title= element.title
+                .choose--realization-edit
+                  button.btn.delete--element-btn(data-element-id=element._id) Usuń
 
 
         .overlay.overlay--delete-element.hidden

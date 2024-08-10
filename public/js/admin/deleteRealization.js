@@ -19,7 +19,6 @@ export const deleteRealization = () => {
     const deleteRealizationBtn = e.target.closest('.delete--realization-btn');
     if (!deleteRealizationBtn) return;
     realizationId = deleteRealizationBtn.dataset.realizationId;
-    console.log(realizationId);
     overlayDelete.classList.remove('hidden');
     modalDelete.classList.remove('hidden');
   });

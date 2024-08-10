@@ -79,9 +79,7 @@ exports.updateElement = catchAsync(async (req, res, next) => {
     req.body.imagesThumbnailsRemove = [req.body.imagesThumbnailsRemove];
   }
 
-  console.log(req.body);
   if (req.body.imagesRemove) {
-    console.log('images remove');
     update = {
       ...update,
       $pull: {
@@ -90,7 +88,6 @@ exports.updateElement = catchAsync(async (req, res, next) => {
       },
     };
   } else if (req.body.images.length > 0) {
-    console.log('images add');
     update = {
       ...update,
       $push: {
@@ -147,10 +144,10 @@ exports.deleteElement = catchAsync(async (req, res, next) => {
     );
 
   const deleteThPromises = element.images.map(async (el) => {
-    return promisify(fs.unlink)(`public/img/realization/elements/${el}`);
+    return promisify(fs.unlink)(`public/img/realization/steel-elements/${el}`);
   });
   const deleteWidePromises = element.imagesThumbnails.map(async (el) => {
-    return promisify(fs.unlink)(`public/img/realization/elements/${el}`);
+    return promisify(fs.unlink)(`public/img/realization/steel-elements/${el}`);
   });
 
   await Promise.all(deleteThPromises);

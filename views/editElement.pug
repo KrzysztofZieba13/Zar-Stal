@@ -20,7 +20,7 @@ block content
               .img-box 
                 img(src=`/img/realization/steel-elements/${element.images[0]}`, alt="element do wybrania")
               .choose--realization-info.choose--realization-info-edit
-                p.choose--realization-title Kontener 
+                p.choose--realization-title= element.title 
                 .choose--realization-edit(data-element-id=element._id)
                   span Wybierz
           
@@ -36,9 +36,9 @@ block content
               label.label(for='category') Kategoria 
               select.input#category(type='text')
                 option(value='none') brak 
-                option(value='meter') Elementy stalowe 
-                option(value='meter-2') Maszyny
-                option(value='meter-3') Kontenery
+                option(value='Elementy') Elementy stalowe 
+                option(value='Maszyny') Maszyny
+                option(value='Kontenery') Kontenery
               label.label(for='title') Tytuł elementu 
               input.input#title(type='text')
 

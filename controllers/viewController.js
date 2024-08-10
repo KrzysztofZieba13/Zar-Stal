@@ -86,5 +86,9 @@ exports.getEditElement = catchAsync(async (req, res, next) => {
 });
 
 exports.getDeleteElement = catchAsync(async (req, res, next) => {
-  res.status(200).render('deleteElement');
+  const elements = await Element.find();
+
+  if (!elements) return next(new AppError('Nie znaleziono elementów', 404));
+
+  res.status(200).render('deleteElement', { elements });
 });
