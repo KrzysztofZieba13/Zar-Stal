@@ -602,6 +602,7 @@ var _editContact = require("./admin/editContact");
 var _accordionNavEdit = require("./admin/accordionNavEdit");
 var _accordionFormEdit = require("./admin/accordionFormEdit");
 var _elementsManagement = require("./admin/elementsManagement");
+var _email = require("./email");
 const sectionSingleRealization = document.querySelector(".section--single-realization");
 const navBar = document.querySelector(".nav-container");
 const realizationCartElements = document.querySelectorAll(".realization--cart-element");
@@ -619,10 +620,11 @@ const sectionDeleteRealization = document.querySelector(".section--delete-realiz
 const sectionDeleteElement = document.querySelector(".section--delete-element");
 const sectionCreateRealization = document.querySelector(".section--create-realization");
 const sectionEditOffert = document.querySelector(".section--edit-offert");
-const sectionEditContact = document.querySelector(".section-contact");
+const sectionEditContact = document.querySelector(".section--edit-contact");
 const sectionUpdateRealization = document.querySelector(".section--update-realization");
 const sectionCreateElement = document.querySelector(".section--create-element");
 const sectionUpdateElement = document.querySelector(".section--update-element");
+const contactForm = document.querySelector(".form-contact");
 let navListener = false;
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) new (0, _singleGalleryDefault.default)("single-realizations");
@@ -683,8 +685,10 @@ if (editFormSpecs) {
 if (sectionCreateElement) _elementsManagement.createElement();
 // Update Element
 if (sectionUpdateElement) _elementsManagement.updateElement();
+// Contact Us Form
+if (contactForm) _email.contactUsHandler();
 
-},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR","./admin/editContact":"VKbKo","./admin/elementsManagement":"hrjAz"}],"il6Pq":[function(require,module,exports) {
+},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR","./admin/editContact":"VKbKo","./admin/elementsManagement":"hrjAz","./email":"cqKO8"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initNavHandlers", ()=>initNavHandlers);
@@ -16930,6 +16934,45 @@ const updateElement = ()=>{
     });
 };
 
-},{"axios":"cHm60","../admin/editForm":"egkCs","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","../alert":"78jVh"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
+},{"axios":"cHm60","../admin/editForm":"egkCs","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","../alert":"78jVh"}],"cqKO8":[function(require,module,exports) {
+/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "contactUsHandler", ()=>contactUsHandler);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _alert = require("./alert");
+const contactUsHandler = ()=>{
+    const contactForm = document.querySelector(".form-contact");
+    const name = document.getElementById("contact-name");
+    const email = document.getElementById("contact-email");
+    const phone = document.getElementById("contact-phone");
+    const message = document.getElementById("contact-message");
+    const submitBtn = document.getElementById("contact-submit");
+    const fullName = document.getElementById("full-name");
+    contactForm.addEventListener("submit", async (e)=>{
+        e.preventDefault();
+        const formData = {
+            name: name.value,
+            email: email.value,
+            phone: phone.value,
+            message: message.value,
+            fullName: fullName.value
+        };
+        try {
+            submitBtn.value = `Wysy\u{142}anie...`;
+            const res = await (0, _axiosDefault.default)({
+                method: "post",
+                url: `${window.location.origin}/api/v1/mainPage/client-send-email`,
+                data: formData
+            });
+            if (res.data.status === "success") (0, _alert.showAlert)("success", "Wiadomo\u015B\u0107 zosta\u0142a wys\u0142ana");
+            submitBtn.value = "Wy\u015Blij wiadomo\u015B\u0107";
+        } catch (err) {
+            (0, _alert.showAlert)("error", "Nie uda\u0142o si\u0119 wys\u0142a\u0107 wiadomo\u015Bci!");
+        }
+    });
+};
+
+},{"axios":"cHm60","./alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
 
 //# sourceMappingURL=index.js.map

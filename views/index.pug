@@ -142,14 +142,15 @@ block content
                 .openhours
                   span nd 
                   span nieczynne
-        //- .contact--right-col
-        //-   h3.contact-header Napisz do nas
-        //-   form.form-contact
-        //-     input#contact-name.input-contact(type='text' placeholder='Imię i nazwisko / Firma')
-        //-     input#contact-email.input-contact(type='email' placeholder='Email')
-        //-     input#contact-phone.input-contact(type='tel' placeholder='Telefon')
-        //-     textarea#contact-message.textarea-contact(name="message" placeholder='Treść wiadomości')
-        //-     input#contact-submit.input-submit(type="submit" value='Wyślij wiadomość')
+        .contact--right-col
+          h3.contact-header Napisz do nas
+          form.form-contact
+            input#contact-name.input-contact(type='text' placeholder='Imię i nazwisko / Firma')
+            input#contact-email.input-contact(type='email' placeholder='Email')
+            input#contact-phone.input-contact(type='tel' placeholder='Telefon')
+            input#full-name.input-contact(type='text' placeholder='Pełne imie')
+            textarea#contact-message.textarea-contact(name="message" placeholder='Treść wiadomości')
+            input#contact-submit.input-submit(type="submit" value='Wyślij wiadomość')
     img(src='../img/construction-bg.png' alt='konstrukcja w tle').construction-bg
   #map
     //- img(src='../img/mapa.png', alt='mapa')

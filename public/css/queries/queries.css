@@ -89,9 +89,9 @@
   }
 
   /* TEMP */
-  .icon-contact {
+  /* .icon-contact {
     left: 5% !important;
-  }
+  } */
 }
 
 /* BELOW 928px */
@@ -153,14 +153,14 @@
   }
 
   /* TEMP */
-  .contact-panel {
+  /* .contact-panel {
     width: 85% !important;
-  }
+  } */
 
   /* TEMP */
-  .icon-contact {
+  /* .icon-contact {
     left: 0% !important;
-  }
+  } */
 }
 
 /* BELOW 768px */
@@ -195,9 +195,9 @@
   }
 
   /* TEMP */
-  .icon-contact {
+  /* .icon-contact {
     left: 25% !important;
-  }
+  } */
 
   .contact-box {
     display: flex;
@@ -216,6 +216,7 @@
     justify-content: center;
     align-items: center;
     padding-left: 0;
+    padding-right: 0;
   }
 
   .contact-element i {

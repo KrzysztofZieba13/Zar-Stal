@@ -1,8 +1,28 @@
 const MainPage = require('../models/mainPageModel');
 const AppError = require('../libs/utils/appError');
 const catchAsync = require('../libs/utils/catchAsync');
+const Email = require('../libs/utils/email');
 
 const MAIN_PAGE_ID = '66b220ea071c24c77932dfa0';
+
+exports.sendHelloWorld = catchAsync(async (req, res, next) => {
+  if (req.body.fullName)
+    return res.status(200).json({
+      status: 'success',
+      data: null,
+    });
+
+  await new Email({
+    name: 'Test',
+    email: 'test@test.com',
+    data: req.body,
+  }).sendHelloWorld();
+
+  res.status(200).json({
+    status: 'success',
+    data: null,
+  });
+});
 
 exports.getMainPage = catchAsync(async (req, res, next) => {
   const mainPage = await MainPage.findById(MAIN_PAGE_ID);

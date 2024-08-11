@@ -9,4 +9,6 @@ router
   .post(mainPageController.createMainPage)
   .patch(mainPageController.updateMainPage);
 
+router.route('/client-send-email').post(mainPageController.sendHelloWorld);
+
 module.exports = router;

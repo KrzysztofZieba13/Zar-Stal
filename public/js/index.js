@@ -14,6 +14,7 @@ import * as editContact from './admin/editContact';
 import * as navInit from './admin/accordionNavEdit';
 import * as formAccordionEdit from './admin/accordionFormEdit';
 import * as elementManage from './admin/elementsManagement';
+import * as email from './email';
 
 const sectionSingleRealization = document.querySelector(
   '.section--single-realization',
@@ -42,12 +43,13 @@ const sectionCreateRealization = document.querySelector(
   '.section--create-realization',
 );
 const sectionEditOffert = document.querySelector('.section--edit-offert');
-const sectionEditContact = document.querySelector('.section-contact');
+const sectionEditContact = document.querySelector('.section--edit-contact');
 const sectionUpdateRealization = document.querySelector(
   '.section--update-realization',
 );
 const sectionCreateElement = document.querySelector('.section--create-element');
 const sectionUpdateElement = document.querySelector('.section--update-element');
+const contactForm = document.querySelector('.form-contact');
 
 let navListener = false;
 
@@ -146,4 +148,9 @@ if (sectionCreateElement) {
 // Update Element
 if (sectionUpdateElement) {
   elementManage.updateElement();
+}
+
+// Contact Us Form
+if (contactForm) {
+  email.contactUsHandler();
 }
