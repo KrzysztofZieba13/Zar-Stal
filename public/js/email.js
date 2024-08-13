@@ -13,6 +13,12 @@ export const contactUsHandler = () => {
 
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const recaptchaToken = grecaptcha.getResponse();
+
+    if (!recaptchaToken) {
+      showAlert('error', 'Wypełnij reCAPTCHA');
+      return;
+    }
 
     const formData = {
       name: name.value,
@@ -20,6 +26,7 @@ export const contactUsHandler = () => {
       phone: phone.value,
       message: message.value,
       fullName: fullName.value,
+      'g-recaptcha-response': recaptchaToken,
     };
 
     try {

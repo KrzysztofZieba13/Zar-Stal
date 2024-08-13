@@ -16951,12 +16951,18 @@ const contactUsHandler = ()=>{
     const fullName = document.getElementById("full-name");
     contactForm.addEventListener("submit", async (e)=>{
         e.preventDefault();
+        const recaptchaToken = grecaptcha.getResponse();
+        if (!recaptchaToken) {
+            (0, _alert.showAlert)("error", "Wype\u0142nij reCAPTCHA");
+            return;
+        }
         const formData = {
             name: name.value,
             email: email.value,
             phone: phone.value,
             message: message.value,
-            fullName: fullName.value
+            fullName: fullName.value,
+            "g-recaptcha-response": recaptchaToken
         };
         try {
             submitBtn.value = `Wysy\u{142}anie...`;

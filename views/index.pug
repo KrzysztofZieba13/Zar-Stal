@@ -3,6 +3,7 @@ extends base
 block append head
   link(rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="")
   meta(name="description", content="Zar-Stal Konstrukcje Stalowe – Specjalizujemy się w produkcji konstrukcji stalowych, elementów stalowych, świetlików kalenicowych, kontenerów, hal magazynowych, produkcyjnych, sportowych czy rolniczych. Produkujemy, dostarczamy oraz montujemy konstrukcje w Polsce i za granicą.")
+  script(src="https://www.google.com/recaptcha/api.js" async defer)
 
 
 mixin testimonial(imgSrc)
@@ -150,10 +151,10 @@ block content
             input#contact-phone.input-contact(type='tel' placeholder='Telefon')
             input#full-name.input-contact(type='text' placeholder='Pełne imie')
             textarea#contact-message.textarea-contact(name="message" placeholder='Treść wiadomości')
+            .g-recaptcha(data-sitekey="6LduryUqAAAAAJ45yAMYN91eVC5Q09GAO-KR2MUJ")
             input#contact-submit.input-submit(type="submit" value='Wyślij wiadomość')
     img(src='../img/construction-bg.png' alt='konstrukcja w tle').construction-bg
   #map
-    //- img(src='../img/mapa.png', alt='mapa')
     .make-route 
       
       a.link(href='https://maps.app.goo.gl/vK6gudVaf39LNmNL8')

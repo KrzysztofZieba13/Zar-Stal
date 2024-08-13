@@ -2,10 +2,12 @@ extends base
 
 block append head 
   link(rel="stylesheet", href="/css/edit.css")
+  link(rel='stylesheet', href='/css/queries/queriesAdmin.css')
   title Zar-Stal | Edytuj Stronę Główną
 
+
 block content
-  section.section-admin 
+  section.section-admin.section--edit-desc
     include _editNav
 
     .edit-content.edit-mp
