@@ -219,48 +219,12 @@
   margin-top: 7.2rem;
   padding-top: 9.4rem;
 }
-/* 
-.offert-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3.2rem;
-  margin-top: 5.2rem;
+
+.offert-details {
+  font-size: 2.4rem;
+  text-transform: none;
+  padding: 2.4rem;
 }
-
-.offert-item {
-  height: 30rem;
-  font-size: 3.2rem;
-  text-align: center;
-  box-shadow: 0 0 9px 5px rgba(3, 3, 3, 0.1);
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: all 0.3s;
-  overflow: hidden;
-  position: relative;
-}
-
-.offert-item img {
-  width: 100%;
-  opacity: 0.9;
-  transition: all 0.3s;
-  height: 100%;
-  object-fit: cover;
-}
-
-.offert-item p {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 111;
-  width: 100%;
-}
-
-.offert-item:hover img {
-  box-shadow: 0 0 9px 9px rgba(3, 3, 3, 0.1);
-  transform: scale(1.1);
-} */
-
 /********************/
 /******CONTACT*******/
 /********************/
@@ -279,11 +243,6 @@
   margin: 4.4rem auto 0 auto;
 }
 
-/* TEMP */
-/* .contact-panel {
-  width: 65% !important;
-} */
-
 .contact--left-col {
   padding: 3.2rem;
   background-color: rgba(157, 178, 191, 0.25);
@@ -296,25 +255,6 @@
 #full-name {
   display: none;
 }
-
-/* TEMP */
-/* .contact-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: center;
-  align-items: center;
-} */
-
-/* TEMP */
-/* .contact-element {
-  align-items: center !important;
-  padding-left: 0 !important;
-} */
-
-/* TEMP */
-/* .icon-contact {
-  left: 10% !important;
-} */
 
 .contact--right-col {
   padding: 3.2rem;
@@ -496,4 +436,62 @@
 .make-route a span {
   display: flex;
   align-items: flex-end;
+}
+
+/******************/
+/******LOGIN*******/
+/******************/
+.primary--header-auth {
+  font-size: 4.4rem;
+  color: #9db2bf;
+  margin-bottom: 4.4rem;
+  text-align: center;
+}
+
+.login-form,
+.new--password-form {
+  margin: 12.8rem auto;
+  display: flex;
+  flex-direction: column;
+  width: 50rem;
+  padding: 9.6rem 4.4rem;
+  background-color: #141c27;
+  box-shadow: 0 0 13px 5px rgba(3, 3, 3, 0.2);
+}
+
+.label {
+  margin-top: 2.4rem;
+  font-size: 1.6rem;
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9db2bf;
+  color: #9db2bf;
+  font-size: 2.4rem;
+  padding: 1.2rem 0.6rem;
+}
+
+.input--submit-auth {
+  margin-top: 3.2rem;
+  font-size: 2.4rem;
+  background-color: #526d82;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  padding: 2rem 2.4rem;
+}
+
+.input--submit-auth:hover {
+  background-color: #27374d;
+}
+
+.forgot--password-btn:link,
+.forgot--password-btn:visited {
+  font-size: 1.6rem;
+  margin-top: 2.4rem;
+  text-align: right;
+  color: #9db2bf;
 }

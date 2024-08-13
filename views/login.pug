@@ -1,0 +1,17 @@
+extends base
+
+block append head
+  link(rel='stylesheet', href='/css/style.css')
+  title Zar-Stal | Logowanie
+
+
+block content 
+  section.section--login
+    form.form.login-form
+      h1.primary--header-auth Logowanie
+      label.label(for='login') Login
+      input.input#login(type='text' placeholder='Login')
+      label.label(for='password') Hasło
+      input.input#password(type='password' placeholder='Hasło')
+      input.input--submit-auth(type="submit" value='Zaloguj Się')
+      a(href="/admin-zar-stal/zapomnialem-hasla").link.forgot--password-btn Nie pamiętam hasła 

@@ -77,8 +77,10 @@ const addSpecificationInputs = (e) => {
               <option value="meter-3">m&sup3;</option>
             </select>
           </div>
-          <i class="ph ph-plus-square more-specs"></i>
-          <i class="ph ph-trash delete--spec-input"></i>
+          <div class="spec--add-remove">
+            <i class="ph ph-plus-square more-specs"></i>
+            <i class="ph ph-trash delete--spec-input"></i>
+          </div>
         </div>
       </div>
     `,

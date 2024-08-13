@@ -2,6 +2,7 @@ extends base
 
 block append head 
   link(rel="stylesheet", href="/css/edit.css")
+  link(rel='stylesheet', href='/css/queries/queriesAdmin.css')
   title Zar-Stal | Utwórz realizację
 
 block content
@@ -41,8 +42,9 @@ block content
                     option(value='meter') m 
                     option(value='meter-2') m&sup2
                     option(value='meter-3') m&sup3
-                i.ph.ph-plus-square.more-specs
-                i.ph.ph-trash.delete--spec-input
+                .spec--add-remove
+                  i.ph.ph-plus-square.more-specs
+                  i.ph.ph-trash.delete--spec-input
 
           p.text.form--inside-title Dodaj zdjęcia
           label.label(for='primary-image') Wybierz jedno zdjęcie główne

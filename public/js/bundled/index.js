@@ -603,6 +603,7 @@ var _accordionNavEdit = require("./admin/accordionNavEdit");
 var _accordionFormEdit = require("./admin/accordionFormEdit");
 var _elementsManagement = require("./admin/elementsManagement");
 var _email = require("./email");
+var _offertShow = require("./offertShow");
 const sectionSingleRealization = document.querySelector(".section--single-realization");
 const navBar = document.querySelector(".nav-container");
 const realizationCartElements = document.querySelectorAll(".realization--cart-element");
@@ -625,6 +626,7 @@ const sectionUpdateRealization = document.querySelector(".section--update-realiz
 const sectionCreateElement = document.querySelector(".section--create-element");
 const sectionUpdateElement = document.querySelector(".section--update-element");
 const contactForm = document.querySelector(".form-contact");
+const sectionOffert = document.querySelector(".section-offert");
 let navListener = false;
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) new (0, _singleGalleryDefault.default)("single-realizations");
@@ -687,8 +689,10 @@ if (sectionCreateElement) _elementsManagement.createElement();
 if (sectionUpdateElement) _elementsManagement.updateElement();
 // Contact Us Form
 if (contactForm) _email.contactUsHandler();
+// Switching offert text on main page
+if (sectionOffert) (0, _offertShow.switchOffertText)();
 
-},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR","./admin/editContact":"VKbKo","./admin/elementsManagement":"hrjAz","./email":"cqKO8"}],"il6Pq":[function(require,module,exports) {
+},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR","./admin/editContact":"VKbKo","./admin/elementsManagement":"hrjAz","./email":"cqKO8","./offertShow":"9USXc"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initNavHandlers", ()=>initNavHandlers);
@@ -11589,7 +11593,7 @@ const init = async ()=>{
     });
 };
 const chooseMainRealizations = ()=>{
-    const ChooseRealizationsForm1 = new (0, _editFormDefault.default)("http://127.0.0.1:3000/api/v1/mainPage");
+    const ChooseRealizationsForm = new (0, _editFormDefault.default)("http://127.0.0.1:3000/api/v1/mainPage");
     const numOfChoosenRealizations = document.querySelector(".number--choosen-realizations");
     let selectedRealizations = 0;
     document.querySelectorAll('input[name="realizations"]').forEach((el)=>{
@@ -11600,7 +11604,7 @@ const chooseMainRealizations = ()=>{
             numOfChoosenRealizations.textContent = `Wybrane realizacje ${selectedRealizations}/2`;
         });
     });
-    ChooseRealizationsForm1.form.addEventListener("submit", async (e)=>{
+    ChooseRealizationsForm.form.addEventListener("submit", async (e)=>{
         try {
             e.preventDefault();
             const fields = {};
@@ -11609,7 +11613,7 @@ const chooseMainRealizations = ()=>{
                 ...checkedInputs
             ].map((el)=>el.value);
             if (fields.mainRealizations.length !== 2) throw new Error("Wybierz dwie g\u0142\xf3wne realizacje");
-            ChooseRealizationsForm1.sendUpdate(fields);
+            ChooseRealizationsForm.sendUpdate(fields);
             [
                 ...checkedInputs
             ].forEach((el)=>el.checked = false);
@@ -11633,15 +11637,17 @@ const editOffert = ()=>{
             offertItems.forEach((el)=>el.classList.remove("offert--item-edit"));
             el.classList.add("offert--item-edit");
             currentOffert.textContent = `Nowa tre\u{15B}\u{107} oferty: ${el.textContent.trim()}`;
+            console.log(currentOffertIndex);
         });
     });
     EditOffertForm.form.addEventListener("submit", (e)=>{
         try {
+            console.log(currentOffertIndex);
             e.preventDefault();
-            if (!currentOffertIndex) throw new Error("Wybierz ofert\u0119 do aktualizacji!");
+            if (!currentOffertIndex && currentOffertIndex !== 0) throw new Error("Wybierz ofert\u0119 do aktualizacji!");
             const field = {};
             field[`offert.${currentOffertIndex}`] = document.getElementById("offert-value").value;
-            ChooseRealizationsForm.sendUpdate(field);
+            EditOffertForm.sendUpdate(field);
             document.getElementById("offert-value").value = "";
         } catch (err) {
             (0, _alert.showAlert)("error", err.message);
@@ -16500,8 +16506,10 @@ const addSpecificationInputs = (e)=>{
               <option value="meter-3">m&sup3;</option>
             </select>
           </div>
-          <i class="ph ph-plus-square more-specs"></i>
-          <i class="ph ph-trash delete--spec-input"></i>
+          <div class="spec--add-remove">
+            <i class="ph ph-plus-square more-specs"></i>
+            <i class="ph ph-trash delete--spec-input"></i>
+          </div>
         </div>
       </div>
     `);
@@ -16979,6 +16987,28 @@ const contactUsHandler = ()=>{
     });
 };
 
-},{"axios":"cHm60","./alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
+},{"axios":"cHm60","./alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"9USXc":[function(require,module,exports) {
+/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "switchOffertText", ()=>switchOffertText);
+const switchOffertText = ()=>{
+    const offertPanels = document.querySelectorAll(".offert-item");
+    offertPanels.forEach((el)=>{
+        el.addEventListener("mouseover", (e)=>{
+            const itemTitle = el.querySelector(".offert-title");
+            const itemDetail = el.querySelector(".offert-details");
+            itemTitle.classList.add("hidden");
+            itemDetail.classList.remove("hidden");
+        });
+        el.addEventListener("mouseout", (e)=>{
+            const itemTitle = el.querySelector(".offert-title");
+            const itemDetail = el.querySelector(".offert-details");
+            itemTitle.classList.remove("hidden");
+            itemDetail.classList.add("hidden");
+        });
+    });
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
 
 //# sourceMappingURL=index.js.map

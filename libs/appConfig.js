@@ -6,6 +6,7 @@ const realizationRouter = require('../routes/realizationRoutes');
 const mainPageRouter = require('../routes/mainPageRoutes');
 const elementRouter = require('../routes/elementRoutes');
 const contactRouter = require('../routes/contactRoutes');
+const userRouter = require('../routes/userRoutes');
 const globalErrorHandler = require('../controllers/errorController');
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(express.json({ limit: '10kb' }));
 app.enable('trust proxy');
 
 app.use('/', viewRouter);
+app.use('/api/v1/user', userRouter);
 app.use('/api/v1/realizations', realizationRouter);
 app.use('/api/v1/elements', elementRouter);
 app.use('/api/v1/mainPage', mainPageRouter);

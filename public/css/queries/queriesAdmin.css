@@ -38,13 +38,66 @@
     width: 100%;
   }
 
-  .choose-realizations {
+  .choose-realizations,
+  .choose-elements {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* BELOW 752px */
+@media (max-width: 47em) {
+  .input {
+    font-size: 2.4rem;
+    padding: 0.8rem;
+  }
+
+  .choose-realizations,
+  .choose-elements {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .more-specs,
+  .delete--spec-input {
+    font-size: 4.4rem;
+  }
+
+  .specification {
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: flex-start;
+    margin-bottom: 2.4rem;
+    margin-left: 1.2rem;
+  }
+
+  .input-file {
+    font-size: 2.4rem;
+  }
+
+  .submit-btn {
+    font-size: 2.4rem;
+  }
+
+  .accordion-inputs {
+    gap: 0.4rem;
+  }
+
+  .accordion--delete-spec {
+    gap: 0.8rem;
   }
 }
 
 /* BELOW 592px */
 @media (max-width: 37em) {
+  .edit--nav-panel-options {
+    font-size: 2.4rem;
+    gap: 1.6rem;
+  }
+
+  .modal--delete-realization,
+  .modal--delete-element {
+    width: 50rem;
+  }
+
   .section-admin {
     flex-direction: column;
   }

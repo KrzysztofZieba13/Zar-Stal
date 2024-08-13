@@ -2,6 +2,7 @@ extends base
 
 block append head 
   link(rel="stylesheet", href="/css/edit.css")
+  link(rel='stylesheet', href='/css/queries/queriesAdmin.css')
   title Zar-Stal | Edytuj realizację
 
 block content
@@ -68,27 +69,9 @@ block content
                       option(value='meter') m 
                       option(value='meter-2') m&sup2
                       option(value='meter-3') m&sup3
-                  i.ph.ph-plus-square.more-specs
-                  i.ph.ph-trash.delete--spec-input
-
-            //- p.text.form--inside-title.accordion--edit-panel Usuń spectfikację  (zaznacz do usunięcia)
-            //-   i.ph.ph-caret-down.accordion--edit-arrow
-            //-   i.ph.ph-caret-up.accordion--edit-arrow.hidden
-            //- .accordion-inputs.accordion--edit-specs.accordion--delete-spec.hidden
-            //-   .specification--delete-row
-            //-     p.delete--spec-title Powierzchnia
-            //-     p.delete--spec-value 60 m
-            //-       sup 2
-            //-     label(for='delete--spec__checkbox-01').custom--checkbox-delete-spec
-            //-       i.ph.ph-trash
-            //-     input(type='checkbox')#delete--spec__checkbox-01.delete--specification__checkbox
-
-            //-   .specification--delete-row
-            //-     p.delete--spec-title Szerokość
-            //-     p.delete--spec-value 60 m
-            //-     label(for='delete--spec__checkbox-02').custom--checkbox-delete-spec
-            //-       i.ph.ph-trash
-            //-     input(type='checkbox')#delete--spec__checkbox-02.delete--specification__checkbox
+                  .spec--add-remove
+                    i.ph.ph-plus-square.more-specs
+                    i.ph.ph-trash.delete--spec-input
             input.btn.submit-btn.submit--realization-edit(type='submit' value='Aktualizuj realizację')
           
           h2.secondary--header-edit Usuń wybrane zdjęcia 

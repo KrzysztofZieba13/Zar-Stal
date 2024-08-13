@@ -92,3 +92,15 @@ exports.getDeleteElement = catchAsync(async (req, res, next) => {
 
   res.status(200).render('deleteElement', { elements });
 });
+
+exports.getLoginPage = catchAsync(async (req, res, next) => {
+  res.status(200).render('login');
+});
+
+exports.getForgotPasswordPage = catchAsync(async (req, res, next) => {
+  res.status(200).render('forgotPassword');
+});
+
+exports.getRenewPassword = catchAsync(async (req, res, next) => {
+  res.status(200).render('newPassword');
+});

@@ -64,19 +64,21 @@ export const editOffert = () => {
       offertItems.forEach((el) => el.classList.remove('offert--item-edit'));
       el.classList.add('offert--item-edit');
       currentOffert.textContent = `Nowa treść oferty: ${el.textContent.trim()}`;
+      console.log(currentOffertIndex);
     });
   });
 
   EditOffertForm.form.addEventListener('submit', (e) => {
     try {
+      console.log(currentOffertIndex);
       e.preventDefault();
-      if (!currentOffertIndex)
+      if (!currentOffertIndex && currentOffertIndex !== 0)
         throw new Error('Wybierz ofertę do aktualizacji!');
       const field = {};
       field[`offert.${currentOffertIndex}`] =
         document.getElementById('offert-value').value;
 
-      ChooseRealizationsForm.sendUpdate(field);
+      EditOffertForm.sendUpdate(field);
       document.getElementById('offert-value').value = '';
     } catch (err) {
       showAlert('error', err.message);

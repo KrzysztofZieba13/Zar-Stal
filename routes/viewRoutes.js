@@ -46,5 +46,11 @@ router.get(
   '/admin-zar-stal/elementy/usun-element',
   viewController.getDeleteElement,
 );
+router.get('/admin-zar-stal/logowanie', viewController.getLoginPage);
+router.get(
+  '/admin-zar-stal/zapomnialem-hasla',
+  viewController.getForgotPasswordPage,
+);
+router.get('/admin-zar-stal/nowe-haslo', viewController.getRenewPassword);
 
 module.exports = router;
