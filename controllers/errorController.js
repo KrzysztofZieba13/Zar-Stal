@@ -28,6 +28,7 @@ const handleValidationErrorDB = (err) => {
 };
 
 const sendErrorDev = async (err, req, res) => {
+  console.log(err);
   if (req.body.images) {
     if (req.originalUrl.endsWith('elements')) deleteImagesElement(req);
     if (req.originalUrl.endsWith('realizations')) deleteImagesRealization(req);
@@ -41,6 +42,14 @@ const sendErrorDev = async (err, req, res) => {
       stack: err.stack,
     });
   //TODO: make the same for rendered website
+  // B) RENDERED WEBSITE
+  if (err.isOperational) {
+    return res.status(err.statusCode).render('error', {
+      title: 'Coś poszło nie tak!',
+      msg: err.message,
+      errorCode: err.statusCode,
+    });
+  }
 };
 
 const sendErrorProd = (err, req, res) => {
@@ -65,6 +74,8 @@ const sendErrorProd = (err, req, res) => {
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
+
+  console.log('xdd');
 
   if (process.env.NODE_ENV === 'development') {
     let error = { ...err };

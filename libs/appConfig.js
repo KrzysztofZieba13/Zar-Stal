@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 const viewRouter = require('../routes/viewRoutes');
 const realizationRouter = require('../routes/realizationRoutes');
 const mainPageRouter = require('../routes/mainPageRoutes');
@@ -16,6 +17,7 @@ app.set('views', path.join(__dirname, '../views'));
 app.use(express.static(path.join(__dirname, '../public')));
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
+app.use(cookieParser());
 app.use(express.json({ limit: '10kb' }));
 app.enable('trust proxy');
 

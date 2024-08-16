@@ -533,3 +533,7 @@
 .offert-item.offert--item-edit {
   box-shadow: 0 0 9px 5px rgba(3, 3, 3, 0.5);
 }
+
+.form--change-password {
+  max-width: 60rem;
+}

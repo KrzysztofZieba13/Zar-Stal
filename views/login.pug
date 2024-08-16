@@ -6,12 +6,12 @@ block append head
 
 
 block content 
-  section.section--login
+  section.section-login
     form.form.login-form
       h1.primary--header-auth Logowanie
       label.label(for='login') Login
-      input.input#login(type='text' placeholder='Login')
+      input.input#login(type='text' placeholder='Login' autocomplete='on')
       label.label(for='password') Hasło
-      input.input#password(type='password' placeholder='Hasło')
+      input.input#password(type='password' placeholder='Hasło' autocomplete='on')
       input.input--submit-auth(type="submit" value='Zaloguj Się')
       a(href="/admin-zar-stal/zapomnialem-hasla").link.forgot--password-btn Nie pamiętam hasła 

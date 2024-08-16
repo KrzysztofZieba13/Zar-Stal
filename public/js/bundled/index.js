@@ -604,6 +604,8 @@ var _accordionFormEdit = require("./admin/accordionFormEdit");
 var _elementsManagement = require("./admin/elementsManagement");
 var _email = require("./email");
 var _offertShow = require("./offertShow");
+var _login = require("./login");
+var _accountManagement = require("./accountManagement");
 const sectionSingleRealization = document.querySelector(".section--single-realization");
 const navBar = document.querySelector(".nav-container");
 const realizationCartElements = document.querySelectorAll(".realization--cart-element");
@@ -627,6 +629,8 @@ const sectionCreateElement = document.querySelector(".section--create-element");
 const sectionUpdateElement = document.querySelector(".section--update-element");
 const contactForm = document.querySelector(".form-contact");
 const sectionOffert = document.querySelector(".section-offert");
+const sectionLogin = document.querySelector(".section-login");
+const sectionAccountManagement = document.querySelector(".section--account-management");
 let navListener = false;
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) new (0, _singleGalleryDefault.default)("single-realizations");
@@ -691,8 +695,12 @@ if (sectionUpdateElement) _elementsManagement.updateElement();
 if (contactForm) _email.contactUsHandler();
 // Switching offert text on main page
 if (sectionOffert) (0, _offertShow.switchOffertText)();
+// Login
+if (sectionLogin) _login.login();
+// Change password
+if (sectionAccountManagement) _accountManagement.changePassword();
 
-},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","./admin/editMainPage":"VFZiv","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR","./admin/editContact":"VKbKo","./admin/elementsManagement":"hrjAz","./email":"cqKO8","./offertShow":"9USXc"}],"il6Pq":[function(require,module,exports) {
+},{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","./admin/editMainPage":"VFZiv","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR","./admin/editContact":"VKbKo","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/elementsManagement":"hrjAz","./email":"cqKO8","./offertShow":"9USXc","./login":"eGbeM","./accountManagement":"cwplE","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initNavHandlers", ()=>initNavHandlers);
@@ -11696,7 +11704,7 @@ class EditForm {
 }
 exports.default = EditForm;
 
-},{"axios":"cHm60","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","../alert":"78jVh"}],"cHm60":[function(require,module,exports) {
+},{"axios":"cHm60","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"cHm60":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "default", ()=>(0, _axiosJsDefault.default));
@@ -16413,127 +16421,6 @@ const showAlert = (type, msg)=>{
     window.setTimeout(hideAlert, 5000);
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"4macJ":[function(require,module,exports) {
-/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "init", ()=>init);
-const nav = document.querySelector(".edit-nav");
-const navLinks = document.querySelectorAll(".option-link");
-const init = ()=>{
-    document.addEventListener("DOMContentLoaded", (e)=>{
-        navLinks.forEach((link)=>{
-            link.classList.remove("option-active");
-            if (link.href.endsWith(location.pathname)) {
-                link.classList.add("option-active");
-                link.parentElement.parentElement.classList.remove("hidden");
-            }
-        });
-    });
-    nav.addEventListener("click", (e)=>{
-        const panel = e.target.closest(".edit--nav-panel-header");
-        if (!panel) return;
-        panel.nextElementSibling.classList.toggle("hidden");
-        const icons = panel.querySelectorAll(".edit--nav-icon");
-        icons.forEach((el)=>el.classList.toggle("hidden"));
-    });
-};
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"7UVN2":[function(require,module,exports) {
-/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "selectSpecsToDeleteHandler", ()=>selectSpecsToDeleteHandler);
-parcelHelpers.export(exports, "specificationInput", ()=>specificationInput);
-parcelHelpers.export(exports, "init", ()=>init);
-const realizationsToSelect = document.querySelectorAll(".choose--realization-edit");
-const editRealizationFields = document.querySelector(".edit--realization-fields");
-const headers = document.querySelectorAll(".accordion--edit-panel");
-const addSpecBox = document.querySelector(".accordion--add-spec");
-const specsToDelete = document.querySelectorAll(".custom--checkbox-delete-spec");
-const selectSpecsToDeleteHandler = (specs = specsToDelete, specsIdToDelete)=>{
-    specsIdToDelete.clear();
-    specs.forEach((el)=>{
-        el.addEventListener("click", ()=>{
-            el.classList.toggle("delete--spec-checked");
-            if (el.classList.contains("delete--spec-checked")) specsIdToDelete.add(el.dataset.specId);
-            else specsIdToDelete.delete(el.dataset.specId);
-        });
-    });
-};
-const updateAddButtons = ()=>{
-    const allSpecs = addSpecBox.querySelectorAll(".more-specs");
-    allSpecs.forEach((el, i)=>{
-        el.classList.add("hidden");
-        if (allSpecs.length - 1 === i) el.classList.remove("hidden");
-    });
-};
-const selectRealizationHandler = (real)=>{
-    realizationsToSelect.forEach((el)=>{
-        el.closest(".edit--choose-cart").classList.remove("choose--cart-active");
-    });
-    editRealizationFields.classList.remove("hidden");
-    real.closest(".edit--choose-cart").classList.add("choose--cart-active");
-    editRealizationFields.scrollIntoView({
-        behavior: "smooth"
-    });
-};
-const deleteSpecificationInputs = (e)=>{
-    const deleteBtn = e.target.closest(".delete--spec-input");
-    if (!deleteBtn || addSpecBox.childElementCount === 1) return;
-    addSpecBox.removeChild(e.target.closest(".specification-box"));
-    updateAddButtons();
-};
-const addSpecificationInputs = (e)=>{
-    const addBtn = e.target.closest(".more-specs");
-    if (!addBtn) return;
-    addSpecBox.insertAdjacentHTML("beforeend", `
-      <div class="specification-box">
-        <p class="specification--box-title">Specyfikacja</p>
-        <div class="specification">
-          <div class="specification-data">
-          <label class="label" for="spec-1-name">Nazwa parametru</label>
-          <input class="input spec-name" id="spec-1-name" type="text">
-          </div>
-          <div class="specification-data">
-          <label class="label" for="spec-1-value">Warto\u{15B}\u{107} parametru</label>
-          <input class="input spec-value" id="spec-1-value" type="text">
-          </div>
-          <div class="specification-data">
-            <label class="label" for="spec-1-unit">Jednostka</label>
-            <select class="input spec-unit" id="spec-1-unit">
-              <option value="none">brak</option>
-              <option value="meter">m</option>
-              <option value="meter-2">m&sup2;</option>
-              <option value="meter-3">m&sup3;</option>
-            </select>
-          </div>
-          <div class="spec--add-remove">
-            <i class="ph ph-plus-square more-specs"></i>
-            <i class="ph ph-trash delete--spec-input"></i>
-          </div>
-        </div>
-      </div>
-    `);
-    updateAddButtons();
-};
-const specificationInput = (action)=>{
-    if (action === "add") addSpecBox.addEventListener("click", (e)=>addSpecificationInputs(e));
-    if (action === "delete") addSpecBox.addEventListener("click", (e)=>deleteSpecificationInputs(e));
-};
-const init = ()=>{
-    realizationsToSelect.forEach((real)=>{
-        real.addEventListener("click", ()=>selectRealizationHandler(real));
-    });
-    headers.forEach((header)=>{
-        header.addEventListener("click", (e)=>{
-            const panel = e.target.closest(".accordion--edit-panel");
-            panel.nextElementSibling.classList.toggle("hidden");
-            panel.querySelectorAll(".accordion--edit-arrow").forEach((el)=>{
-                el.classList.toggle("hidden");
-            });
-        });
-    });
-};
-
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"7yScn":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -16595,7 +16482,7 @@ const deleteRealization = ()=>{
     });
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","axios":"cHm60","../alert":"78jVh"}],"3n93A":[function(require,module,exports) {
+},{"axios":"cHm60","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"3n93A":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "deleteElement", ()=>deleteElement);
@@ -16643,7 +16530,7 @@ const deleteElement = ()=>{
     });
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","../alert":"78jVh","axios":"cHm60"}],"3qRhR":[function(require,module,exports) {
+},{"axios":"cHm60","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"3qRhR":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "updateRealization", ()=>updateRealization);
@@ -16797,7 +16684,103 @@ const createRealization = async ()=>{
     }
 };
 
-},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","axios":"cHm60","./accordionFormEdit":"7UVN2"}],"VKbKo":[function(require,module,exports) {
+},{"axios":"cHm60","../admin/editForm":"egkCs","../alert":"78jVh","./accordionFormEdit":"7UVN2","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"7UVN2":[function(require,module,exports) {
+/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "selectSpecsToDeleteHandler", ()=>selectSpecsToDeleteHandler);
+parcelHelpers.export(exports, "specificationInput", ()=>specificationInput);
+parcelHelpers.export(exports, "init", ()=>init);
+const realizationsToSelect = document.querySelectorAll(".choose--realization-edit");
+const editRealizationFields = document.querySelector(".edit--realization-fields");
+const headers = document.querySelectorAll(".accordion--edit-panel");
+const addSpecBox = document.querySelector(".accordion--add-spec");
+const specsToDelete = document.querySelectorAll(".custom--checkbox-delete-spec");
+const selectSpecsToDeleteHandler = (specs = specsToDelete, specsIdToDelete)=>{
+    specsIdToDelete.clear();
+    specs.forEach((el)=>{
+        el.addEventListener("click", ()=>{
+            el.classList.toggle("delete--spec-checked");
+            if (el.classList.contains("delete--spec-checked")) specsIdToDelete.add(el.dataset.specId);
+            else specsIdToDelete.delete(el.dataset.specId);
+        });
+    });
+};
+const updateAddButtons = ()=>{
+    const allSpecs = addSpecBox.querySelectorAll(".more-specs");
+    allSpecs.forEach((el, i)=>{
+        el.classList.add("hidden");
+        if (allSpecs.length - 1 === i) el.classList.remove("hidden");
+    });
+};
+const selectRealizationHandler = (real)=>{
+    realizationsToSelect.forEach((el)=>{
+        el.closest(".edit--choose-cart").classList.remove("choose--cart-active");
+    });
+    editRealizationFields.classList.remove("hidden");
+    real.closest(".edit--choose-cart").classList.add("choose--cart-active");
+    editRealizationFields.scrollIntoView({
+        behavior: "smooth"
+    });
+};
+const deleteSpecificationInputs = (e)=>{
+    const deleteBtn = e.target.closest(".delete--spec-input");
+    if (!deleteBtn || addSpecBox.childElementCount === 1) return;
+    addSpecBox.removeChild(e.target.closest(".specification-box"));
+    updateAddButtons();
+};
+const addSpecificationInputs = (e)=>{
+    const addBtn = e.target.closest(".more-specs");
+    if (!addBtn) return;
+    addSpecBox.insertAdjacentHTML("beforeend", `
+      <div class="specification-box">
+        <p class="specification--box-title">Specyfikacja</p>
+        <div class="specification">
+          <div class="specification-data">
+          <label class="label" for="spec-1-name">Nazwa parametru</label>
+          <input class="input spec-name" id="spec-1-name" type="text">
+          </div>
+          <div class="specification-data">
+          <label class="label" for="spec-1-value">Warto\u{15B}\u{107} parametru</label>
+          <input class="input spec-value" id="spec-1-value" type="text">
+          </div>
+          <div class="specification-data">
+            <label class="label" for="spec-1-unit">Jednostka</label>
+            <select class="input spec-unit" id="spec-1-unit">
+              <option value="none">brak</option>
+              <option value="meter">m</option>
+              <option value="meter-2">m&sup2;</option>
+              <option value="meter-3">m&sup3;</option>
+            </select>
+          </div>
+          <div class="spec--add-remove">
+            <i class="ph ph-plus-square more-specs"></i>
+            <i class="ph ph-trash delete--spec-input"></i>
+          </div>
+        </div>
+      </div>
+    `);
+    updateAddButtons();
+};
+const specificationInput = (action)=>{
+    if (action === "add") addSpecBox.addEventListener("click", (e)=>addSpecificationInputs(e));
+    if (action === "delete") addSpecBox.addEventListener("click", (e)=>deleteSpecificationInputs(e));
+};
+const init = ()=>{
+    realizationsToSelect.forEach((real)=>{
+        real.addEventListener("click", ()=>selectRealizationHandler(real));
+    });
+    headers.forEach((header)=>{
+        header.addEventListener("click", (e)=>{
+            const panel = e.target.closest(".accordion--edit-panel");
+            panel.nextElementSibling.classList.toggle("hidden");
+            panel.querySelectorAll(".accordion--edit-arrow").forEach((el)=>{
+                el.classList.toggle("hidden");
+            });
+        });
+    });
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"VKbKo":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "editContact", ()=>editContact);
@@ -16859,7 +16842,32 @@ const editOpenHours = ()=>{
     });
 };
 
-},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"hrjAz":[function(require,module,exports) {
+},{"../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"4macJ":[function(require,module,exports) {
+/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "init", ()=>init);
+const nav = document.querySelector(".edit-nav");
+const navLinks = document.querySelectorAll(".option-link");
+const init = ()=>{
+    document.addEventListener("DOMContentLoaded", (e)=>{
+        navLinks.forEach((link)=>{
+            link.classList.remove("option-active");
+            if (link.href.endsWith(location.pathname)) {
+                link.classList.add("option-active");
+                link.parentElement.parentElement.classList.remove("hidden");
+            }
+        });
+    });
+    nav.addEventListener("click", (e)=>{
+        const panel = e.target.closest(".edit--nav-panel-header");
+        if (!panel) return;
+        panel.nextElementSibling.classList.toggle("hidden");
+        const icons = panel.querySelectorAll(".edit--nav-icon");
+        icons.forEach((el)=>el.classList.toggle("hidden"));
+    });
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"hrjAz":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "createElement", ()=>createElement);
@@ -16942,7 +16950,7 @@ const updateElement = ()=>{
     });
 };
 
-},{"axios":"cHm60","../admin/editForm":"egkCs","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F","../alert":"78jVh"}],"cqKO8":[function(require,module,exports) {
+},{"axios":"cHm60","../admin/editForm":"egkCs","../alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"cqKO8":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "contactUsHandler", ()=>contactUsHandler);
@@ -17009,6 +17017,77 @@ const switchOffertText = ()=>{
     });
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"eGbeM":[function(require,module,exports) {
+/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "login", ()=>login);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _alert = require("./alert");
+const login = ()=>{
+    const loginForm = document.querySelector(".login-form");
+    const email = document.getElementById("login");
+    const password = document.getElementById("password");
+    const clearFields = ()=>{
+        email.value = "";
+        password.value = "";
+    };
+    loginForm.addEventListener("submit", async (e)=>{
+        try {
+            e.preventDefault();
+            const authFields = {
+                email: email.value,
+                password: password.value
+            };
+            const res = await (0, _axiosDefault.default)({
+                method: "post",
+                url: `${window.location.origin}/api/v1/user/login`,
+                data: authFields
+            });
+            if (!res.data.status) throw new Error("Nie uda\u0142o si\u0119 zalogowa\u0107");
+            (0, _alert.showAlert)("success", "Zalogowano pomy\u015Blnie");
+            clearFields();
+            window.setTimeout(()=>{
+                location.assign("/admin-zar-stal/edycja/strona-glowna-opis");
+            }, 1500);
+        } catch (err) {
+            if (err.message) (0, _alert.showAlert)("error", err.message);
+            if (err.response.data) (0, _alert.showAlert)("error", err.response.data.message);
+            clearFields();
+        }
+    });
+};
+
+},{"axios":"cHm60","./alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"cwplE":[function(require,module,exports) {
+/*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "changePassword", ()=>changePassword);
+var _editForm = require("./admin/editForm");
+var _editFormDefault = parcelHelpers.interopDefault(_editForm);
+var _alert = require("./alert");
+const changePassword = ()=>{
+    const changePasswordForm = new (0, _editFormDefault.default)(`${window.location.origin}/api/v1/user/change-password`);
+    changePasswordForm.form.addEventListener("submit", async (e)=>{
+        try {
+            e.preventDefault();
+            const currentPassword = document.getElementById("current-password").value;
+            const newPassword = document.getElementById("new-password").value;
+            const repeatNewPassword = document.getElementById("repeat--new-password").value;
+            const fields = {
+                passwordCurrent: currentPassword,
+                password: newPassword,
+                passwordConfirm: repeatNewPassword
+            };
+            changePasswordForm.sendUpdate(fields);
+            document.getElementById("current-password").value = "";
+            document.getElementById("new-password").value = "";
+            document.getElementById("repeat--new-password").value = "";
+        } catch (err) {
+            (0, _alert.showAlert)("error", err.message);
+        }
+    });
+};
+
+},{"./admin/editForm":"egkCs","./alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
 
 //# sourceMappingURL=index.js.map

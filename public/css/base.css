@@ -68,6 +68,17 @@ nav {
   z-index: 1100;
 }
 
+.goto-admin a {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.goto-admin i {
+  font-size: 3.2rem;
+  cursor: pointer;
+}
+
 /*******************/
 /******FOOTER*******/
 /*******************/

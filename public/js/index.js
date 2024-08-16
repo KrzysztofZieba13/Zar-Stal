@@ -16,6 +16,8 @@ import * as formAccordionEdit from './admin/accordionFormEdit';
 import * as elementManage from './admin/elementsManagement';
 import * as email from './email';
 import { switchOffertText } from './offertShow';
+import * as login from './login';
+import * as account from './accountManagement';
 
 const sectionSingleRealization = document.querySelector(
   '.section--single-realization',
@@ -52,6 +54,10 @@ const sectionCreateElement = document.querySelector('.section--create-element');
 const sectionUpdateElement = document.querySelector('.section--update-element');
 const contactForm = document.querySelector('.form-contact');
 const sectionOffert = document.querySelector('.section-offert');
+const sectionLogin = document.querySelector('.section-login');
+const sectionAccountManagement = document.querySelector(
+  '.section--account-management',
+);
 
 let navListener = false;
 
@@ -159,3 +165,9 @@ if (contactForm) {
 
 // Switching offert text on main page
 if (sectionOffert) switchOffertText();
+
+// Login
+if (sectionLogin) login.login();
+
+// Change password
+if (sectionAccountManagement) account.changePassword();

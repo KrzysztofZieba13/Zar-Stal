@@ -104,3 +104,7 @@ exports.getForgotPasswordPage = catchAsync(async (req, res, next) => {
 exports.getRenewPassword = catchAsync(async (req, res, next) => {
   res.status(200).render('newPassword');
 });
+
+exports.getChangePassword = catchAsync(async (req, res, next) => {
+  res.status(200).render('changePassword');
+});

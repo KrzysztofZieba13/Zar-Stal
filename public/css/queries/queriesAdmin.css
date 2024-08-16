@@ -88,6 +88,10 @@
 
 /* BELOW 592px */
 @media (max-width: 37em) {
+  .form-contact {
+    grid-template-columns: 1fr;
+  }
+
   .edit--nav-panel-options {
     font-size: 2.4rem;
     gap: 1.6rem;
