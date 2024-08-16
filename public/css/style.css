@@ -449,7 +449,8 @@
 }
 
 .login-form,
-.new--password-form {
+.new--password-form,
+.forgot--password-form {
   margin: 12.8rem auto;
   display: flex;
   flex-direction: column;

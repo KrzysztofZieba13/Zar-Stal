@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
+const crypto = require('node:crypto');
+const Email = require('../libs/utils/email');
 const User = require('../models/userModel');
 const catchAsync = require('../libs/utils/catchAsync');
 const AppError = require('../libs/utils/appError');
@@ -133,5 +135,59 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save({ validateModifiedOnly: true });
 
+  createSendToken(user, 200, res);
+});
+
+exports.forgotPassword = catchAsync(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) return next(new AppError('Niepoprawny email', 404));
+
+  const resetToken = user.createPasswordResetToken();
+  await user.save({ validateModifiedOnly: true });
+
+  try {
+    const resetURL = `${req.protocol}://${req.get(
+      'host',
+    )}/nowe-haslo/${resetToken}`;
+    await new Email(user, resetURL).sendPasswordReset();
+
+    res
+      .status(200)
+      .json({ status: 'success', message: 'Token wysłany na email' });
+  } catch (err) {
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+
+    await user.save({ validateModifiedOnly: true });
+    return next(
+      new AppError(
+        'Wystąpił błąd podczas wysyłania email. Spróbuj ponownie później',
+      ),
+      500,
+    );
+  }
+});
+
+exports.resetPassword = catchAsync(async (req, res, next) => {
+  // 1) Get user based on the token
+  const hashedToken = crypto
+    .createHash('sha256')
+    .update(req.params.token)
+    .digest('hex');
+
+  const user = await User.findOne({
+    passwordResetToken: hashedToken,
+    passwordResetExpires: { $gt: Date.now() },
+  });
+
+  // 2) If token has not expired, and there is user, set the new password
+  if (!user) return next(new AppError('Token jest nieważny lub wygasł', 400));
+
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+  await user.save({ validateModifiedOnly: true });
+  // 4) Log the user in, send JWT
   createSendToken(user, 200, res);
 });

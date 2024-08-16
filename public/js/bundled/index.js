@@ -631,6 +631,8 @@ const contactForm = document.querySelector(".form-contact");
 const sectionOffert = document.querySelector(".section-offert");
 const sectionLogin = document.querySelector(".section-login");
 const sectionAccountManagement = document.querySelector(".section--account-management");
+const sectionForgotPassword = document.querySelector(".section--forgot-password");
+const sectionResetPassword = document.querySelector(".section--new-password");
 let navListener = false;
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) new (0, _singleGalleryDefault.default)("single-realizations");
@@ -699,6 +701,10 @@ if (sectionOffert) (0, _offertShow.switchOffertText)();
 if (sectionLogin) _login.login();
 // Change password
 if (sectionAccountManagement) _accountManagement.changePassword();
+// Forgot password
+if (sectionForgotPassword) _accountManagement.forgotPassword();
+// Reset password
+if (sectionResetPassword) _accountManagement.resetPassword();
 
 },{"./nav":"il6Pq","./gallery/imageGallery":"k7nGs","./gallery/singleGallery":"3MfQ3","./mapLeaflet":"31YzK","./interObserver":"389lu","./heroSlideshow":"jJYIA","./admin/editMainPage":"VFZiv","./admin/realizationImages":"7yScn","./admin/deleteRealization":"xpmqd","./admin/deleteElement":"3n93A","./admin/realizationsManagement":"3qRhR","./admin/editContact":"VKbKo","./admin/accordionNavEdit":"4macJ","./admin/accordionFormEdit":"7UVN2","./admin/elementsManagement":"hrjAz","./email":"cqKO8","./offertShow":"9USXc","./login":"eGbeM","./accountManagement":"cwplE","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}],"il6Pq":[function(require,module,exports) {
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -17062,6 +17068,10 @@ const login = ()=>{
 /*eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "changePassword", ()=>changePassword);
+parcelHelpers.export(exports, "forgotPassword", ()=>forgotPassword);
+parcelHelpers.export(exports, "resetPassword", ()=>resetPassword);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _editForm = require("./admin/editForm");
 var _editFormDefault = parcelHelpers.interopDefault(_editForm);
 var _alert = require("./alert");
@@ -17083,11 +17093,75 @@ const changePassword = ()=>{
             document.getElementById("new-password").value = "";
             document.getElementById("repeat--new-password").value = "";
         } catch (err) {
-            (0, _alert.showAlert)("error", err.message);
+            if (err.message) (0, _alert.showAlert)("error", err.message);
+            if (err.response.data) (0, _alert.showAlert)("error", err.response.data.message);
+            document.getElementById("current-password").value = "";
+            document.getElementById("new-password").value = "";
+            document.getElementById("repeat--new-password").value = "";
+        }
+    });
+};
+const forgotPassword = ()=>{
+    const forgotPasswordForm = document.querySelector(".forgot--password-form");
+    const email = document.getElementById("email");
+    const confirmBtn = document.querySelector(".input--submit-auth");
+    forgotPasswordForm.addEventListener("submit", async (e)=>{
+        try {
+            e.preventDefault();
+            confirmBtn.value = "Wysy\u0142anie...";
+            const fields = {
+                email: email.value
+            };
+            const res = await (0, _axiosDefault.default)({
+                method: "post",
+                url: `${window.location.origin}/api/v1/user/forgot-password`,
+                data: fields
+            });
+            if (!res.data.status) throw new Error("B\u0142\u0105d, spr\xf3buj ponownie");
+            email.value = "";
+            confirmBtn.value = "Wy\u015Blij";
+            (0, _alert.showAlert)("success", "Wys\u0142ano wiadomo\u015B\u0107 na wskazany adres email");
+        } catch (err) {
+            if (err.message) (0, _alert.showAlert)("error", err.message);
+            if (err.response.data) (0, _alert.showAlert)("error", err.response.data.message);
+            email.value = "";
+            confirmBtn.value = "Wy\u015Blij";
+        }
+    });
+};
+const resetPassword = ()=>{
+    const token = window.location.pathname.split("/").pop();
+    console.log(token);
+    const resetPasswordForm = new (0, _editFormDefault.default)(`${window.location.origin}/api/v1/user/reset-password/${token}`);
+    console.log(`${window.location.origin}/api/v1/user/reset-password/${token}`);
+    const confirmBtn = document.querySelector(".input--submit-auth");
+    const password = document.getElementById("password");
+    const passwordConfirm = document.getElementById("password-confirm");
+    resetPasswordForm.form.addEventListener("submit", async (e)=>{
+        try {
+            e.preventDefault();
+            confirmBtn.value = "Wysy\u0142anie...";
+            const fields = {
+                password: password.value,
+                passwordConfirm: passwordConfirm.value
+            };
+            resetPasswordForm.sendUpdate(fields);
+            password.value = "";
+            passwordConfirm.value = "";
+            confirmBtn.value = "Zapisz";
+            window.setTimeout(()=>{
+                location.assign("/admin-zar-stal/edycja/strona-glowna-opis");
+            }, 1500);
+        } catch (err) {
+            if (err.message) (0, _alert.showAlert)("error", err.message);
+            if (err.response.data) (0, _alert.showAlert)("error", err.response.data.message);
+            password.value = "";
+            passwordConfirm.value = "";
+            confirmBtn.value = "Zapisz";
         }
     });
 };
 
-},{"./admin/editForm":"egkCs","./alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
+},{"axios":"cHm60","./admin/editForm":"egkCs","./alert":"78jVh","@parcel/transformer-js/src/esmodule-helpers.js":"jZb5F"}]},["18Qvj","3LR9W"], "3LR9W", "parcelRequire2a96")
 
 //# sourceMappingURL=index.js.map

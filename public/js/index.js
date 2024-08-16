@@ -58,6 +58,10 @@ const sectionLogin = document.querySelector('.section-login');
 const sectionAccountManagement = document.querySelector(
   '.section--account-management',
 );
+const sectionForgotPassword = document.querySelector(
+  '.section--forgot-password',
+);
+const sectionResetPassword = document.querySelector('.section--new-password');
 
 let navListener = false;
 
@@ -171,3 +175,9 @@ if (sectionLogin) login.login();
 
 // Change password
 if (sectionAccountManagement) account.changePassword();
+
+// Forgot password
+if (sectionForgotPassword) account.forgotPassword();
+
+// Reset password
+if (sectionResetPassword) account.resetPassword();

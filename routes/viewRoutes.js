@@ -65,11 +65,7 @@ router.get(
   '/admin-zar-stal/zapomnialem-hasla',
   viewController.getForgotPasswordPage,
 );
-router.get(
-  '/admin-zar-stal/nowe-haslo',
-  authController.protect,
-  viewController.getRenewPassword,
-);
+router.get('/nowe-haslo/:token', viewController.getRenewPassword);
 router.get(
   '/admin-zar-stal/zmiana-hasla',
   authController.protect,
