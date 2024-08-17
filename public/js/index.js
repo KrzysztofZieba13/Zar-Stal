@@ -62,8 +62,12 @@ const sectionForgotPassword = document.querySelector(
   '.section--forgot-password',
 );
 const sectionResetPassword = document.querySelector('.section--new-password');
+const adminNav = document.querySelector('.logout');
 
 let navListener = false;
+
+// Logout if logged in
+if (adminNav) login.logout();
 
 // GALLERY FOR ONE REALIZATION
 if (sectionSingleRealization) {
@@ -93,6 +97,7 @@ if (manyRealizationsPage || mainPage) {
 
 if (mainPage) {
   interObserver.initLoadLazyImg();
+  interObserver.initSmoothScrolling();
   initSlider(mainPage);
 }
 

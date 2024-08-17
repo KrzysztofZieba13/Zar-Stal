@@ -49,6 +49,11 @@ const realizationSchema = new mongoose.Schema({
     trim: true,
     required: [true, 'Realizacja musi mieć podaną lokalizację jej budowy'],
   },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+    select: false,
+  },
 });
 
 const Realization = mongoose.model('Realization', realizationSchema);

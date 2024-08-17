@@ -37,11 +37,7 @@ exports.sendHelloWorld = catchAsync(async (req, res, next) => {
     });
   }
 
-  await new Email({
-    name: 'Test',
-    email: 'test@test.com',
-    data: req.body,
-  }).sendHelloWorld();
+  await new Email(req.body).sendClientAsk();
 
   res.status(200).json({
     status: 'success',

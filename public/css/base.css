@@ -68,12 +68,15 @@ nav {
   z-index: 1100;
 }
 
-.goto-admin a {
+.logout .nav-item,
+.goto-admin .nav-item {
   display: flex;
   align-items: center;
   gap: 0.8rem;
+  cursor: pointer;
 }
 
+.logout i,
 .goto-admin i {
   font-size: 3.2rem;
   cursor: pointer;

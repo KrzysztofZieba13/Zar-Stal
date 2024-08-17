@@ -25,6 +25,7 @@ module.exports = class Email {
       return nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port: process.env.EMAIL_PORT,
+        secure: true,
         auth: {
           user: process.env.EMAIL_USER,
           pass: process.env.EMAIL_PASSWORD,
@@ -38,6 +39,7 @@ module.exports = class Email {
       {
         url: this.url,
         subject,
+        user: this.user,
       },
     );
 
@@ -56,11 +58,14 @@ module.exports = class Email {
     }
   }
 
-  async sendHelloWorld() {
-    await this.send('Hello world', 'Witaj Świecie');
+  async sendClientAsk() {
+    await this.send('client', 'Klient napisał');
   }
 
   async sendPasswordReset() {
-    await this.send('passwordReset', 'Reset Hasła (ważny przez 10 minut)');
+    await this.send(
+      'passwordReset',
+      'Reset Hasła wwww.zar-stal.pl (ważny przez 10 minut)',
+    );
   }
 };

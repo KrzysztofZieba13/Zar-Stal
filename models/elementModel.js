@@ -16,6 +16,11 @@ const elementSchema = new mongoose.Schema({
       message: `{VALUE} nie jest poprawną wartością`,
     },
   },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+    select: false,
+  },
 });
 
 const Element = mongoose.model('Element', elementSchema);

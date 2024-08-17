@@ -67,6 +67,13 @@ const sendErrorProd = (err, req, res) => {
     });
   }
   //TODO: make the same for rendered website
+  if (err.isOperational) {
+    return res.status(err.statusCode).render('error', {
+      title: 'Coś poszło nie tak!',
+      msg: err.message,
+      errorCode: err.statusCode,
+    });
+  }
 };
 
 module.exports = (err, req, res, next) => {

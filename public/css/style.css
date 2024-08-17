@@ -496,3 +496,36 @@
   text-align: right;
   color: #9db2bf;
 }
+
+/******************/
+/******ERROR*******/
+/******************/
+.error-box {
+  max-width: 60rem;
+  background-color: #141c27;
+  margin: 12.8rem auto;
+  padding: 3.2rem;
+}
+
+.error-text {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.error--login-btn:link,
+.error--login-btn:visited {
+  padding: 1.2rem;
+  background-color: #27374d;
+  text-align: center;
+  margin: 3.2rem auto 0 auto;
+  display: block;
+}
+
+.error--login-btn:hover,
+.error--login-btn:active {
+  background-color: #526d82;
+}
+
+.error-box .text {
+  text-align: center;
+}

@@ -6,9 +6,12 @@ block append head
 
 
 block content 
-  section.section-login
-    form.form.login-form
-      h1.primary--header-auth Błąd
-      h2.primary--header-auth Błąd
-      h3.primary--header-auth Błąd
-      h4.primary--header-auth Błąd
+  section.section-error
+    .error-box
+      h1.primary--header-auth= title
+      - if(errorCode === 401)
+          p.text= msg
+          p.text.error-text  
+            a(href='/logowanie').link.error--login-btn Zaloguj się
+      - else
+          p.text= msg

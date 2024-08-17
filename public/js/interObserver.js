@@ -47,3 +47,39 @@ export const initLoadLazyImg = () => {
 
   allLazyImgs.forEach((img) => imgObserver.observe(img));
 };
+
+export const initSmoothScrolling = () => {
+  const mainPage = document.querySelector('.overview-header');
+  const goToMainPage = document.querySelector('.mainPage--nav-btn');
+  const company = document.getElementById('firma');
+  const goToCompany = document.querySelector('.company--nav-btn');
+  const offert = document.getElementById('oferta');
+  const goToOffert = document.querySelector('.offert--nav-btn');
+  const contact = document.getElementById('kontakt');
+  const goToContact = document.querySelector('.contact--nav-btn');
+
+  const goToOffertFooter = document.querySelectorAll('.footer--offera-btns');
+  const goToCompanyFooter = document.querySelector('.footer--firma-btn');
+
+  const goToContactFooter = document.querySelector('.footer--kontakt-btn');
+
+  const smoothScroll = (element, elementTarget) => {
+    element.addEventListener('click', (e) => {
+      e.preventDefault();
+      elementTarget.scrollIntoView({ behavior: 'smooth' });
+    });
+  };
+
+  const scrolls = () => {
+    smoothScroll(goToMainPage, mainPage);
+    smoothScroll(goToCompany, company);
+    smoothScroll(goToOffert, offert);
+    smoothScroll(goToContact, contact);
+    smoothScroll(goToCompanyFooter, company);
+    smoothScroll(goToContactFooter, contact);
+    goToOffertFooter.forEach((el) => {
+      smoothScroll(el, offert);
+    });
+  };
+  scrolls();
+};

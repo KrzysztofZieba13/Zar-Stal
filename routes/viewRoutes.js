@@ -60,7 +60,7 @@ router.get(
   authController.protect,
   viewController.getDeleteElement,
 );
-router.get('/admin-zar-stal/logowanie', viewController.getLoginPage);
+router.get('/logowanie', viewController.getLoginPage);
 router.get(
   '/admin-zar-stal/zapomnialem-hasla',
   viewController.getForgotPasswordPage,

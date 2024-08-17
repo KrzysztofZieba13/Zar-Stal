@@ -75,7 +75,7 @@ block content
       h2.secondary-header Elementy Stalowe
       .realizations-box 
         each element, i in elements.filter(el => el.category === 'Elementy')
-          +realizationElementCart(`elements/${element.imagesThumbnails[0]}`, `${element.title}`, `${element.title}-${(Math.random()*1000)%1000}`, [...element.images])
+          +realizationElementCart(`steel-elements/${element.imagesThumbnails[0]}`, `${element.title}`, `${element.title}-${(Math.random()*1000)%1000}`, [...element.images])
 
     
 
@@ -85,7 +85,7 @@ block content
       h2.secondary-header Maszyny
       .realizations-box 
         each element, i in elements.filter(el => el.category === 'Maszyny')
-          +realizationElementCart(`elements/${element.imagesThumbnails[0]}`, `${element.title}`, `${element.title}-${(Math.random()*1000)%1000}`, [...element.images])        
+          +realizationElementCart(`steel-elements/${element.imagesThumbnails[0]}`, `${element.title}`, `${element.title}-${(Math.random()*1000)%1000}`, [...element.images])        
   
   section.section.section--hidden.section--realizations-containers.realizations#steel-containers
     .container-realizations

@@ -43,3 +43,17 @@ export const login = () => {
     }
   });
 };
+
+export const logout = () => {
+  const logoutBtn = document.querySelector('.logout');
+
+  logoutBtn.addEventListener('click', async () => {
+    const res = await axios(`${window.location.origin}/api/v1/user/logout`);
+
+    if (res.data.status === 'success') showAlert('success', 'Wylogowano');
+
+    window.setTimeout(() => {
+      location.assign('/');
+    }, 1500);
+  });
+};

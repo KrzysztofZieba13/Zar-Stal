@@ -13,8 +13,8 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 });
 
 exports.getRealizations = catchAsync(async (req, res, next) => {
-  const realizations = await Realization.find();
-  const elements = await Element.find({});
+  const realizations = await Realization.find().sort({ createdAt: -1 });
+  const elements = await Element.find({}).sort({ createdAt: -1 });
 
   if (!elements) return next(new AppError('Nie znaleziono realizacji', 404));
   if (!realizations)
@@ -57,7 +57,7 @@ exports.getCreateRealization = catchAsync(async (req, res, next) => {
 });
 
 exports.getEditRealization = catchAsync(async (req, res, next) => {
-  const realizations = await Realization.find();
+  const realizations = await Realization.find().sort({ createdAt: -1 });
 
   if (!realizations)
     return next(new AppError('Nie znaleziono realizacji ', 404));
@@ -66,7 +66,7 @@ exports.getEditRealization = catchAsync(async (req, res, next) => {
 });
 
 exports.getDeleteRealization = catchAsync(async (req, res, next) => {
-  const realizations = await Realization.find();
+  const realizations = await Realization.find().sort({ createdAt: -1 });
 
   if (!realizations)
     return next(new AppError('Nie znaleziono realizacji ', 404));
@@ -79,14 +79,14 @@ exports.getCreateElement = catchAsync(async (req, res, next) => {
 });
 
 exports.getEditElement = catchAsync(async (req, res, next) => {
-  const elements = await Element.find();
+  const elements = await Element.find().sort({ createdAt: -1 });
 
   if (!elements) return next(new AppError('Nie znaleziono elementów ', 404));
   res.status(200).render('editElement', { elements });
 });
 
 exports.getDeleteElement = catchAsync(async (req, res, next) => {
-  const elements = await Element.find();
+  const elements = await Element.find().sort({ createdAt: -1 });
 
   if (!elements) return next(new AppError('Nie znaleziono elementów', 404));
 

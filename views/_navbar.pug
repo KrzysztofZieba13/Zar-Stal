@@ -4,20 +4,24 @@
       img(src='/img/logo.png' alt='Logo firmy Zar-Stal')
     .nav-menu
       .nav-btn
-        a.nav-item.link(href="/#") Strona Główna 
+        a.nav-item.mainPage--nav-btn.link(href="/#") Strona Główna 
       .nav-btn
-        a.nav-item.link(href="/#firma") Firma 
+        a.nav-item.company--nav-btn.link(href="/#firma") Firma 
       .nav-btn
-        a.nav-item.link(href="/#oferta") Oferta 
+        a.nav-item.offert--nav-btn.link(href="/#oferta") Oferta 
       .nav-btn
-        a.nav-item.link(href="/realizacje") Nasze Realizacje
+        a.nav-item.realilzations--nav-btn.link(href="/realizacje") Nasze Realizacje
       .nav-btn
-        a.nav-item.link(href="/#kontakt") Kontakt
+        a.nav-item.contact--nav-btn.link(href="/#kontakt") Kontakt
       if user 
         .nav-btn.goto-admin
           a.nav-item.link(href="/admin-zar-stal/edycja/strona-glowna-opis")
             i.ph.ph-gear-six
             | Admin
+        .nav-btn.logout
+          .nav-item
+            i.ph.ph-sign-out
+            | Wyloguj
     .mobile--nav-btns 
       i.ph.ph-list.open-nav
       i.ph.ph-x.close-nav.hidden
