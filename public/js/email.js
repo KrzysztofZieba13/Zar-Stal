@@ -37,6 +37,7 @@ export const contactUsHandler = () => {
         url: `${window.location.origin}/api/v1/mainPage/client-send-email`,
         data: formData,
       });
+      console.log(res)
 
       if (res.data.status === 'success') {
         showAlert('success', 'Wiadomość została wysłana');

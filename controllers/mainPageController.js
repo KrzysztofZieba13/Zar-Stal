@@ -16,6 +16,7 @@ const verifyRecaptcha = async (token) => {
 };
 
 exports.sendHelloWorld = catchAsync(async (req, res, next) => {
+  console.log(req.body);
   if (req.body.fullName)
     return res.status(200).json({
       status: 'success',

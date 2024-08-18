@@ -24,7 +24,6 @@ export const createElement = () => {
       document.getElementById('title').value = '';
       document.getElementById('images').value = '';
     } catch (err) {
-      console.log(err.message);
       showAlert('error', err.message);
     }
   });
@@ -83,7 +82,7 @@ export const updateElement = () => {
       Array.from(wideImagesToDelete).forEach((img) =>
         form.append('imagesRemove', img),
       );
-      console.log(form);
+
       await formUpdateElement.sendUpdate(form);
 
       document.getElementById('category').value = '';

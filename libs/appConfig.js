@@ -20,7 +20,7 @@ const AppError = require('./utils/appError');
 
 const app = express();
 
-// if (process.env.NODE_ENV === 'production') app.use(enforce.HTTPS());
+if (process.env.NODE_ENV === 'production') app.use(enforce.HTTPS());
 
 app.use(helmet({ crossOriginEmbedderPolicy: false }));
 

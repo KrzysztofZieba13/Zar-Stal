@@ -49,6 +49,7 @@ export const initLoadLazyImg = () => {
 };
 
 export const initSmoothScrolling = () => {
+  console.log('smooth scroll')
   const mainPage = document.querySelector('.overview-header');
   const goToMainPage = document.querySelector('.mainPage--nav-btn');
   const company = document.getElementById('firma');

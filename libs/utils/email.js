@@ -20,6 +20,9 @@ module.exports = class Email {
           user: process.env.EMAIL_USER,
           pass: process.env.EMAIL_PASSWORD,
         },
+        tls: {
+          rejectUnauthorized: false, // do not fail on invalid certs
+        }
       });
     if (process.env.NODE_ENV === 'development')
       return nodemailer.createTransport({
