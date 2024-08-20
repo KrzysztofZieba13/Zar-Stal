@@ -3,7 +3,7 @@ import Form from '../admin/editForm';
 import { showAlert } from '../alert';
 
 export const init = async () => {
-  const EditForm = new Form('http://127.0.0.1:3000/api/v1/mainPage');
+  const EditForm = new Form(`${window.location.origin}/api/v1/mainPage`);
   EditForm.form.addEventListener('submit', (e) => {
     e.preventDefault();
     const fields = {};
@@ -15,7 +15,7 @@ export const init = async () => {
 
 export const chooseMainRealizations = () => {
   const ChooseRealizationsForm = new Form(
-    'http://127.0.0.1:3000/api/v1/mainPage',
+    `${window.location.origin}/api/v1/mainPage`,
   );
   const numOfChoosenRealizations = document.querySelector(
     '.number--choosen-realizations',
@@ -53,7 +53,7 @@ export const chooseMainRealizations = () => {
 };
 
 export const editOffert = () => {
-  const EditOffertForm = new Form('http://127.0.0.1:3000/api/v1/mainPage');
+  const EditOffertForm = new Form(`${window.location.origin}/api/v1/mainPage`);
   let currentOffertIndex;
   const currentOffert = document.querySelector('.current--edit-offert');
 

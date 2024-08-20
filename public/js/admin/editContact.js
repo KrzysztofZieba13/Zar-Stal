@@ -4,7 +4,7 @@ import { showAlert } from '../alert';
 
 export const editContact = () => {
   const EditContactForm = new Form(
-    'http://127.0.0.1:3000/api/v1/contacts',
+    `${window.location.origin}/api/v1/contacts`,
     'form--edit-contact',
   );
   EditContactForm.form.addEventListener('submit', (e) => {
@@ -39,7 +39,7 @@ export const editContact = () => {
 
 export const editOpenHours = () => {
   const EditOpenHoursForm = new Form(
-    'http://127.0.0.1:3000/api/v1/mainPage',
+    `${window.location.origin}/api/v1/mainPage`,
     'form--id-edit-openhours',
   );
   EditOpenHoursForm.form.addEventListener('submit', (e) => {
