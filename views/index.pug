@@ -34,7 +34,7 @@ block content
     .hero 
       .hero--text-box
         h1.primary-header.hero-header ZAR-STAL <br> KONSTRUKCJE STALOWE
-        p.hero-text Specjalizuje się w produkcji konstrukcji stalowych, elementów stalowych, świetlików kalenicowych, kontenerów, hal magazynowych, produkcyjnych, sportowych czy rolniczych. Produkujemy, dostarczamy oraz montujemy konstrukcje w Polsce i za granicą.
+        p.hero-text= mainPage.pageDescription
         .hero-btns 
           a.btn.btn-realization.link(href='#realizacje') REALIZACJE
           a.btn.btn-offert.link(href='#oferta') OFERTA
@@ -78,12 +78,12 @@ block content
       .realizations-box 
         img.realization-img.lazy-img(src=`../img/realization/${mainPage.mainRealizations[0].primaryImageThumbnail}` data-src=`../img/realization/${mainPage.mainRealizations[0].primaryImage}` alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
         .realization-desc
-          h3.third-header Okręgowa Stacja Kontroli Pojazdów
-          p.text Nowoczesny budynek wykonany z konstrukcji stalowej, posiada przestronny układ z dużymi bramami wjazdowymi, umożliwiającymi wygodny dostęp pojazdów do wnętrza. Hala przystosowana do wykonywania przeglądów technicznych pojazdów, spełniając wszystkie wymagania techniczne i bezpieczeństwa.
+          h3.third-header= mainPage.mainRealizations[0].title
+          p.text= mainPage.mainRealizations[0].description
           a(href=`/realizacje/realizacja/${mainPage.mainRealizations[0]._id}`).btn.link.btn--see-realization Zobacz Realizację
         .realization-desc
-          h3.third-header Hala Naprawy <br> i konserwacji maszyn
-          p.text Hala przeznaczona do naprawy oraz konserwacji maszyn. Budynek składa się z dużej, głównej części warsztatowej z wieloma bramami wjazdowymi, co umożliwia jednoczesne serwisowanie wielu maszyn.
+          h3.third-header= mainPage.mainRealizations[1].title
+          p.text= mainPage.mainRealizations[1].description
           a(href=`/realizacje/realizacja/${mainPage.mainRealizations[1]._id}`).btn.link.btn--see-realization Zobacz Realizację
         img.realization-img.lazy-img(src=`../img/realization/${mainPage.mainRealizations[1].primaryImageThumbnail}` data-src=`../img/realization/${mainPage.mainRealizations[1].primaryImage}` alt="zdjęcie realizacji konstrukcji stalowej przez Zar-Stal")
       a(href='/realizacje').btn.link.btn--see-morerealizations Zobacz Więcej Realizacji
@@ -132,20 +132,26 @@ block content
           img.contact-logo(src='../img/logoContact.png' alt='logo Zar-Stal')
           .contact-box
             +contactElement('map-pin', 'Miejscowość', 'Wylewa, 244a')
-            +contactElement('phone', 'Właściciel', '504 200 637')
-            +contactElement('phone', 'Kierownik Produkcji', '502 307 540')
-            +contactElement('phone', 'Sekretariat', '786 801 755')
-            +contactElement('envelope-simple', 'Email', 'biuro@zar-stal.pl')
+            +contactElement('phone', 'Właściciel', mainPage.contact[0].ownerNumber)
+            +contactElement('phone', 'Kierownik Produkcji', mainPage.contact[0].productionNumber)
+            +contactElement('phone', 'Sekretariat', mainPage.contact[0].secretariatNumber)
+            +contactElement('envelope-simple', 'Email', mainPage.contact[0].email)
             .contact-element 
               i.ph.ph-clock.icon-contact
               span.contact--sub-info Godziny Otwarcia
               .contact--main-info.last-contact 
                 .openhours 
                   span pn-pt
-                  span 06:00-16:00 
+                  if mainPage.openHours[0].isClosed
+                    span Nieczynne
+                  else
+                    span= `${mainPage.openHours[0].open}-${mainPage.openHours[0].close}` 
                 .openhours 
                   span sb 
-                  span 06:00-13:00 
+                  if mainPage.openHours[1].isClosed
+                    span Nieczynne
+                  else
+                    span= `${mainPage.openHours[1].open}-${mainPage.openHours[1].close}` 
                 .openhours
                   span nd 
                   span nieczynne

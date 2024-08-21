@@ -75,13 +75,11 @@ export const forgotPassword = () => {
 
 export const resetPassword = () => {
   const token = window.location.pathname.split('/').pop();
-  console.log(token);
 
   const resetPasswordForm = new Form(
     `${window.location.origin}/api/v1/user/reset-password/${token}`,
   );
 
-  console.log(`${window.location.origin}/api/v1/user/reset-password/${token}`);
 
   const confirmBtn = document.querySelector('.input--submit-auth');
   const password = document.getElementById('password');

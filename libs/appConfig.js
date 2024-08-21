@@ -87,7 +87,7 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 app.use(cookieParser());
 app.use(express.json({ limit: '10kb' }));
-app.use(mongoSanitize());
+app.use(mongoSanitize({ allowDots: true }));
 app.use(xss());
 app.use(hpp());
 app.enable('trust proxy');

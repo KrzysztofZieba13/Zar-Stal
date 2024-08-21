@@ -1,11 +1,13 @@
 const express = require('express');
 const realizationController = require('../controllers/realizationController');
+const authController = require('../controllers/authController')
 
 const router = express.Router();
 
 router
   .route('/')
   .post(
+    authController.protect,
     realizationController.uploadRealizationImages,
     realizationController.resizeRealizationImages,
     realizationController.createRealization,
@@ -16,19 +18,20 @@ router
   .route('/realization/:id')
   .get(realizationController.getRealization)
   .patch(
+    authController.protect,
     realizationController.uploadRealizationImages,
     realizationController.resizeRealizationImages,
     realizationController.updateRealization,
   )
-  .delete(realizationController.deleteRealization);
+  .delete(authController.protect, realizationController.deleteRealization);
 
 router.patch(
-  '/realization/:id/delete-images',
+  '/realization/:id/delete-images', authController.protect,
   realizationController.deleteImages,
 );
 
 router.patch(
-  '/realization/:id/delete-specification',
+  '/realization/:id/delete-specification', authController.protect,
   realizationController.deleteSpecification,
 );
 

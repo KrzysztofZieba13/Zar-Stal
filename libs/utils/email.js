@@ -6,7 +6,7 @@ module.exports = class Email {
   constructor(user, url) {
     this.to = 'noreply@zar-stal.pl';
     this.url = url;
-    this.from = `Test`;
+    this.from = user.name;
     this.user = user;
   }
 
