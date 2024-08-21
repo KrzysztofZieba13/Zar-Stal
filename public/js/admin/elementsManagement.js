@@ -10,6 +10,7 @@ export const createElement = () => {
   formCreateElement.form.addEventListener('submit', async (e) => {
     try {
       e.preventDefault();
+      const submitBtn = document.querySelector('.submit-btn');
       const form = new FormData();
 
       form.append('category', document.getElementById('category').value);
@@ -18,11 +19,13 @@ export const createElement = () => {
         form.append('images', img),
       );
 
+      submitBtn.value = 'Tworzę...';
       await formCreateElement.sendCreate(form);
 
       document.getElementById('category').value = '';
       document.getElementById('title').value = '';
       document.getElementById('images').value = '';
+      submitBtn.value = 'Utwórz element';
     } catch (err) {
       showAlert('error', err.message);
     }
@@ -70,6 +73,7 @@ export const updateElement = () => {
     formUpdateElement.form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
+      const submitBtn = document.querySelector('.submit-btn');
       const form = new FormData();
       form.append('category', document.getElementById('category').value);
       form.append('title', document.getElementById('title').value);
@@ -83,11 +87,13 @@ export const updateElement = () => {
         form.append('imagesRemove', img),
       );
 
+      submitBtn.value = 'Aktualizuję...';
       await formUpdateElement.sendUpdate(form);
 
       document.getElementById('category').value = '';
       document.getElementById('title').value = '';
       document.getElementById('images').value = '';
+      submitBtn.value = 'Aktualizuj element';
     });
   });
 

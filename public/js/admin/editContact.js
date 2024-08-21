@@ -7,6 +7,9 @@ export const editContact = () => {
     `${window.location.origin}/api/v1/contacts`,
     'form--edit-contact',
   );
+
+  const submitBtn = document.querySelector('.submit--btn-contact')
+
   EditContactForm.form.addEventListener('submit', (e) => {
     try {
       e.preventDefault();
@@ -26,11 +29,13 @@ export const editContact = () => {
       if (Object.keys(fields).length === 0)
         throw new Error('Uzupełnij przynajmniej jedno pole');
 
+      submitBtn.value = 'Aktualizuję...';
       EditContactForm.sendUpdate(fields);
       document.getElementById('owner-number').value = '';
       document.getElementById('production-number').value = '';
       document.getElementById('secretariat-number').value = '';
       document.getElementById('email-contact').value = '';
+      submitBtn.value = 'Aktualizuj kontakt';
     } catch (err) {
       showAlert('error', err.message);
     }
@@ -42,6 +47,8 @@ export const editOpenHours = () => {
     `${window.location.origin}/api/v1/mainPage`,
     'form--id-edit-openhours',
   );
+  const submitBtn = document.querySelector('.submit--btn-openhours');
+
   EditOpenHoursForm.form.addEventListener('submit', (e) => {
     e.preventDefault();
     const openhourWeek = document.getElementById('openhour-1').value;
@@ -62,8 +69,10 @@ export const editOpenHours = () => {
     if (closehourSat) fields['close-2'] = closehourSat;
     if (saturdayClosed) fields.saturdayClosed = saturdayClosed.checked;
     fields.openhours = openhours;
+    submitBtn.value = 'Aktualizuję...';
     EditOpenHoursForm.sendUpdate(fields);
 
+    submitBtn.value = 'Aktualizuj godziny';
     document.getElementById('openhour-1').value = '';
     document.getElementById('closehour-1').value = '';
     document.getElementById('openhour-2').value = '';

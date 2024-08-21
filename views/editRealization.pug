@@ -72,7 +72,7 @@ block content
                   .spec--add-remove
                     i.ph.ph-plus-square.more-specs
                     i.ph.ph-trash.delete--spec-input
-            input.btn.submit-btn.submit--realization-edit(type='submit' value='Aktualizuj realizację')
+            input.btn.submit-btn.submit--realization-edit#edit-realization-btn(type='submit' value='Aktualizuj realizację')
           
           h2.secondary--header-edit Usuń wybrane zdjęcia 
           form.form.edit-form.edit--form-margin#form--delete-images
@@ -81,7 +81,7 @@ block content
               i.ph.ph-caret-up.accordion--edit-arrow.hidden
               .accordion-inputs.hidden
                 .choose--images-delete
-            input.btn.submit-btn.submit--realization-edit(type='submit' value='Usuń wybrane zdjęcia')
+            input.btn.submit-btn.submit--realization-edit#delete-realization-images-btn(type='submit' value='Usuń wybrane zdjęcia')
           
           h2.secondary--header-edit Usuń wybrane specyfikacje 
           form.form.edit-form.edit--form-margin#form--delete-specs
@@ -89,5 +89,5 @@ block content
               i.ph.ph-caret-down.accordion--edit-arrow
               i.ph.ph-caret-up.accordion--edit-arrow.hidden
             .accordion-inputs.accordion--edit-specs.accordion--delete-spec.hidden
-            input.btn.submit-btn.submit--realization-edit(type='submit' value='Usuń wybrane specyfikacje')
+            input.btn.submit-btn.submit--realization-edit#delete-specifications-btn(type='submit' value='Usuń wybrane specyfikacje')
 

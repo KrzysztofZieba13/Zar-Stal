@@ -115,8 +115,11 @@ export const updateRealization = async () => {
     updateForm.form.addEventListener('submit', async (e) => {
       try {
         e.preventDefault();
+        const submitBtn = document.getElementById('edit-realization-btn');
+        submitBtn.value = 'Aktualizuję...';
         const form = getBasicInputs();
         await updateForm.sendUpdate(form);
+        submitBtn.value = 'Aktualizuj realizację';
       } catch (err) {
         showAlert('error', err.message);
       }
@@ -130,6 +133,8 @@ export const updateRealization = async () => {
     deleteForm.form.addEventListener('submit', async (e) => {
       try {
         e.preventDefault();
+        const submitBtn = document.getElementById('delete-realization-images-btn');
+        submitBtn.value = 'Usuwam...';
         const thToRemoveArray = Array.from(thImagesToDelete);
         const wideToRemoveArray = Array.from(wideImagesToDelete);
         const fields = {
@@ -137,6 +142,7 @@ export const updateRealization = async () => {
           wideToRemove: wideToRemoveArray,
         };
         await deleteForm.sendUpdate(fields);
+        submitBtn.value = 'Usuń wybrane zdjęcia';
       } catch (err) {
         showAlert('error', err.message);
       }
@@ -150,11 +156,14 @@ export const updateRealization = async () => {
     formDeleteSpecs.form.addEventListener('submit', async (e) => {
       try {
         e.preventDefault();
+        const submitBtn = document.getElementById('delete-specifications-btn');
+        submitBtn.value = 'Usuwam...';
         const specsToDeleteArray = Array.from(specsIdToDelete);
         const fields = {
           deleteId: specsToDeleteArray,
         };
         await formDeleteSpecs.sendUpdate(fields);
+        submitBtn.value = 'Usuń wybrane specyfikacje';
       } catch (err) {
         showAlert('error', err.message);
       }
@@ -180,11 +189,14 @@ export const createRealization = async () => {
     const createForm = new Form(
       `${window.location.origin}/api/v1/realizations`,
     );
+    const submitBtn = document.querySelector('.submit-btn');
+
     createForm.form.addEventListener('submit', (e) => {
       e.preventDefault();
 
       const form = getBasicInputs();
 
+      submitBtn.value = 'Tworzę...';
       createForm.sendCreate(form);
       document.getElementById('location').value = '';
       document.getElementById('title').value = '';
@@ -198,6 +210,7 @@ export const createRealization = async () => {
       );
       document.getElementById('primary-image').value = '';
       document.getElementById('images').value = '';
+      submitBtn.value = 'Utwórz realizację';
     });
   } catch (err) {
     showAlert('error', `error!!! ${err.message}`);

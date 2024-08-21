@@ -4,9 +4,9 @@ const { convert } = require('html-to-text');
 
 module.exports = class Email {
   constructor(user, url) {
-    this.to = 'noreply@zar-stal.pl';
+    this.to = 'biuro@zar-stal.pl';
     this.url = url;
-    this.from = user.name;
+    this.from = `${user.name ?? 'Zar-Stal automatycznie'} ${user.name ? '<klient@zar-stal.pl>' : '<noreply@zar-stal.pl>'}`;
     this.user = user;
   }
 
